@@ -36,5 +36,6 @@ class UserCanCreateCompanyTest < ActionDispatch::IntegrationTest
     
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
+    assert_nil @user.company
   end
 end

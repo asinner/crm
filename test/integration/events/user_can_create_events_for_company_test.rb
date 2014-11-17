@@ -20,6 +20,9 @@ class UserCanCreateEventsForCompanyTest < ActionDispatch::IntegrationTest
     
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
+    event = json(response.body)[:event]
+    assert_equal 'The Awesome Wedding', event[:name]
+    assert_equal 1, @user.company.events.count
   end
   
   test 'user cannot create event for company with invalid data' do
@@ -35,5 +38,6 @@ class UserCanCreateEventsForCompanyTest < ActionDispatch::IntegrationTest
     
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
+    assert_equal 0, @user.company.events.count
   end
 end
