@@ -18,6 +18,7 @@ class CreateUsersTest < ActionDispatch::IntegrationTest
     user = json(response.body)[:user]
     assert_equal 'Andrew Sinner', user[:name]
     assert_equal 'andrew@example.com', user[:email]
+    assert_equal 1, User.count
   end
   
   test 'does not create a new user with invalid data' do
@@ -33,5 +34,6 @@ class CreateUsersTest < ActionDispatch::IntegrationTest
     
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
+    assert_equal 0, User.count
   end
 end

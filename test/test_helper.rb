@@ -24,6 +24,15 @@ class ActiveSupport::TestCase
       name: 'Vintage Vault'
     )
     user.save
+    user.company
+  end
+  
+  def create_event(company)
+    event = company.events.new(
+      name: 'My awesome event'
+    )
+    event.save
+    event
   end
   
   def sign_in(user)

@@ -12,6 +12,16 @@ class Api::V1::EventsController < ApplicationController
     end
   end
   
+  def update
+    event = Event.find(params[:id])
+    
+    if event.update(event_params)
+      render status: 200, json: event
+    else
+      render status: 422, json: event.errors
+    end
+  end
+  
   def event_params
     params.require(:event).permit(:name)
   end
