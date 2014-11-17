@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     @user = User.find_by(token: params[:token])
     return render status: 401, json: { msg: 'You are not authorized for that' } unless @user
   end
+  
+  def authenticate_company!
+    return render status: 400, json: { msg: 'You need to create a company first' } unless @user.company
+  end
 end

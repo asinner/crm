@@ -19,6 +19,13 @@ class ActiveSupport::TestCase
     )
   end
   
+  def create_company(user)
+    user.build_company(
+      name: 'Vintage Vault'
+    )
+    user.save
+  end
+  
   def sign_in(user)
     user.update(token: SecureRandom.uuid)
   end
