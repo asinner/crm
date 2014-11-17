@@ -1,6 +1,10 @@
+require 'simplecov'
+SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -23,7 +27,7 @@ class ActiveSupport::TestCase
     user.build_company(
       name: 'Vintage Vault'
     )
-    user.save
+    user.save!
     user.company
   end
   
@@ -31,8 +35,22 @@ class ActiveSupport::TestCase
     event = company.events.new(
       name: name
     )
-    event.save
+    event.save!
     event
+  end
+  
+  def create_timeline(event)
+    timeline = event.build_timeline
+    timeline.save
+    timeline
+  end
+  
+  def create_category(timeline, name = 'Pre-wedding')
+    category = timeline.categories.build(
+      name: name
+    )
+    category.save!
+    category
   end
   
   def sign_in(user)

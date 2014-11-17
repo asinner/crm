@@ -9,6 +9,7 @@ class Api::V1::EventsController < ApplicationController
   
   def create
     event = @user.company.events.new(event_params)
+    event.build_timeline
     
     if event.save
       render status: 201, json: event
