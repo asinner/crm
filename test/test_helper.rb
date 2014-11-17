@@ -10,4 +10,16 @@ class ActiveSupport::TestCase
   def json(content)
     JSON.parse(content, symbolize_names: true)
   end
+  
+  def create_user
+    User.create!(
+      name: 'Andrew',
+      email: 'andrew@example.com',
+      password: '12345678'
+    )
+  end
+  
+  def sign_in(user)
+    user.update(token: SecureRandom.uuid)
+  end
 end

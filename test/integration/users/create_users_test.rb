@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CreateUsersTest < ActionDispatch::IntegrationTest  
+class CreateUsersTest < ActionDispatch::IntegrationTest
   test 'creates a new user with valid data' do
     post '/api/users', {
       user: {
