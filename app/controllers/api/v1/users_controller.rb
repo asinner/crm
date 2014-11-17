@@ -8,6 +8,8 @@ class Api::V1::UsersController < ApplicationController
       render status: 422, json: user.errors
     end
   end
+
+  private
   
   def user_params
     params.require(:user).permit(:name, :email, :password)
