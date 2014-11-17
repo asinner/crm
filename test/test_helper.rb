@@ -27,9 +27,9 @@ class ActiveSupport::TestCase
     user.company
   end
   
-  def create_event(company)
+  def create_event(company, name = 'My awesome event')
     event = company.events.new(
-      name: 'My awesome event'
+      name: name
     )
     event.save
     event

@@ -2,6 +2,11 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_company!
   
+  def index
+    events = @user.company.events
+    render status: 200, json: events
+  end
+  
   def create
     event = @user.company.events.new(event_params)
     
