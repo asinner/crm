@@ -22,6 +22,12 @@ class Api::V1::EventsController < ApplicationController
     end
   end
   
+  def destroy
+    event = Event.find(params[:id])
+    event.destroy
+    render status: 204, nothing: true
+  end
+  
   def event_params
     params.require(:event).permit(:name)
   end
