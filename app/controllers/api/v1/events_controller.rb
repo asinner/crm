@@ -20,6 +20,7 @@ class Api::V1::EventsController < ApplicationController
   
   def update
     event = Event.find(params[:id])
+    authorize event
     
     if event.update(event_params)
       render status: 200, json: event
@@ -30,6 +31,7 @@ class Api::V1::EventsController < ApplicationController
   
   def destroy
     event = Event.find(params[:id])
+    authorize event
     event.destroy
     render status: 204, nothing: true
   end

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
   def authenticate_user!
-    return render status: 401, json: { msg: 'You are not authorized for that' } unless current_user
+    return render status: 401, json: { msg: 'You must be signed in' } unless current_user
   end
   
   def authenticate_company!
