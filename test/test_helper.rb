@@ -15,10 +15,10 @@ class ActiveSupport::TestCase
     JSON.parse(content, symbolize_names: true)
   end
   
-  def create_user
+  def create_user(email = 'andrew@example.com')
     User.create!(
       name: 'Andrew',
-      email: 'andrew@example.com',
+      email: email,
       password: '12345678'
     )
   end

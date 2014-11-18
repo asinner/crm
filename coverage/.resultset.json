@@ -1,6 +1,84 @@
 {
   "MiniTest": {
     "coverage": {
+      "/Users/andrewsinner/Developer/crm/test/integration/authorization/timelines/categories/hacker_cannot_update_categories_test.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/test/integration/companies/user_can_create_company_test.rb": [
+        1,
+        null,
+        1,
+        1,
+        2,
+        2,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/andrewsinner/Developer/crm/test/integration/events/user_can_create_events_for_company_test.rb": [
         1,
         null,
@@ -339,86 +417,10 @@
         1,
         null
       ],
-      "/Users/andrewsinner/Developer/crm/app/controllers/api/v1/companies_controller.rb": [
-        1,
-        1,
-        null,
-        1,
-        2,
-        2,
-        2,
-        2,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        null,
-        1,
-        2,
-        null,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/controllers/application_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        28,
-        null,
-        null,
-        1,
-        null,
-        1,
-        14,
-        null,
-        null,
-        1,
-        12,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/application_helper.rb": [
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/companies_helper.rb": [
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/events_helper.rb": [
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/timeline_categories_helper.rb": [
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/tokens_helper.rb": [
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/users_helper.rb": [
-        1,
-        null
-      ],
       "/Users/andrewsinner/Developer/crm/app/models/company.rb": [
         1,
         1,
         null,
-        1,
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/serializers/company_serializer.rb": [
         1,
         1,
         null
@@ -449,8 +451,8 @@
         1,
         null,
         1,
-        1,
-        1,
+        2,
+        2,
         1,
         null,
         null,
@@ -467,8 +469,8 @@
         null,
         null,
         1,
-        2,
-        2,
+        3,
+        3,
         null,
         2,
         1,
@@ -491,6 +493,55 @@
         null,
         null
       ],
+      "/Users/andrewsinner/Developer/crm/app/controllers/application_controller.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        32,
+        null,
+        null,
+        1,
+        null,
+        1,
+        16,
+        null,
+        null,
+        1,
+        14,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/companies_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/events_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/timeline_categories_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/tokens_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/helpers/api/v1/users_helper.rb": [
+        1,
+        null
+      ],
       "/Users/andrewsinner/Developer/crm/app/policies/timeline_policy.rb": [
         1,
         1,
@@ -500,15 +551,15 @@
         null,
         null,
         1,
-        6,
-        null,
-        null,
-        1,
-        1,
+        8,
         null,
         null,
         1,
         2,
+        null,
+        null,
+        1,
+        3,
         null,
         null,
         1,
@@ -521,8 +572,8 @@
         1,
         null,
         1,
-        6,
-        6,
+        8,
+        8,
         null,
         null,
         1,
@@ -570,6 +621,30 @@
         null,
         null,
         null,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/controllers/api/v1/users_controller.rb": [
+        1,
+        1,
+        2,
+        null,
+        2,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/serializers/user_serializer.rb": [
+        1,
+        1,
         null
       ],
       "/Users/andrewsinner/Developer/crm/app/serializers/timeline_category_serializer.rb": [
@@ -619,36 +694,39 @@
         null,
         null
       ],
+      "/Users/andrewsinner/Developer/crm/app/controllers/api/v1/companies_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/Users/andrewsinner/Developer/crm/app/serializers/company_serializer.rb": [
+        1,
+        1,
+        null
+      ],
       "/Users/andrewsinner/Developer/crm/app/serializers/event_serializer.rb": [
-        1,
-        1,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/controllers/api/v1/users_controller.rb": [
-        1,
-        1,
-        2,
-        null,
-        2,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        null,
-        1,
-        2,
-        null,
-        null
-      ],
-      "/Users/andrewsinner/Developer/crm/app/serializers/user_serializer.rb": [
         1,
         1,
         null
       ]
     },
-    "timestamp": 1416268926
+    "timestamp": 1416269619
   }
 }

@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
   
   def user_not_authorized
-    return render status: 403, json: { msg: 'You are not authorized for that resources' }
+    return render status: 403, json: { msg: 'You are not authorized for that resource' }
   end
 end
