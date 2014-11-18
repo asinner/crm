@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HackerCannotUpdateCategoriesTest < ActionDispatch::IntegrationTest
+class HackerCannotCreateCategoriesTest < ActionDispatch::IntegrationTest
   setup do
     @user = create_user
     @company = create_company(@user)
@@ -13,10 +13,11 @@ class HackerCannotUpdateCategoriesTest < ActionDispatch::IntegrationTest
     create_company(@hacker)
   end
 
-  test 'hacker cannot update category' do
-    patch "/api/timelines/#{@timeline.id}/categories/#{@category.id}", {
+  
+  test 'users can create categories for a timeline' do
+    post "/api/timelines/#{@timeline.id}/categories", {
       category: {
-        name: 'L33t h@x'
+        name: 'Pre-departure'
       },
       token: @hacker.token
     }.to_json, {
@@ -26,6 +27,6 @@ class HackerCannotUpdateCategoriesTest < ActionDispatch::IntegrationTest
     
     res = json(response.body)
     assert_equal 403, response.status
-    assert_equal 'You are not authorized for that resource', res[:msg]
+    assert_equal 'You are not authorized for that resource', res[:msg]    
   end
 end
