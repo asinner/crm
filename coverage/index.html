@@ -14,26 +14,26 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-17T16:17:00-08:00">2014-11-17T16:17:00-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-11-17T16:18:54-08:00">2014-11-17T16:18:54-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">96.58%</span></span>
+    (<span class="covered_percent"><span class="green">96.73%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.45
+         1.47
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>34</b> files in total.
-    <b>351</b> relevant lines. 
-    <span class="green"><b>339</b> lines covered</span> and
+    <b>35</b> files in total.
+    <b>367</b> relevant lines. 
+    <span class="green"><b>355</b> lines covered</span> and
     <span class="red"><b>12</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -77,7 +77,7 @@
         <td>28</td>
         <td>28</td>
         <td>0</td>
-        <td>1.6</td>
+        <td>1.7</td>
       </tr>
       
       <tr>
@@ -97,7 +97,7 @@
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>6.0</td>
+        <td>6.4</td>
       </tr>
       
       <tr>
@@ -217,7 +217,7 @@
         <td>28</td>
         <td>17</td>
         <td>11</td>
-        <td>1.2</td>
+        <td>1.3</td>
       </tr>
       
       <tr>
@@ -227,7 +227,7 @@
         <td>12</td>
         <td>11</td>
         <td>1</td>
-        <td>1.8</td>
+        <td>2.0</td>
       </tr>
       
       <tr>
@@ -266,6 +266,16 @@
         <td>3</td>
         <td>2</td>
         <td>2</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#2af2569b50e3d76f8245b84f6b50998abc310c70" class="src_link" title="test/integration/authorization/timelines/categories/hacker_cannot_delete_categories_test.rb">test/integration/authorization/timelines/categories/hacker_cannot_delete_categories_test.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>28</td>
+        <td>16</td>
+        <td>16</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -1020,14 +1030,14 @@
           <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="35">
+          <span class="hits">2</span>
           
           <code class="ruby">    category = TimelineCategory.find(params[:id])</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="36">
+          <span class="hits">2</span>
           
           <code class="ruby">    authorize category.timeline</code>
         </li>
@@ -1266,8 +1276,8 @@
           <code class="ruby">  def current_user</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="7">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="36" data-linenumber="7">
+          <span class="hits">36</span>
           
           <code class="ruby">    @user ||= User.find_by(token: params[:token]) if params[:token]</code>
         </li>
@@ -1302,8 +1312,8 @@
           <code class="ruby">  def authenticate_user!</code>
         </li>
       
-        <li class="covered" data-hits="17" data-linenumber="13">
-          <span class="hits">17</span>
+        <li class="covered" data-hits="18" data-linenumber="13">
+          <span class="hits">18</span>
           
           <code class="ruby">    return render status: 401, json: { msg: &#39;You are not authorized for that&#39; } unless current_user</code>
         </li>
@@ -1326,8 +1336,8 @@
           <code class="ruby">  def authenticate_company!</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="17">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="16" data-linenumber="17">
+          <span class="hits">16</span>
           
           <code class="ruby">    return render status: 400, json: { msg: &#39;You need to create a company first&#39; } unless @user.company</code>
         </li>
@@ -1350,8 +1360,8 @@
           <code class="ruby">  def user_not_authorized</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="21">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="21">
+          <span class="hits">4</span>
           
           <code class="ruby">    return render status: 403, json: { msg: &#39;You are not authorized for that resource&#39; }</code>
         </li>
@@ -1854,14 +1864,14 @@
           <code class="ruby">  def initialize(user, record)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="5">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="10" data-linenumber="5">
+          <span class="hits">10</span>
           
           <code class="ruby">    @user = user</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="6">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="10" data-linenumber="6">
+          <span class="hits">10</span>
           
           <code class="ruby">    @record = record</code>
         </li>
@@ -2220,8 +2230,8 @@
           <code class="ruby">  def create?</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="9">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="10" data-linenumber="9">
+          <span class="hits">10</span>
           
           <code class="ruby">    @user.company.events.include?(record.event)</code>
         </li>
@@ -2292,8 +2302,8 @@
           <code class="ruby">  def destroy?</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="21">
+          <span class="hits">2</span>
           
           <code class="ruby">    create?</code>
         </li>
@@ -2449,6 +2459,192 @@
         </li>
       
         <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="2af2569b50e3d76f8245b84f6b50998abc310c70">
+  <div class="header">
+    <h3>test/integration/authorization/timelines/categories/hacker_cannot_delete_categories_test.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>16</b> relevant lines. 
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &#39;test_helper&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">class HackerCannotDeleteCategoriesTest &lt; ActionDispatch::IntegrationTest</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  setup do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @user = create_user</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @company = create_company(@user)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @event = create_event(@company)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @timeline = create_timeline(@event)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @category = create_category(@timeline, Faker::Lorem.sentence)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">    </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    @hacker = create_user(&#39;hacker@example.com&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    sign_in(@hacker)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    create_company(@hacker)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">  </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  test &#39;user can delete timeline categories&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    delete &quot;/api/timelines/#{@timeline.id}/categories/#{@category.id}&quot;, {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="18">
+          
+          
+          <code class="ruby">      token: @hacker.token</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
+          <code class="ruby">    }.to_json, {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby">      &#39;Accept&#39; =&gt; &#39;application/json&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">      &#39;Content-Type&#39; =&gt; &#39;application/json&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">    }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">    </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    res = json(response.body)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="25">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    assert_equal 403, response.status</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    assert_equal &#39;You are not authorized for that resource&#39;, res[:msg]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
           
           
           <code class="ruby">end</code>
