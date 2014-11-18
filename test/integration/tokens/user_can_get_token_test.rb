@@ -2,14 +2,10 @@ require 'test_helper'
 
 class UserCanGetTokenTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create!(
-      name: 'Andrew Sinner',
-      email: 'andrew@example.com',
-      password: '12345678'
-    )
+    @user = create_user
   end
   
-  test 'user can sign in with valid credentials' do
+  test 'user can get token with valid credentials' do
     post '/api/tokens', {
       email: @user.email,
       password: @user.password
@@ -24,7 +20,7 @@ class UserCanGetTokenTest < ActionDispatch::IntegrationTest
     assert_not_nil res[:token]
   end
   
-  test 'user can sign in with valid credentials' do
+  test 'user cannot get token without valid credentials' do
     post '/api/tokens', {
       email: @user.email,
       password: nil

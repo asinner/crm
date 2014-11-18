@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   
   namespace :api do
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
-      resources :users, :tokens, :companies, :events
+      
+      resources :tokens, only: %w(create) do
+        collection do
+          delete '/' => 'tokens#destroy'
+        end
+      end
+      
+      resources :users, :companies, :events
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
@@ -13,7 +20,13 @@ Rails.application.routes.draw do
     end
     
     scope module: :v1 do
-      resources :users, :tokens, :companies, :events
+      resources :tokens, only: %w(create) do
+        collection do
+          delete '/' => 'tokens#destroy'
+        end
+      end
+      
+      resources :users, :companies, :events
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
