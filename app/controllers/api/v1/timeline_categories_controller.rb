@@ -1,6 +1,12 @@
 class Api::V1::TimelineCategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_company!
+
+  def index
+    timeline = Timeline.find(params[:timeline_id])
+    authorize timeline
+    render status: 200, json: timeline.categories
+  end
   
   def create
     timeline = Timeline.find(params[:timeline_id])
