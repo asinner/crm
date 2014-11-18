@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  timeline_category_id: 
-  description: MyString
-
-two:
-  timeline_category_id: 
-  description: MyString

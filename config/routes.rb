@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  root 'static_pages#home'
   namespace :api do
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
       
