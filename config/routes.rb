@@ -6,12 +6,20 @@ Rails.application.routes.draw do
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
+      
+      resources :timeline_categories do
+        resources :events, controller: :timeline_events
+      end
     end
     
     scope module: :v1 do
       resources :users, :tokens, :companies, :events
       resources :timelines do
         resources :categories, controller: :timeline_categories
+      end
+      
+      resources :timeline_categories do
+        resources :events, controller: :timeline_events
       end
     end
   end

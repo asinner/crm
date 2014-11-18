@@ -53,6 +53,14 @@ class ActiveSupport::TestCase
     category
   end
   
+  def create_timeline_event(category, description = 'My awesome timeline event')
+    event = category.events.build(
+      description: description
+    )
+    event.save!
+    event
+  end
+  
   def sign_in(user)
     user.update(token: SecureRandom.uuid)
   end
