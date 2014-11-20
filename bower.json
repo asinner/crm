@@ -1,0 +1,25 @@
+{
+  "name": "crm",
+  "version": "0.0.0",
+  "homepage": "https://github.com/asinner/crm",
+  "authors": [
+    "Andrew Sinner <andrewsinner@gmail.com>"
+  ],
+  "description": "A crm application",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.2"
+  },
+  "devDependencies": {
+    "karma": "~0.2.2"
+  }
+}

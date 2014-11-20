@@ -1,2 +1,22 @@
 %h1
 	CRM Home page
+.container
+	.row
+		%form.form-horizontal{data: {ng_controller: 'UsersCtrl', ng_submit: 'create()'}, role: 'form'}
+			.form-group
+				%label.sr-only
+					Name
+				%input.form-control{type: 'text', name: 'name', placeholder: 'Name'}
+			.form-group
+				%label.sr-only
+					Email
+				%input.form-control{type: 'email', name: 'email', placeholder: 'Email'}
+			.form-group
+				%label.sr-only
+					Password
+				%input.form-control{type: 'password', name: 'password', placeholder: 'Password'}
+			.form-group
+				%button.btn.btn-primary{type: 'submit'} 
+					Create your free account
+					%br
+					14-day free trial
