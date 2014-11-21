@@ -39,7 +39,7 @@ class UserCanEditProductsTest < ActionDispatch::IntegrationTest
       token: @user.token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
-  
+
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
     assert_equal 'Photobooth', @product.name

@@ -4,8 +4,12 @@ class ProductPolicy < ApplicationPolicy
       scope
     end
   end
-  
+
   def update?
     @user.company.products.include?(@record)
+  end
+
+  def destroy?
+    update?
   end
 end
