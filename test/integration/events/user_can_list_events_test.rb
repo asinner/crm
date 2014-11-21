@@ -5,13 +5,12 @@ class UserCanListEventsTest < ActionDispatch::IntegrationTest
     @user = create_user
     sign_in(@user)
     @company = create_company(@user)
-    10.times do
-      create_event(@company, Faker::Name.name)
-    end
+    @lead = create_lead(@company)
+    @event = create_event(@lead)
   end
-  
+
   test 'user can list events' do
-    get "/api/events?token=#{@user.token}", nil, {
+    get "/api/leads/#{@lead.id}/events?token=#{@user.token}", {
       'Accept' => 'application/json',
       'Content-Type' => 'application/json'
     }
@@ -19,6 +18,7 @@ class UserCanListEventsTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     events = json(response.body)[:events]
-    assert_equal 10, events.count
+    assert_equal 1, events.count
+    assert_equal 'San Diego', events.first[:estimate_location]
   end
 end

@@ -1,0 +1,31 @@
+.events {
+	font-family: 'Open Sans';
+	font-size: 0.9em;
+	letter-spacing: -0.50px;
+	font-weight: 600;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 250px;
+	background: #505F73;
+	height: 100%;
+	border-right: 1px solid rgb(0, 0, 0);
+	.filters {
+		padding: 5px;
+		background: rgba(0, 0, 0, 0.20);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.30);
+	}
+	.event {
+		text-align: center;
+		color: #FFF;
+		padding: 15px 0;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+		-webkit-font-smoothing: antialiased;
+		.name {
+			opacity: 0.50;
+		}
+		&:hover .name {
+			opacity: 1.0;
+		}
+	}
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118005313) do
+ActiveRecord::Schema.define(version: 20141121182719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,10 +26,34 @@ ActiveRecord::Schema.define(version: 20141118005313) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "company_id"
+    t.integer  "lead_id"
+    t.string   "estimate_location"
   end
 
-  add_index "events", ["company_id"], name: "index_events_on_company_id", using: :btree
+  add_index "events", ["lead_id"], name: "index_events_on_lead_id", using: :btree
+
+  create_table "leads", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "leads", ["company_id"], name: "index_leads_on_company_id", using: :btree
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "price"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "products", ["company_id"], name: "index_products_on_company_id", using: :btree
 
   create_table "timeline_categories", force: true do |t|
     t.string   "name"

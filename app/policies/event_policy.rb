@@ -4,12 +4,20 @@ class EventPolicy < ApplicationPolicy
       scope
     end
   end
-  
-  def update?
-    @user.company.events.include?(@record)
+
+  def index?
+    create?
   end
-  
+
+  def create?
+    @user.company.leads.include?(@record.lead)
+  end
+
+  def update?
+    create?
+  end
+
   def destroy?
-    update?
+    create?
   end
 end
