@@ -31,4 +31,23 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
     lead = Lead.last
     assert_equal @company, lead.company
   end
+  
+  test 'lead cannot be created with invalid data' do
+    post '/api/leads', {
+      lead: {
+        first_name: 'Andrew',
+        last_name: nil,
+        email: 'andrew@example.com',
+        phone_number: '(555) 123-4567'
+      },
+      token: @user.token
+    }.to_json, {
+      'Accept' => 'application/json',
+      'Content-Type' => 'application/json'
+    }
+    
+    assert_equal 422, response.status
+    assert_equal Mime::JSON, response.content_type
+    assert_equal 0, @company.leads.count
+  end
 end
