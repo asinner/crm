@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
+  
   namespace :api do
+    # Version 1
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
       
       resources :tokens, only: %w(create) do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
         end
       end
       
-      resources :users, :companies, :events
+      resources :users, :companies, :events, :leads
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
     
+    # Catch all API requests
     scope module: :v1 do
       resources :tokens, only: %w(create) do
         collection do
@@ -27,7 +30,7 @@ Rails.application.routes.draw do
         end
       end
       
-      resources :users, :companies, :events
+      resources :users, :companies, :events, :leads
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
