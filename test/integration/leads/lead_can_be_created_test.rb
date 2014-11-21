@@ -6,7 +6,7 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
     sign_in(@user)
     @company = create_company(@user)
   end
-  
+
   test 'lead can be created with valid data' do
     post '/api/leads', {
       lead: {
@@ -16,11 +16,9 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
         phone_number: '(555) 123-4567'
       },
       token: @user.token
-    }.to_json, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
-    
+    }.to_json, 'Accept' => 'application/json',
+               'Content-Type' => 'application/json'
+
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
     lead = json(response.body)[:lead]
@@ -31,7 +29,7 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
     lead = Lead.last
     assert_equal @company, lead.company
   end
-  
+
   test 'lead cannot be created with invalid data' do
     post '/api/leads', {
       lead: {
@@ -41,11 +39,9 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
         phone_number: '(555) 123-4567'
       },
       token: @user.token
-    }.to_json, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
-    
+    }.to_json, 'Accept' => 'application/json',
+               'Content-Type' => 'application/json'
+
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
     assert_equal 0, @company.leads.count

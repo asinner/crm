@@ -4,11 +4,11 @@ class EventPolicy < ApplicationPolicy
       scope
     end
   end
-  
+
   def update?
     @user.company.events.include?(@record)
   end
-  
+
   def destroy?
     update?
   end

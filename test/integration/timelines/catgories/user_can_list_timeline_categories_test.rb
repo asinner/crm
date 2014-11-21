@@ -11,13 +11,11 @@ class UserCanListTimelineCategoriesTest < ActionDispatch::IntegrationTest
       create_category(@timeline, Faker::Lorem.sentence)
     end
   end
-  
+
   test 'user can list timeline categories' do
-    get "/api/timelines/#{@timeline.id}/categories?token=#{@user.token}", nil, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
-    
+    get "/api/timelines/#{@timeline.id}/categories?token=#{@user.token}", nil, 'Accept' => 'application/json',
+                                                                               'Content-Type' => 'application/json'
+
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     categories = json(response.body)[:timeline_categories]

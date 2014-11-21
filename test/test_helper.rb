@@ -6,7 +6,6 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 
-
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
 end
@@ -19,7 +18,7 @@ class ActiveSupport::TestCase
   def json(content)
     JSON.parse(content, symbolize_names: true)
   end
-  
+
   def create_user(email = 'andrew@example.com')
     User.create!(
       name: 'Andrew',
@@ -27,7 +26,7 @@ class ActiveSupport::TestCase
       password: '12345678'
     )
   end
-  
+
   def create_company(user)
     user.build_company(
       name: 'Vintage Vault'
@@ -35,7 +34,7 @@ class ActiveSupport::TestCase
     user.save!
     user.company
   end
-  
+
   def create_event(company, name = 'My awesome event')
     event = company.events.new(
       name: name
@@ -43,13 +42,13 @@ class ActiveSupport::TestCase
     event.save!
     event
   end
-  
+
   def create_timeline(event)
     timeline = event.build_timeline
     timeline.save
     timeline
   end
-  
+
   def create_category(timeline, name = 'Pre-wedding')
     category = timeline.categories.build(
       name: name
@@ -57,7 +56,7 @@ class ActiveSupport::TestCase
     category.save!
     category
   end
-  
+
   def create_timeline_event(category, description = 'My awesome timeline event')
     event = category.events.build(
       description: description
@@ -65,7 +64,7 @@ class ActiveSupport::TestCase
     event.save!
     event
   end
-  
+
   def sign_in(user)
     user.update(token: SecureRandom.uuid)
   end

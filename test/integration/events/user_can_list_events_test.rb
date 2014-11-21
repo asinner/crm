@@ -9,13 +9,11 @@ class UserCanListEventsTest < ActionDispatch::IntegrationTest
       create_event(@company, Faker::Name.name)
     end
   end
-  
+
   test 'user can list events' do
-    get "/api/events?token=#{@user.token}", nil, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
-    
+    get "/api/events?token=#{@user.token}", nil, 'Accept' => 'application/json',
+                                                 'Content-Type' => 'application/json'
+
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     events = json(response.body)[:events]

@@ -9,19 +9,17 @@ class HackerCannotRemoveTimelineItemsTest < ActionDispatch::IntegrationTest
     @timeline = create_timeline(@event)
     @category = create_category(@timeline)
     @timeline_event = create_timeline_event(@category)
-    
+
     @hacker = create_user('hacker@example.com')
     sign_in(@hacker)
     create_company(@hacker)
   end
-  
+
   test 'user can delete timeline events' do
     delete "/api/timeline_categories/#{@category.id}/events/#{@timeline_event.id}", {
       token: @hacker.token
-    }.to_json, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
+    }.to_json, 'Accept' => 'application/json',
+               'Content-Type' => 'application/json'
 
     res = json(response.body)
     assert_equal 403, response.status

@@ -26,9 +26,8 @@ gem 'pg'
 # Authorization
 gem 'pundit'
 
-
 group :doc do
-  gem 'sdoc', '~> 0.4.0'  
+  gem 'sdoc', '~> 0.4.0'
 end
 
 group :development, :test do

@@ -1,27 +1,27 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
-  
+
   namespace :api do
     # Version 1
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
-      
+
       resources :tokens, only: %w(create) do
         collection do
           delete '/' => 'tokens#destroy'
         end
       end
-      
-      resources :users, :companies, :events, :leads
+
+      resources :users, :companies, :events, :leads, :products
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
-      
+
       resources :timeline_categories do
         resources :events, controller: :timeline_events
       end
     end
-    
+
     # Catch all API requests
     scope module: :v1 do
       resources :tokens, only: %w(create) do
@@ -29,19 +29,18 @@ Rails.application.routes.draw do
           delete '/' => 'tokens#destroy'
         end
       end
-      
-      resources :users, :companies, :events, :leads
+
+      resources :users, :companies, :events, :leads, :products
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
-      
+
       resources :timeline_categories do
         resources :events, controller: :timeline_events
       end
     end
   end
-  
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

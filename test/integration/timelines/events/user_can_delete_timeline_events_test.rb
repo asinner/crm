@@ -10,14 +10,12 @@ class UserCanDeleteTimelineEventsTest < ActionDispatch::IntegrationTest
     @category = create_category(@timeline)
     @timeline_event = create_timeline_event(@category)
   end
-  
+
   test 'user can delete timeline events' do
     delete "/api/timeline_categories/#{@category.id}/events/#{@timeline_event.id}", {
       token: @user.token
-    }.to_json, {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
+    }.to_json, 'Accept' => 'application/json',
+               'Content-Type' => 'application/json'
 
     assert_equal 204, response.status
     assert_equal 0, @category.events.count
