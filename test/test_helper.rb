@@ -4,11 +4,11 @@ SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'capybara/rails'
+# require 'capybara/rails'
 
-class ActionDispatch::IntegrationTest
-  include Capybara::DSL
-end
+#class ActionDispatch::IntegrationTest
+#  include Capybara::DSL
+#end
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -84,6 +84,14 @@ class ActiveSupport::TestCase
     )
     event.save
     event
+  end
+  
+  def create(args)
+    @user = create_user if args.include?(:user)
+    sign_in(@user) if @user
+    @company = create_company(@user) if args.include?(:company)
+    @lead = create_lead(@company) if args.include?(:lead)
+    @event = create_event(@lead) if args.include?(:event)
   end
 
   def sign_in(user)

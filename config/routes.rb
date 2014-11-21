@@ -18,6 +18,10 @@ Rails.application.routes.draw do
         resources :events
       end
       
+      resources :events do
+        resource :estimate
+      end
+      
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
@@ -39,6 +43,10 @@ Rails.application.routes.draw do
       
       resources :leads do
         resources :events
+      end
+      
+      resources :events do
+        resource :estimate
       end
       
       resources :timelines do
