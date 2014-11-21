@@ -5,6 +5,10 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    @user.company.leads.include?(@record.lead)
+  end
+
   def update?
     @user.company.events.include?(@record)
   end

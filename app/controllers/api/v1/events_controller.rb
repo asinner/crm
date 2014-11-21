@@ -8,9 +8,10 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def create
-    event = @user.company.events.new(event_params)
-    event.build_timeline
-
+    lead = Lead.find(params[:lead_id])
+    event = lead.events.new(event_params)
+    authorize event
+    
     if event.save
       render status: 201, json: event
     else
@@ -37,6 +38,6 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name)
+    params.require(:event).permit(:name, :estimate_location)
   end
 end

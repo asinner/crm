@@ -12,7 +12,12 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, :companies, :events, :leads, :products
+      resources :users, :companies, :products
+      
+      resources :leads do
+        resources :events
+      end
+      
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end
@@ -30,7 +35,12 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, :companies, :events, :leads, :products
+      resources :users, :companies, :products
+      
+      resources :leads do
+        resources :events
+      end
+      
       resources :timelines do
         resources :categories, controller: :timeline_categories
       end

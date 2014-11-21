@@ -35,14 +35,6 @@ class ActiveSupport::TestCase
     user.company
   end
 
-  def create_event(company, name = 'My awesome event')
-    event = company.events.new(
-      name: name
-    )
-    event.save!
-    event
-  end
-
   def create_timeline(event)
     timeline = event.build_timeline
     timeline.save
@@ -73,6 +65,16 @@ class ActiveSupport::TestCase
     )
     product.save
     product
+  end
+
+  def create_lead(company)
+    lead = company.leads.new(
+      first_name: 'Andrew',
+      last_name: 'Sinner',
+      email: 'andrew@example.com'
+    )
+    lead.save
+    lead
   end
 
   def sign_in(user)

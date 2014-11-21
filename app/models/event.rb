@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
-  validates :name, presence: true
+  validates :estimate_location, presence: true
 
-  belongs_to :company
+  belongs_to :lead
   has_one :timeline
 end

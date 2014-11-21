@@ -5,35 +5,40 @@ class UserCanCreateEventsForCompanyTest < ActionDispatch::IntegrationTest
     @user = create_user
     sign_in(@user)
     @company = create_company(@user)
+    @lead = create_lead(@company)
   end
 
-  test 'user can create event for company with valid data' do
-    post '/api/events', {
+  test 'create event for lead with valid data' do
+    post "/api/leads/#{@lead.id}/events", {
       event: {
-        name: 'The Awesome Wedding'
+        estimate_location: 'San Diego',
+        name: 'The Grand Gala'        
       },
       token: @user.token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
-
+    
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
-    event = json(response.body)[:event]
-    assert_equal 'The Awesome Wedding', event[:name]
-    assert_equal 1, @user.company.events.count
+    event = json(response.body)[:event]    
+    assert_equal 'The Grand Gala', event[:name]
+    assert_equal 'San Diego', event[:estimate_location]
+    assert_equal @lead.id, event[:lead_id]
+    assert_equal 1, @lead.events.count
   end
 
-  test 'user cannot create event for company with invalid data' do
-    post '/api/events', {
+  test 'cannot create event for lead with invalid data' do
+    post "/api/leads/#{@lead.id}/events", {
       event: {
-        name: nil
+        estimate_location: nil,
+        name: 'The Grand Gala'
       },
       token: @user.token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
-
+  
     assert_equal 422, response.status
     assert_equal Mime::JSON, response.content_type
-    assert_equal 0, @user.company.events.count
+    assert_equal 0, @lead.events.count
   end
 end

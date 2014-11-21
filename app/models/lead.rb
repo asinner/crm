@@ -4,4 +4,5 @@ class Lead < ActiveRecord::Base
   validates :email, presence: true
 
   belongs_to :company
+  has_many :events
 end
