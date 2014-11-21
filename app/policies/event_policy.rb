@@ -5,15 +5,19 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    create?
+  end
+
   def create?
     @user.company.leads.include?(@record.lead)
   end
 
   def update?
-    @user.company.events.include?(@record)
+    create?
   end
 
   def destroy?
-    update?
+    create?
   end
 end

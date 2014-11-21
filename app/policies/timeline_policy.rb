@@ -6,7 +6,7 @@ class TimelinePolicy < ApplicationPolicy
   end
 
   def create?
-    @user.company.events.include?(record.event)
+    @user.company.leads.include?(record.event.lead)
   end
 
   def index?

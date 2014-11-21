@@ -4,7 +4,8 @@ class HackerCannotUpdateTest < ActionDispatch::IntegrationTest
   setup do
     @user = create_user
     @company = create_company(@user)
-    @event = create_event(@company)
+    @lead = create_lead(@company)
+    @event = create_event(@lead)
 
     @hacker = create_user('hacker@example.com')
     sign_in(@hacker)
@@ -12,7 +13,7 @@ class HackerCannotUpdateTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can update event details with valid data' do
-    patch "/api/events/#{@event.id}", {
+    patch "/api/leads/#{@lead.id}/events/#{@event.id}", {
       event: {
         name: 'My really awesome event'
       },

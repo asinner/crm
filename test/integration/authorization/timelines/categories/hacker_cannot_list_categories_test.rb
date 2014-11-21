@@ -5,7 +5,8 @@ class HackerCannotListCategoriesTest < ActionDispatch::IntegrationTest
     @user = create_user
     # sign_in(@user)
     @company = create_company(@user)
-    @event = create_event(@company)
+    @lead = create_lead(@company)
+    @event = create_event(@lead)
     @timeline = create_timeline(@event)
     10.times do
       create_category(@timeline, Faker::Lorem.sentence)

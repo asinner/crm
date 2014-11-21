@@ -4,7 +4,8 @@ class HackerCannotCreateCategoriesTest < ActionDispatch::IntegrationTest
   setup do
     @user = create_user
     @company = create_company(@user)
-    @event = create_event(@company)
+    @lead = create_lead(@company)
+    @event = create_event(@lead)
     @timeline = create_timeline(@event)
     @category = create_category(@timeline, Faker::Lorem.sentence)
 

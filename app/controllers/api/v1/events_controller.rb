@@ -3,14 +3,17 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_company!
 
   def index
-    events = @user.company.events
+    lead = Lead.find(params[:lead_id])
+    authorize lead
+    events = lead.events
+    
     render status: 200, json: events
   end
 
   def create
     lead = Lead.find(params[:lead_id])
+    authorize lead
     event = lead.events.new(event_params)
-    authorize event
     
     if event.save
       render status: 201, json: event
@@ -29,7 +32,7 @@ class Api::V1::EventsController < ApplicationController
       render status: 422, json: event.errors
     end
   end
-
+  
   def event_params
     params.require(:event).permit(:name, :estimate_location)
   end

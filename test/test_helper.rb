@@ -76,6 +76,15 @@ class ActiveSupport::TestCase
     lead.save
     lead
   end
+  
+  def create_event(lead)
+    event = lead.events.new(
+      estimate_location: 'San Diego',
+      name: 'The Grand Gala'
+    )
+    event.save
+    event
+  end
 
   def sign_in(user)
     user.update(token: SecureRandom.uuid)
