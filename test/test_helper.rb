@@ -65,6 +65,16 @@ class ActiveSupport::TestCase
     event
   end
 
+  def create_product(company, name = 'Photobooth', description = 'nil', price = 750.00)
+    product = company.products.new(
+      name: name,
+      description: description,
+      price: price
+    )
+    product.save
+    product
+  end
+
   def sign_in(user)
     user.update(token: SecureRandom.uuid)
   end
