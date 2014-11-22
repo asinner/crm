@@ -92,6 +92,14 @@ class ActiveSupport::TestCase
     estimate
   end
   
+  def create_note(lead)
+    note = lead.notes.build(
+      body: 'An awesome note'
+    )
+    note.save
+    note
+  end
+  
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user
@@ -100,6 +108,7 @@ class ActiveSupport::TestCase
     @event = create_event(@lead) if args.include?(:event)
     @product = create_product(@company) if args.include?(:product)
     @estimate = create_estimate(@event) if args.include?(:estimate)
+    @note = create_note(@lead) if args.include?(:note)
   end
 
   def sign_in(user)

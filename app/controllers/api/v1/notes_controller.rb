@@ -13,6 +13,17 @@ class Api::V1::NotesController < ApplicationController
     end
   end
   
+  def update
+    note = Note.find(params[:id])
+    authorize note
+    
+    if note.update(note_params)
+      render status: 200, json: note
+    else
+      render status: 422, json: note.errors
+    end
+  end
+  
   private
   
   def note_params
