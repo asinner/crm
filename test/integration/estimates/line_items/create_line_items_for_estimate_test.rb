@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CreateLineItemsForEstimatesTest < ActionDispatch::IntegrationTest
+class CreateLineItemsForEstimateTest < ActionDispatch::IntegrationTest
   setup do 
     create([:user, :company, :lead, :event, :product, :estimate])
   end

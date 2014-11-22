@@ -13,5 +13,13 @@ class Api::V1::LineItemsController < ApplicationController
     else
       render status: 422, json: estimate.errors
     end
-  end  
+  end
+  
+  def destroy
+    estimate = Estimate.find(params[:estimate_id])
+    authorize estimate
+    product = Product.find(params[:id])
+    estimate.items.delete(product)
+    render status: 204, nothing: true
+  end
 end

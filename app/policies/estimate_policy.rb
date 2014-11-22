@@ -8,4 +8,8 @@ class EstimatePolicy < ApplicationPolicy
   def create?
     @user.company.leads.include?(@record.event.lead)
   end
+  
+  def destroy?
+    create?
+  end
 end
