@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :users, :companies, :products
       
       resources :leads do
-        resources :events
+        resources :events, :notes
       end
       
       resources :events do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
       resources :users, :companies, :products
       
       resources :leads do
-        resources :events
+        resources :events, :notes
       end
       
       resources :events do

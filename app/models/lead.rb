@@ -5,4 +5,5 @@ class Lead < ActiveRecord::Base
 
   belongs_to :company
   has_many :events
+  has_many :notes
 end
