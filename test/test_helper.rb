@@ -6,9 +6,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 # require 'capybara/rails'
 
-#class ActionDispatch::IntegrationTest
+# class ActionDispatch::IntegrationTest
 #  include Capybara::DSL
-#end
+# end
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -76,7 +76,7 @@ class ActiveSupport::TestCase
     lead.save
     lead
   end
-  
+
   def create_event(lead)
     event = lead.events.new(
       estimate_location: 'San Diego',
@@ -85,13 +85,13 @@ class ActiveSupport::TestCase
     event.save
     event
   end
-  
+
   def create_estimate(event)
     estimate = event.build_estimate
     estimate.save
     estimate
   end
-  
+
   def create_note(lead)
     note = lead.notes.build(
       body: 'An awesome note'
@@ -99,7 +99,7 @@ class ActiveSupport::TestCase
     note.save
     note
   end
-  
+
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user

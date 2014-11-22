@@ -4,11 +4,11 @@ class LeadPolicy < ApplicationPolicy
       scope
     end
   end
-  
+
   def index?
     @user.company.leads.include?(@record)
   end
-  
+
   def create?
     index?
   end

@@ -3,7 +3,7 @@ require 'test_helper'
 class UserCanListLineItemsTest < ActionDispatch::IntegrationTest
   setup do
     create([:user, :company, :lead, :event, :estimate])
-    
+
     products = []
     10.times do
       products.push(create_product(@company))
@@ -14,12 +14,10 @@ class UserCanListLineItemsTest < ActionDispatch::IntegrationTest
     end
     @estimate.save
   end
-  
-  test "user can list line items for estimate" do
-    get "/api/estimates/#{@estimate.id}/items?token=#{@user.token}", {
-      'Accept' => 'application/json',
-      'Content-Type' => 'application/json'
-    }
+
+  test 'user can list line items for estimate' do
+    get "/api/estimates/#{@estimate.id}/items?token=#{@user.token}", 'Accept' => 'application/json',
+                                                                     'Content-Type' => 'application/json'
 
     assert_equal 200, response.status
     items = json(response.body)[:line_items]
