@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
-
+  
   namespace :api do
     # Version 1
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
