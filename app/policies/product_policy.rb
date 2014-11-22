@@ -5,6 +5,10 @@ class ProductPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    update?
+  end
+
   def update?
     @user.company.products.include?(@record)
   end

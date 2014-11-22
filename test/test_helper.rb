@@ -86,12 +86,20 @@ class ActiveSupport::TestCase
     event
   end
   
+  def create_estimate(event)
+    estimate = event.build_estimate
+    estimate.save
+    estimate
+  end
+  
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user
     @company = create_company(@user) if args.include?(:company)
     @lead = create_lead(@company) if args.include?(:lead)
     @event = create_event(@lead) if args.include?(:event)
+    @product = create_product(@company) if args.include?(:product)
+    @estimate = create_estimate(@event) if args.include?(:estimate)
   end
 
   def sign_in(user)
