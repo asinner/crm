@@ -12,7 +12,7 @@ class Api::V1::LineItemsController < ApplicationController
     authorize estimate
     product = Product.find(params[:product_id])
     authorize product
-    item = estimate.items << product
+    estimate.items << product
 
     if estimate.save
       render status: 201, nothing: true
