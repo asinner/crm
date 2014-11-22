@@ -5,6 +5,10 @@ class EstimatePolicy < ApplicationPolicy
     end
   end
   
+  def index?
+    create?
+  end
+  
   def create?
     @user.company.leads.include?(@record.event.lead)
   end
