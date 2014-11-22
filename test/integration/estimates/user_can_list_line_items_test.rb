@@ -20,7 +20,7 @@ class UserCanListLineItemsTest < ActionDispatch::IntegrationTest
       'Accept' => 'application/json',
       'Content-Type' => 'application/json'
     }
-        
+
     assert_equal 200, response.status
     items = json(response.body)[:line_items]
     assert_equal 10, items.count
