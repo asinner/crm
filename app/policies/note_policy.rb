@@ -8,4 +8,8 @@ class NotePolicy < ApplicationPolicy
   def update?
     @user.company.leads.include?(@record.lead)
   end
+  
+  def destroy?
+    update?
+  end
 end

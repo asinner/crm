@@ -24,6 +24,13 @@ class Api::V1::NotesController < ApplicationController
     end
   end
   
+  def destroy
+    note = Note.find(params[:id])
+    authorize note
+    note.delete
+    render status: 204, nothing: true
+  end
+  
   private
   
   def note_params
