@@ -4,15 +4,15 @@ class EstimatePolicy < ApplicationPolicy
       scope
     end
   end
-  
+
   def index?
     create?
   end
-  
+
   def create?
     @user.company.leads.include?(@record.event.lead)
   end
-  
+
   def destroy?
     create?
   end

@@ -6,7 +6,7 @@ class Api::V1::EventsController < ApplicationController
     lead = Lead.find(params[:lead_id])
     authorize lead
     events = lead.events
-    
+
     render status: 200, json: events
   end
 
@@ -14,7 +14,7 @@ class Api::V1::EventsController < ApplicationController
     lead = Lead.find(params[:lead_id])
     authorize lead
     event = lead.events.new(event_params)
-    
+
     if event.save
       render status: 201, json: event
     else
@@ -32,7 +32,7 @@ class Api::V1::EventsController < ApplicationController
       render status: 422, json: event.errors
     end
   end
-  
+
   def event_params
     params.require(:event).permit(:name, :estimate_location)
   end
