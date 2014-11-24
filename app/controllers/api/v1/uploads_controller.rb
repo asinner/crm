@@ -5,9 +5,9 @@ class Api::V1::UploadsController < ApplicationController
     event = Event.find(params[:event_id])
     authorize event
     upload = event.uploads.build(upload_params)
-    upload.url = "/uploads/#{SecureRandom.hex(7)}"
+    upload.path = "/uploads/#{SecureRandom.hex(7)}"
     presigned_post = S3_BUCKET.presigned_post(
-      key: upload.url,
+      key: upload.path,
       acl: :private,
       success_action_status: 201,
       content_length: 0..1.gigabytes
@@ -22,6 +22,14 @@ class Api::V1::UploadsController < ApplicationController
     else
       render status: 422, json: upload.errors
     end
+  end
+
+  def destroy
+    upload = Upload.find(params[:id])
+    authorize upload
+    upload.delete
+    S3_BUCKET.objects[upload.path].delete
+    render status: 204, nothing: true
   end
   
   private

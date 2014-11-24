@@ -100,6 +100,17 @@ class ActiveSupport::TestCase
     note
   end
 
+  def create_upload(event)
+    upload = event.uploads.new(
+      name: 'Some Document.docx',
+      size: 1_234_567,
+      mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      path: '/uploads/my-awesome-file'
+    )
+    upload.save
+    upload
+  end
+  
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user
@@ -109,6 +120,7 @@ class ActiveSupport::TestCase
     @product = create_product(@company) if args.include?(:product)
     @estimate = create_estimate(@event) if args.include?(:estimate)
     @note = create_note(@lead) if args.include?(:note)
+    @upload = create_upload(@event) if args.include?(:upload)
   end
 
   def sign_in(user)
