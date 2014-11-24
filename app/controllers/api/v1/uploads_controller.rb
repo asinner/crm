@@ -1,6 +1,6 @@
 class Api::V1::UploadsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     event = Event.find(params[:event_id])
     authorize event
@@ -12,9 +12,9 @@ class Api::V1::UploadsController < ApplicationController
       success_action_status: 201,
       content_length: 0..1.gigabytes
     )
-        
+
     if upload.save
-      render status: 201, json: { 
+      render status: 201, json: {
         presigned_post: presigned_post.fields,
         url: presigned_post.url,
         upload: upload
@@ -31,9 +31,9 @@ class Api::V1::UploadsController < ApplicationController
     S3_BUCKET.objects[upload.path].delete
     render status: 204, nothing: true
   end
-  
+
   private
-  
+
   def upload_params
     params.require(:upload).permit(:name, :size, :mime_type)
   end

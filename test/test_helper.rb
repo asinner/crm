@@ -110,7 +110,7 @@ class ActiveSupport::TestCase
     upload.save
     upload
   end
-  
+
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user

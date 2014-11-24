@@ -4,7 +4,7 @@ class UploadPolicy < ApplicationPolicy
       scope
     end
   end
-  
+
   def destroy?
     @user.company.leads.include?(@record.event.lead)
   end
