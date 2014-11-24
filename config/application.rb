@@ -21,6 +21,8 @@ module Crm
     # config.i18n.default_locale = :de
     config.generators do |g|
       g.test_framework false
+      g.stylesheets false
+      g.javascripts false
     end
   end
 end

@@ -3,8 +3,12 @@ source 'https://rubygems.org'
 # Rails
 gem 'rails', '4.1.6'
 
+# Services
+gem 'aws-sdk'
+
 # Misc
 gem 'faker'
+gem 'figaro'
 
 # API
 gem 'active_model_serializers'

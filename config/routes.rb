@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
       resources :events do
         resource :estimate
+        resources :uploads
       end
 
       resources :estimates do
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
 
       resources :events do
         resource :estimate
+        resources :uploads
       end
 
       resources :estimates do
