@@ -11,7 +11,7 @@ class UserCanCreateCompanyTest < ActionDispatch::IntegrationTest
       company: {
         name: 'Vintage Vault'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -26,7 +26,7 @@ class UserCanCreateCompanyTest < ActionDispatch::IntegrationTest
       company: {
         name: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

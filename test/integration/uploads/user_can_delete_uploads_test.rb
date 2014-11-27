@@ -7,7 +7,7 @@ class UserCanDeleteUploadsTest < ActionDispatch::IntegrationTest
 
   test 'user can delete uploads' do
     delete "/api/events/#{@event.id}/uploads/#{@upload.id}", {
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

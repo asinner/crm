@@ -7,7 +7,7 @@ class UserCanDeleteNotesTest < ActionDispatch::IntegrationTest
 
   test 'user can delete notes' do
     delete "/api/leads/#{@lead.id}/notes/#{@note.id}", {
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

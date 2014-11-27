@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.2'
+
 # Rails
 gem 'rails', '4.1.6'
 
@@ -27,6 +29,9 @@ gem 'uglifier', '>= 1.3.0'
 # Database
 gem 'pg'
 
+# Authentication
+gem 'devise'
+
 # Authorization
 gem 'pundit'
 
@@ -34,14 +39,12 @@ group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
-group :development, :test do
-  gem 'capybara'
-end
-
 group :development do
   gem 'spring'
 end
 
 group :test do
+  gem 'database_cleaner'
+  gem 'launchy'
   gem 'simplecov', require: false
 end

@@ -10,7 +10,7 @@ class UserCanEditNotesTest < ActionDispatch::IntegrationTest
       note: {
         body: 'This note body was updated!'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -25,7 +25,7 @@ class UserCanEditNotesTest < ActionDispatch::IntegrationTest
       note: {
         body: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

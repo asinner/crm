@@ -19,7 +19,7 @@ class HackerCannotListTimelineItemsTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can list timeline events' do
-    get "/api/timeline_categories/#{@category.id}/events?token=#{@hacker.token}",
+    get "/api/timeline_categories/#{@category.id}/events?token=#{@hacker.authentication_token}",
         nil,
         'Accept' => 'application/json',
         'Content-Type' => 'application/json'

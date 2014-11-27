@@ -14,7 +14,7 @@ class UserCanCreateEventsForCompanyTest < ActionDispatch::IntegrationTest
         estimate_location: 'San Diego',
         name: 'The Grand Gala'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -33,7 +33,7 @@ class UserCanCreateEventsForCompanyTest < ActionDispatch::IntegrationTest
         estimate_location: nil,
         name: 'The Grand Gala'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

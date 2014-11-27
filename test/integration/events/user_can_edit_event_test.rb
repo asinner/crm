@@ -14,7 +14,7 @@ class UserCanEditEventDetailsTest < ActionDispatch::IntegrationTest
       event: {
         estimate_location: 'Los Angeles'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -29,7 +29,7 @@ class UserCanEditEventDetailsTest < ActionDispatch::IntegrationTest
       event: {
         estimate_location: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

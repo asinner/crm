@@ -1,6 +1,9 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
+  get 'users/new'
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
+  get '/sign-up' => 'users#new'
+  get '/start' => 'dashboard#start'
 
   namespace :api do
     # Version 1
@@ -12,7 +15,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, :companies, :products
+      resources :companies, :products
+
+      resources :users do
+        get 'emails', on: :collection
+      end
 
       resources :leads do
         resources :events, :notes
@@ -44,8 +51,12 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, :companies, :products
+      resources :companies, :products
 
+      resources :users do
+        get 'emails', on: :collection
+      end
+      
       resources :leads do
         resources :events, :notes
       end

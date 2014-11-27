@@ -21,7 +21,7 @@ class HackerCannotUpdateTimelineItemsTest < ActionDispatch::IntegrationTest
       timeline_event: {
         description: 'My newly updated timeline event'
       },
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

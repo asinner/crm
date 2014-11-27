@@ -15,7 +15,7 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
         email: 'andrew@example.com',
         phone_number: '(555) 123-4567'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -38,7 +38,7 @@ class LeadCanBeCreatedTest < ActionDispatch::IntegrationTest
         email: 'andrew@example.com',
         phone_number: '(555) 123-4567'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

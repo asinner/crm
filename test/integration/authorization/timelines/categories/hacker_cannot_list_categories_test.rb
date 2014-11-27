@@ -18,7 +18,7 @@ class HackerCannotListCategoriesTest < ActionDispatch::IntegrationTest
   end
 
   test 'hacker cannot list categories' do
-    get "/api/timelines/#{@timeline.id}/categories?token=#{@hacker.token}", nil, 'Accept' => 'application/json',
+    get "/api/timelines/#{@timeline.id}/categories?token=#{@hacker.authentication_token}", nil, 'Accept' => 'application/json',
                                                                                  'Content-Type' => 'application/json'
 
     res = json(response.body)

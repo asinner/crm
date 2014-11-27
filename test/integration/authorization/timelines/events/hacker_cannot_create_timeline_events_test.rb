@@ -20,7 +20,7 @@ class HackerCannotCreateTimelineItemsTest < ActionDispatch::IntegrationTest
       timeline_event: {
         description: 'This is an event happening on the timeline'
       },
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

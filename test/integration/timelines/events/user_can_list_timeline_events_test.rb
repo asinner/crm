@@ -15,7 +15,7 @@ class UserCanListTimelineEventsTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can list timeline events' do
-    get "/api/timeline_categories/#{@category.id}/events?token=#{@user.token}",
+    get "/api/timeline_categories/#{@category.id}/events?token=#{@user.authentication_token}",
         nil,
         'Accept' => 'application/json',
         'Content-Type' => 'application/json'
