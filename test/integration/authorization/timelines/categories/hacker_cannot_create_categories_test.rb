@@ -19,7 +19,7 @@ class HackerCannotCreateCategoriesTest < ActionDispatch::IntegrationTest
       category: {
         name: 'Pre-departure'
       },
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

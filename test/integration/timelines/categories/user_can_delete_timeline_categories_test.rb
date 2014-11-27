@@ -13,7 +13,7 @@ class UserCanDeleteTimelineCategoriesTest < ActionDispatch::IntegrationTest
 
   test 'user can delete timeline categories' do
     delete "/api/timelines/#{@timeline.id}/categories/#{@category.id}", {
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

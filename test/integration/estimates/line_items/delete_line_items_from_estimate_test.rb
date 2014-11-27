@@ -9,7 +9,7 @@ class DeleteLineItemsFromEstimateTest < ActionDispatch::IntegrationTest
 
   test 'user can delete line items from an estimate' do
     delete "/api/estimates/#{@estimate.id}/items/#{@product.id}", {
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

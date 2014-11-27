@@ -18,6 +18,7 @@ module.exports = function(config) {
 			'vendor/assets/components/angular/angular.js',
 			'vendor/assets/components/angular-mocks/angular-mocks.js',
 			'vendor/assets/components/angular-resource/angular-resource.js',
+			'vendor/assets/components/angular-animate/angular-animate.js',
 			'app/assets/javascripts/crm.js',
 			'app/assets/javascripts/app/**/*.js',
       {pattern: 'test/javascripts/**/*_test.js', included: true}

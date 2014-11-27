@@ -16,7 +16,7 @@ class UserCanListLineItemsTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can list line items for estimate' do
-    get "/api/estimates/#{@estimate.id}/items?token=#{@user.token}", 'Accept' => 'application/json',
+    get "/api/estimates/#{@estimate.id}/items?token=#{@user.authentication_token}", 'Accept' => 'application/json',
                                                                      'Content-Type' => 'application/json'
 
     assert_equal 200, response.status

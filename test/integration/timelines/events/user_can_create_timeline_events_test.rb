@@ -16,7 +16,7 @@ class UserCanCreateTimelineEventsTest < ActionDispatch::IntegrationTest
       timeline_event: {
         description: 'This is an event happening on the timeline'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -32,7 +32,7 @@ class UserCanCreateTimelineEventsTest < ActionDispatch::IntegrationTest
       timeline_event: {
         description: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

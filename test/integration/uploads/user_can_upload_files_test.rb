@@ -12,7 +12,7 @@ class UserCanUploadFilesTest < ActionDispatch::IntegrationTest
         size: 1_234_567,
         mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -42,7 +42,7 @@ class UserCanUploadFilesTest < ActionDispatch::IntegrationTest
         size: 1_234_567,
         type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

@@ -10,7 +10,7 @@ class UserCanAddNotesToClientsTest < ActionDispatch::IntegrationTest
       note: {
         body: 'This is an awesome note body'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -26,7 +26,7 @@ class UserCanAddNotesToClientsTest < ActionDispatch::IntegrationTest
       note: {
         body: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

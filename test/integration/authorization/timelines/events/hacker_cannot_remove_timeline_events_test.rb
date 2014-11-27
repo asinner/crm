@@ -18,7 +18,7 @@ class HackerCannotRemoveTimelineItemsTest < ActionDispatch::IntegrationTest
 
   test 'user can delete timeline events' do
     delete "/api/timeline_categories/#{@category.id}/events/#{@timeline_event.id}", {
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

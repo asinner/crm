@@ -15,7 +15,7 @@ class UserCanEditProductsTest < ActionDispatch::IntegrationTest
         description: 'An elegant photobooth service',
         price: 950.00
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -36,7 +36,7 @@ class UserCanEditProductsTest < ActionDispatch::IntegrationTest
         description: 'An elegant photobooth service',
         price: 'Abc'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

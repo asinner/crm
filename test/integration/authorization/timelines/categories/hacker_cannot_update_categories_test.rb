@@ -19,7 +19,7 @@ class HackerCannotUpdateCategoriesTest < ActionDispatch::IntegrationTest
       category: {
         name: 'L33t h@x'
       },
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

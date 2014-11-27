@@ -1,0 +1,41 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+input.error {
+	border: 1px solid red;
+}
+
+form {
+	div.error {
+		overflow: hidden;
+		position: relative;;
+		display: block;
+		color: red;
+		height: 50px;
+		line-height: 30px;
+		padding: 0 10px;
+		span {
+			display: block;
+			position: absolute;
+			top: 10px;
+			-webkit-transition:all ease-in-out 0.2s;
+		  transition:all ease-in-out 0.2s;
+		}
+		span.ng-hide {
+			top: -30px;
+			opacity: 0;
+		}
+	}
+}

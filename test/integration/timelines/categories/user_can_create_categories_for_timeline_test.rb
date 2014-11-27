@@ -15,7 +15,7 @@ class UserCanCreateCategoriesForTimelineTest < ActionDispatch::IntegrationTest
       category: {
         name: 'Pre-departure'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -31,7 +31,7 @@ class UserCanCreateCategoriesForTimelineTest < ActionDispatch::IntegrationTest
       category: {
         name: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

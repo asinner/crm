@@ -17,7 +17,7 @@ class HackerCannotUpdateTest < ActionDispatch::IntegrationTest
       event: {
         name: 'My really awesome event'
       },
-      token: @hacker.token
+      token: @hacker.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

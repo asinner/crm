@@ -9,7 +9,7 @@ class LeadCanCreateEstimatesTest < ActionDispatch::IntegrationTest
     post "/api/events/#{@event.id}/estimate", {
       estimate: {
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 

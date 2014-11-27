@@ -10,7 +10,7 @@ class UserCanListEventsTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can list events' do
-    get "/api/leads/#{@lead.id}/events?token=#{@user.token}", 'Accept' => 'application/json',
+    get "/api/leads/#{@lead.id}/events?token=#{@user.authentication_token}", 'Accept' => 'application/json',
                                                               'Content-Type' => 'application/json'
 
     assert_equal 200, response.status

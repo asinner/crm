@@ -14,7 +14,7 @@ class UserCanListTimelineCategoriesTest < ActionDispatch::IntegrationTest
   end
 
   test 'user can list timeline categories' do
-    get "/api/timelines/#{@timeline.id}/categories?token=#{@user.token}", nil, 'Accept' => 'application/json',
+    get "/api/timelines/#{@timeline.id}/categories?token=#{@user.authentication_token}", nil, 'Accept' => 'application/json',
                                                                                'Content-Type' => 'application/json'
 
     assert_equal 200, response.status

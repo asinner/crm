@@ -16,7 +16,7 @@ class UserCanEditTimelineCategoriesTest < ActionDispatch::IntegrationTest
       category: {
         name: 'My new awesome category'
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
@@ -31,7 +31,7 @@ class UserCanEditTimelineCategoriesTest < ActionDispatch::IntegrationTest
       category: {
         name: nil
       },
-      token: @user.token
+      token: @user.authentication_token
     }.to_json, 'Accept' => 'application/json',
                'Content-Type' => 'application/json'
 
