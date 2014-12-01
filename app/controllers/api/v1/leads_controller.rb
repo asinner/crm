@@ -1,6 +1,11 @@
 class Api::V1::LeadsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    leads = current_user.company.leads
+    render status: 200, leads: leads
+  end
+
   def create
     lead = current_user.company.leads.new(lead_params)
 

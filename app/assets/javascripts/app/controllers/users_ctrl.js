@@ -2,7 +2,7 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('UsersCtrl', [ '$scope', '$http', 'User', '$location', '$window', function($scope, $http, User, $location, $window) {
+	app.controller('UsersCtrl', [ '$scope', '$http', 'User', '$location', '$window', 'AuthService', function($scope, $http, User, $location, $window, AuthService) {
 
 		$scope.currentUser = {
 			name: '',
@@ -21,8 +21,18 @@
 		$scope.create = function() {
 			var user = new User($scope.currentUser);
 			user.$save().then(
-				function(response) {
-					$window.location.href = '/start';
+				function(response) {			
+					AuthService.login({
+						email: $scope.currentUser.email,
+						password: $scope.currentUser.password
+					}).then(
+						function() {
+							$window.location.href = '/start';
+						},
+						function() {
+							console.log('There was an error logging in');
+						}
+					)
 				},
 				function(response) {
 					// User did not save

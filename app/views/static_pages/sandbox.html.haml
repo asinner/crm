@@ -1,9 +1,0 @@
-.events{data: {ng_controller: 'EventsCtrl'}}
-	.filters
-		.btn-group
-			%button.btn.btn-success{type: 'button'} Upcoming
-			%button.btn.btn-default{type: 'button'} A-Z
-			%button.btn.btn-default{type: 'button'} Not paid
-	.event.animate{data: {ng_repeat: 'event in events | orderBy:"name"'}}
-		.name
-			{{ event.name }}

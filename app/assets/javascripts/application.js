@@ -15,4 +15,7 @@
 //= require angular/angular
 //= require angular-resource/angular-resource
 //= require angular-animate/angular-animate
+//= require angular-cookies/angular-cookies
+//= require spin.js/spin.js
+//= require angular-spinner/angular-spinner
 //= require crm

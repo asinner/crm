@@ -1,3 +1,10 @@
 %h1.getting-started
 	Getting Started
-%h4.form-section-title
+
+%h2
+	Tell us about your company
+%form{name: 'newCompany', novalidate: true, data: {ng_controller: 'CompanyCtrl', ng_submit: 'create(currentCompany)'}}
+	%label{for: 'name'}
+		What is your company name?
+	%input#name{required: true, name: 'name', autocomplete: :off, type: 'text', placeholder: 'Company', data: {ng_model: 'currentCompany.name'}}
+	%button{type: 'submit', data: {ng_disabled: 'newCompany.$invalid'}} Continue »

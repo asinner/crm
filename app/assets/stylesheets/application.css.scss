@@ -15,8 +15,12 @@
 @import "bourbon/bourbon";
 @import "base/base";
 @import "neat/neat";
+@import "sign-in";
+@import "dashboard";
 
+html,
 body {
+	height: 100%;
 	margin: 0;
 }
 .bg-blue {
@@ -95,6 +99,9 @@ $button-height: 35px;
 	}
 }
 
+.thin-txt {
+	font-weight: 100;
+}
 .transparent-txt {
 	opacity: 0.50;
 }

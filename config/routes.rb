@@ -1,9 +1,13 @@
 Rails.application.routes.draw do  
+  get 'sessions/new'
+
   get 'users/new'
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
   get '/sign-up' => 'users#new'
+  get '/sign-in' => 'sessions#new'
   get '/start' => 'dashboard#start'
+  get '/dashboard' => 'dashboard#dashboard'
 
   namespace :api do
     # Version 1

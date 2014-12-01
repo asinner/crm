@@ -1,0 +1,26 @@
+#sign-in {
+	height: 100%;
+	padding-top: 50px;
+	.us-spinner {
+		position: relative;
+		left: 50%;
+		top: -10px;
+	}
+	form {
+		margin-top: 25px;
+		max-width: 300px;
+		input {
+			box-shadow: none;
+			border: none;
+		}
+		button {
+			@include fill-parent;
+		}
+	}
+}
+
+@include media($medium-screen) {
+	#sign-in {
+		padding-top: 50px;
+	}
+}
