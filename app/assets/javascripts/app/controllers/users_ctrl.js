@@ -27,7 +27,7 @@
 						password: $scope.currentUser.password
 					}).then(
 						function() {
-							$window.location.href = '/start';
+							$location.path('/start');
 						},
 						function() {
 							console.log('There was an error logging in');

@@ -1,7 +1,7 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('TokensCtrl', ['$scope', 'AuthService', '$location', '$window', function($scope, AuthService, $location, $window) {
+	app.controller('TokensCtrl', ['$scope', 'AuthService', '$location', function($scope, AuthService, $location) {
 		
 		$scope.error = '';
 		
@@ -14,7 +14,7 @@
 			AuthService.login($scope.credentials).then(
 				function(user) {
 					$scope.error = '';
-					$window.location.href = '/dashboard';					
+					$location.path('/dashboard');
 					//$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 					//$location.path('/dashboard');
 					//$scope.setCurrentUser(user);

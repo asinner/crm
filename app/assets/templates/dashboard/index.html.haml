@@ -1,0 +1,30 @@
+#lightbox{data: {ng_show: 'showLightbox'}}
+	.close{data: {ng_click: 'showLightbox = false'}}
+		&times;
+	#new-lead.centered
+		%h3
+			Create a new lead
+		%form{data: {ng_controller: 'LeadsCtrl', ng_submit: 'create(currentLead)'}}
+			.row
+				%div.half
+					%input{type: 'text', placeholder: 'First name', data: {ng_model: 'currentLead.first_name'}}
+				%div.half
+					%input{type: 'text', placeholder: 'Last name', data: {ng_model: 'currentLead.last_name'}}
+			.row
+				%div.half
+					%input{type: 'text', placeholder: 'Email', data: {ng_model: 'currentLead.email'}}
+				%div.half
+					%input.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: "currentLead.phone_number"}}
+			%button{type: 'submit'}
+				Create Lead
+
+#dashboard-main-bar
+	.name
+		Signed in as {{currentUser.name}}
+	.new-lead
+		%a{data: {ng_click: 'showLightbox = true'}}
+			+ New Lead
+			
+#dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
+	%div{data: {ng_scope: '', ng_repeat: 'lead in leads'}}
+		{{lead.first_name}} {{lead.last_name}}

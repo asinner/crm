@@ -1,7 +1,7 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('CompanyCtrl', ['$scope', 'Company', 'Session', function($scope, Company, Session) {
+	app.controller('CompanyCtrl', ['$scope', 'Company', 'Session', '$location', function($scope, Company, Session, $location) {
 		
 		$scope.currentCompany = {
 			name: ''
@@ -12,7 +12,7 @@
 			company.token = Session.token;
 			company.$save().then(
 				function(response) {
-					$window.location.href = '/dashboard';
+					$location.path('/dashboard');
 				},
 				function(response) {
 					console.log(response);

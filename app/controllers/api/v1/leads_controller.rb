@@ -3,7 +3,7 @@ class Api::V1::LeadsController < ApplicationController
 
   def index
     leads = current_user.company.leads
-    render status: 200, leads: leads
+    render status: 200, json: leads
   end
 
   def create

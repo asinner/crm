@@ -15,6 +15,8 @@
 			$scope.currentUser = user;
 		};
 		
+		
+		console.log($scope.currentUser);
 	
 	}]);
 })()

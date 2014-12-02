@@ -17,6 +17,9 @@
 @import "neat/neat";
 @import "sign-in";
 @import "dashboard";
+@import "registration";
+@import "getting-started";
+
 
 html,
 body {
@@ -75,6 +78,23 @@ blockquote cite {
 	display: block;
 }
 $button-height: 35px;
+button {
+	font-family: $sans-serif;
+	border-bottom: 2px solid darken($blue, 15);
+	border-right: 2px solid darken($blue, 15);
+}
+
+form {
+	input {
+	}
+	.error span {
+		display: block;
+		color: red;
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
+}
+
 .btn {
 	display: block;
 	text-align: center;

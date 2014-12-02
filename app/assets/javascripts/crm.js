@@ -3,6 +3,6 @@
 
 (function() {
 	
-	var app = angular.module('crmApp', ['ngResource', 'ngAnimate', 'ngCookies', 'angularSpinner']);
+	var app = angular.module('crmApp', ['ngResource', 'ngAnimate', 'ngCookies', 'angularSpinner', 'ngRoute']);
 	
 })()
