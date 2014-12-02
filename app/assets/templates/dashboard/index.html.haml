@@ -26,5 +26,6 @@
 			+ New Lead
 			
 #dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
-	%div{data: {ng_scope: '', ng_repeat: 'lead in leads'}}
+	%input.centered{type: 'search', data: {ng_model: 'search.$'}, placeholder: 'Search your leads'}
+	.lead{data: {ng_repeat: 'lead in leads | filter:search'}}
 		{{lead.first_name}} {{lead.last_name}}

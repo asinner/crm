@@ -37,6 +37,34 @@ $main-bar-height: 50px;
 	width: 250px;
 	height: 100%;
 	background: #464E57;
+	input[type='search'] {
+		@include transition(all 0.10s ease-in-out);
+		font-size: rem(14);
+		width: 90%;
+		border: none;
+		margin-top: 15px;
+		background: rgba(0, 0, 0, 0.10);
+		color: rgba(255, 255, 255, 0.50);
+		box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.20);
+		&:focus {
+			box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.20);
+			background: rgba(0, 0, 0, 0.20);
+		}
+	}
+	.lead {
+		&:hover {
+			background: $blue;
+			color: #FFF;
+			cursor: pointer;
+		}
+		border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		font-size: rem(14);
+		font-weight: 600;
+		color: rgba(255, 255, 255, 0.70);
+	}
 }
 #lightbox {
 	@include transition(all 0.20s ease-in-out);
