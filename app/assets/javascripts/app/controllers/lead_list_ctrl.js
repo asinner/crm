@@ -10,6 +10,16 @@
 			$scope.leads = $scope.leads.concat(data.lead);
 		});
 		
+		$scope.search = function(lead) {
+			var query = angular.lowercase($scope.query) || '';
+			if (query == '') return true;
+			var name = angular.lowercase(lead.first_name + ' ' + lead.last_name);
+			if (name.indexOf(query) != -1) {
+				return true;
+			}
+			return false;
+		}
+		
 		Lead.query({token: Session.token},
 			function(response) {
 				$scope.leads = response.leads;
