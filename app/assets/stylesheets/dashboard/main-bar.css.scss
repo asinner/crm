@@ -1,0 +1,35 @@
+#dashboard-main-bar {
+	position: relative;
+	z-index: 99999;
+	height: $main-bar-height;
+	background: #000;
+	-webkit-font-smoothing: subpixel-antialiased;
+	.name {
+		color: rgba(255, 255, 255, 0.50);
+		font-size: rem(14);
+		padding: 0 15px;
+		line-height: $main-bar-height;
+		float: left;
+	}
+	.new-lead {
+		a {
+			cursor: pointer;
+			&:hover {
+				color: #FFF;
+			}
+			font-size: rem(13);
+			color: rgba(255, 255, 255, 0.70);
+			background: $blue;
+			display: block;
+			padding: 0 15px;
+			height: 30px;
+			line-height: 30px;
+			position: relative;
+			top: 10px;
+			margin-right: 10px;
+			border-radius: 4px;
+		}
+		line-height: $main-bar-height;
+		float: right;
+	}
+}

@@ -28,4 +28,9 @@
 #dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
 	%input.centered{type: 'search', data: {ng_model: 'query'}, placeholder: 'Search your leads'}
 	.lead{data: {ng_repeat: 'lead in leads | filter:search'}}
-		{{lead.first_name}} {{lead.last_name}}
+		%a{data: {ng_class: "{ 'active': activeLead == lead.id }", ng_click: 'viewLead(lead)'}}
+			{{lead.first_name}} {{lead.last_name}}
+
+#dashboard-view
+	%div{data: {ng_controller: 'LeadViewCtrl'}}
+	

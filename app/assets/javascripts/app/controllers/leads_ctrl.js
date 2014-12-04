@@ -9,6 +9,9 @@
 			email: '',
 			phone_number: ''
 		};
+		$scope.currentEvent = {
+			estimate_location: ''
+		};
 	
 		$scope.create = function(lead) {
 			var lead = new Lead($scope.currentLead);

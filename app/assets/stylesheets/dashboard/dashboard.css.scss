@@ -1,0 +1,52 @@
+$main-bar-height: 50px;
+#lightbox {
+	@include transition(all 0.20s ease-in-out);
+	overflow: scroll;
+	position: fixed;
+	z-index: 999999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 15px;
+	&.ng-hide {
+		opacity: 0;
+	}
+	.close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 50px;
+		line-height: 50px;
+		height: 50px;
+		text-align: center;
+		font-size: rem(32);
+		color: rgba(255, 255, 255, 0.70);
+		&:hover {
+			cursor: pointer;
+			color: #FFF;
+		}
+	}
+}
+#new-lead {
+	max-width: 600px;
+	padding: 25px;
+	background: #FFF;
+	margin-top: 25px;
+	form	{
+		margin-top: 25px;
+	}
+	input {
+		font-size: rem(18);
+		height: 50px;
+	}
+	.row .half {
+		float: left;
+		width: 50%;
+		&:first-child {
+			padding-right: 10px;
+		}
+	}
+	@include clearfix;
+}

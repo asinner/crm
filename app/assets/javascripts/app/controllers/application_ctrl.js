@@ -14,9 +14,6 @@
 		$scope.setCurrentUser = function(user) {
 			$scope.currentUser = user;
 		};
-		
-		
-		console.log($scope.currentUser);
-	
+			
 	}]);
 })()
