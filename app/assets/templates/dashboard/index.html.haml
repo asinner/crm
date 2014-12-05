@@ -53,9 +53,12 @@
 			%div{data: {ng_show: 'activeTab == "notes"'}}
 				.heading
 					Notes
-				%form{name: 'new-lead-note', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
-					%input{name: 'body', type: 'text', data: {ng_model: 'currentNote.body'}}
-				
+				%form#new_note{name: 'new-lead-note', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
+					%input{placeholder: 'Leave a note about this lead', name: 'body', type: 'text', data: {ng_model: 'currentNote.body'}}
+				.notes{data: {ng_controller: 'ListLeadNotesCtrl'}}
+					.note{data: {ng_repeat: "note in notes | orderBy:'-created_at'"}}
+						%span.date {{ note.created_at | date: 'MMM dd, yy' }}
+						%span.body {{ note.body }}
 			%div{data: {ng_show: 'activeTab == "estimate"'}}
 				.heading
 					Estimate

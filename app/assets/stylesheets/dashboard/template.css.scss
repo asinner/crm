@@ -35,3 +35,21 @@
 		font-weight: 600;
 	}
 }
+
+#new_note {
+	margin-top: 15px;
+}
+.notes {
+	font-size: rem(15);
+	color: rgb(100, 100, 100);
+	.date {
+		font-size: rem(12);
+		text-transform: uppercase;
+		font-weight: 600;
+		color: rgba(0, 0, 0, 0.30);
+		margin-right: 5px;
+	}
+	.body {
+		font-size: rem(15);
+	}
+}

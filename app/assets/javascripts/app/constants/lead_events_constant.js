@@ -6,7 +6,6 @@
 		created: 'created',
 		viewLead: 'viewLead',
 		viewInfo: 'viewInfo',
-		viewNotes: 'viewNotes',
 		viewEstimate: 'viewEstimate',
 		viewExpenseReport: 'viewExpenseReport',
 		viewOrder: 'viewOrder'
