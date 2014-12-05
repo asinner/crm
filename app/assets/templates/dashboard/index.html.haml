@@ -35,13 +35,13 @@
 	%div{data: {ng_controller: 'ViewLeadCtrl'}}
 		#lead-view-menu
 			%ul
-				%li{data: {ng_class: "{'active': activeTab == 1}", ng_click: 'setActiveTab(1)'}} Info
-				%li{data: {ng_class: "{'active': activeTab == 2}", ng_click: 'setActiveTab(2)'}} Notes
-				%li{data: {ng_class: "{'active': activeTab == 3}", ng_click: 'setActiveTab(3)'}} Estimates
-				%li{data: {ng_class: "{'active': activeTab == 4}", ng_click: 'setActiveTab(4)'}} Expense Report
-				%li{data: {ng_class: "{'active': activeTab == 5}", ng_click: 'setActiveTab(5)'}} Order
+				%li{data: {ng_class: "{'active': activeTab == 'info'}", ng_click: 'viewTab("info")'}} Info
+				%li{data: {ng_class: "{'active': activeTab == 'notes'}", ng_click: 'viewTab("notes")'}} Notes
+				%li{data: {ng_class: "{'active': activeTab == 'estimate'}", ng_click: 'viewTab("estimate")'}} Estimates
+				%li{data: {ng_class: "{'active': activeTab == 'expense-report'}", ng_click: 'viewTab("expense-report")'}} Expense Report
+				%li{data: {ng_class: "{'active': activeTab == 'order'}", ng_click: 'viewTab("order")'}} Order
 		.tab-view
-			%div{data: {ng_show: 'activeTab == 1'}}
+			%div{data: {ng_show: 'activeTab == "info"'}}
 				.heading
 					Personal Info
 				.name
@@ -50,16 +50,19 @@
 					{{ currentLead.email }}
 				.phone_number
 					{{ currentLead.phone_number }}
-			%div{data: {ng_show: 'activeTab == 2'}}
+			%div{data: {ng_show: 'activeTab == "notes"'}}
 				.heading
 					Notes
-			%div{data: {ng_show: 'activeTab == 3'}}
+				%form{name: 'new-lead-note', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
+					%input{name: 'body', type: 'text', data: {ng_model: 'currentNote.body'}}
+				
+			%div{data: {ng_show: 'activeTab == "estimate"'}}
 				.heading
 					Estimate
-			%div{data: {ng_show: 'activeTab == 4'}}
+			%div{data: {ng_show: 'activeTab == "expense-report"'}}
 				.heading
 					Expense Report
-			%div{data: {ng_show: 'activeTab == 5'}}
+			%div{data: {ng_show: 'activeTab == "order"'}}
 				.heading
 					Order
 		

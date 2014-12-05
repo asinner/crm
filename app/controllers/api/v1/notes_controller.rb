@@ -1,6 +1,9 @@
 class Api::V1::NotesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+  end
+
   def create
     lead = Lead.find(params[:lead_id])
     authorize lead
