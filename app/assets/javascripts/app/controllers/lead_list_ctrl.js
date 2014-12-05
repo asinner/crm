@@ -3,7 +3,7 @@
 	var app = angular.module('crmApp');
 	
 	app.controller('LeadListCtrl', ['$scope', 'Lead', 'Session', 'LEAD_EVENTS', '$rootScope', function($scope, Lead, Session, LEAD_EVENTS, $rootScope) {
-		
+				
 		$scope.leads = [];
 		
 		$scope.$on(LEAD_EVENTS.created, function(event, data) {

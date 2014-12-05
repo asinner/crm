@@ -24,7 +24,7 @@
 	.new-lead
 		%a{data: {ng_click: 'showLightbox = true'}}
 			+ New Lead
-			
+						
 #dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
 	%input.centered{type: 'search', data: {ng_model: 'query'}, placeholder: 'Search your leads'}
 	.lead{data: {ng_repeat: 'lead in leads | filter:search'}}
