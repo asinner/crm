@@ -1,9 +1,13 @@
 class Api::V1::NotesController < ApplicationController
   before_action :authenticate_user!
-
+  
   def index
+    lead = Lead.find(params[:lead_id])
+    authorize lead
+    notes = lead.notes
+    render status: 200, json: notes
   end
-
+  
   def create
     lead = Lead.find(params[:lead_id])
     authorize lead
