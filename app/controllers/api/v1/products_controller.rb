@@ -1,6 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :authenticate_user!
-
+  
   def create
     product = current_user.company.products.new(product_params)
 
