@@ -32,5 +32,13 @@
 			{{lead.first_name}} {{lead.last_name}}
 
 #dashboard-view
-	%div{data: {ng_controller: 'LeadViewCtrl'}}
+	%div{data: {ng_controller: 'ViewLeadCtrl'}}
+		#lead-view-menu
+			%ul
+				%li{data: {ng_class: "{'active': activeTab == 1}", ng_click: 'setActiveTab(1)'}} Info
+				%li{data: {ng_class: "{'active': activeTab == 2}", ng_click: 'setActiveTab(2)'}} Notes
+				%li{data: {ng_class: "{'active': activeTab == 3}", ng_click: 'setActiveTab(3)'}} Estimates
+				%li{data: {ng_class: "{'active': activeTab == 4}", ng_click: 'setActiveTab(4)'}} Expense Report
+				%li{data: {ng_class: "{'active': activeTab == 5}", ng_click: 'setActiveTab(5)'}} Order
+		
 	

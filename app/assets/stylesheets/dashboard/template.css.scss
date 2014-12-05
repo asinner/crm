@@ -3,5 +3,28 @@
 	z-index: 999;
 	height: 100%;
 	width: 100%;
-	background: #FFF7CC;
+	background: rgb(250, 250 ,250);
+	padding-left: 250px;
+}
+#lead-view-menu {
+	font-weight: 600;
+	color: rgb(100, 100, 100);
+	height: 50px;
+	background: rgb(240, 240, 240);
+	border-bottom: 1px solid rgb(230, 230, 230);
+	li {
+		font-family: $helvetica;
+		text-transform: uppercase;
+		font-size: rem(11);
+		padding: 0 25px;
+		float: left;
+		line-height: 50px;
+		cursor: pointer;
+		@include transition(all 0.20s ease-in-out);
+		&.active,
+		&:hover {
+			color: #000;
+			background: rgba(0, 0, 0, 0.10);
+		}
+	}
 }
