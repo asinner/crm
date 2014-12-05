@@ -1,6 +1,11 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :authenticate_user!
   
+  def index
+    products = current_user.company.products
+    render status: 200, json: products
+  end
+  
   def create
     product = current_user.company.products.new(product_params)
 
