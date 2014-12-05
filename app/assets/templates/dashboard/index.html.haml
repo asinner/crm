@@ -40,5 +40,26 @@
 				%li{data: {ng_class: "{'active': activeTab == 3}", ng_click: 'setActiveTab(3)'}} Estimates
 				%li{data: {ng_class: "{'active': activeTab == 4}", ng_click: 'setActiveTab(4)'}} Expense Report
 				%li{data: {ng_class: "{'active': activeTab == 5}", ng_click: 'setActiveTab(5)'}} Order
+		.tab-view
+			%div{data: {ng_show: 'activeTab == 1'}}
+				.heading
+					Personal Info
+				.name
+					{{ currentLead.first_name }} {{currentLead.last_name}}
+				.email
+					{{ currentLead.email }}
+				.phone_number
+					{{ currentLead.phone_number }}
+			%div{data: {ng_show: 'activeTab == 2'}}
+				.heading
+					Notes
+			%div{data: {ng_show: 'activeTab == 3'}}
+				.heading
+					Estimate
+			%div{data: {ng_show: 'activeTab == 4'}}
+				.heading
+					Expense Report
+			%div{data: {ng_show: 'activeTab == 5'}}
+				.heading
+					Order
 		
-	
