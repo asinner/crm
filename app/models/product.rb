@@ -8,4 +8,8 @@ class Product < ActiveRecord::Base
     value *= 100
     self[:price] = value
   end
+  
+  def price
+    self[:price] / 100
+  end
 end

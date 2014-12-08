@@ -63,7 +63,10 @@
 				.heading
 					Estimate
 				.products{data: {ng_controller: 'ConnectProductsToEstimateCtrl'}}
-					
+					%p
+						Add your products & services to this estimate
+					.product{data: {ng_repeat: 'product in products'}}
+						{{ product.name }} {{ product.price | currency }}
 			%div{data: {ng_show: 'activeTab == "expense-report"'}}
 				.heading
 					Expense Report
