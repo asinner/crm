@@ -1,7 +1,7 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('ShowLeadCtrl', ['$scope', 'LEAD_EVENTS', 'NOTE_EVENTS', '$rootScope', '$filter', function($scope, LEAD_EVENTS, NOTE_EVENTS, $rootScope, $filter) {
+	app.controller('ShowLeadCtrl', ['$scope', 'LEAD_EVENTS', 'NOTE_EVENTS', 'LINE_ITEM_EVENTS', '$rootScope', '$filter', function($scope, LEAD_EVENTS, NOTE_EVENTS, LINE_ITEM_EVENTS, $rootScope, $filter) {
 		
 		$scope.$on(LEAD_EVENTS.show, function(event, data) {
 			$scope.setCurrentLead(data);
@@ -17,12 +17,10 @@
 			$scope.setActiveTab(tab);
 			if (tab == 'info') $rootScope.$broadcast(LEAD_EVENTS.viewInfo);
 			if (tab == 'notes') $rootScope.$broadcast(NOTE_EVENTS.viewNotes);
-			
-			if (tab == 'estimate') $rootScope.$broadcast(LEAD_EVENTS.viewEstimate, {
-				lead: $scope.currentLead
+			if (tab == 'estimate') $rootScope.$broadcast(LINE_ITEM_EVENTS.showLineItems, {
+				selectedEvent: $scope.selectedEvent
 			});
-
-			if (tab == 'expense-report') $rootScope.$broadcast(LEAD_EVENTS.viewExpenseReport);
+			if (tab == 'expenseReport') $rootScope.$broadcast(LEAD_EVENTS.viewExpenseReport);
 			if (tab == 'order') $rootScope.$broadcast(LEAD_EVENTS.viewOrder);
 		};
 		
