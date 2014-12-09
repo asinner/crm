@@ -21,10 +21,9 @@ class Api::V1::LineItemsController < ApplicationController
   end
 
   def destroy
-    estimate = Estimate.find(params[:estimate_id])
-    authorize estimate
-    product = Product.find(params[:id])
-    estimate.items.delete(product)
+    line_item = LineItem.find(params[:id])
+    authorize line_item.estimate
+    line_item.delete
     render status: 204, nothing: true
   end
   
