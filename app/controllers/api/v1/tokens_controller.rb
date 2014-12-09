@@ -6,7 +6,7 @@ class Api::V1::TokensController < ApplicationController
 
     if user && user.authenticate(params[:password])
       user.update(authentication_token: SecureRandom.uuid)
-      render status: 201, json: { token: user.authentication_token }
+      render status: 201, json: { token: user.authentication_token, user: user }
     else
       render status: 401, json: { msg: 'Invalid email or password' }
     end

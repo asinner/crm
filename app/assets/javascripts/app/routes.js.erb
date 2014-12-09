@@ -1,0 +1,51 @@
+(function() {
+	var app = angular.module('crmApp');
+	
+	app.config(function($routeProvider, USER_ROLES) {
+		
+		$routeProvider
+			.when('/', {
+				templateUrl: "<%= asset_path('pages/home.html') %>",
+				data: {
+					authorizedRoles: [USER_ROLES.user]
+				}
+			})
+			.when('/sign-up', {
+				templateUrl: "<%= asset_path('pages/sign_up.html') %>",
+				data: {
+					authorizedRoles: [USER_ROLES.guest]
+				}
+			})
+			.when('/sign-in', {
+				templateUrl: "<%= asset_path('pages/sign_in.html') %>",
+				data: {
+					authorizedRoles: [USER_ROLES.guest]
+				}
+			})
+			.when('/dashboard', {
+				templateUrl: "<%= asset_path('dashboard/index.html') %>",
+				data: {
+					authorizedRoles: [USER_ROLES.user]
+				}
+			})
+			.when('/start', {
+				templateUrl: "<%= asset_path('company/start.html') %>",
+				data: {
+					authorizedRoles: [USER_ROLES.user]
+				}
+			});
+		
+	});
+	
+	
+	app.run(function($rootScope, $location) {
+		
+		$rootScope.$on("$routeChangeStart", function(event, next, current) {
+			
+			
+			
+		});
+		
+	});
+	
+})()

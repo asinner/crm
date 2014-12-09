@@ -1,0 +1,27 @@
+#dashboard {
+	padding-left: 200px;
+	.primary-bar {
+		height: 50px;
+		border-bottom: 1px solid #CCC;
+		margin: 0;
+		.name {
+			line-height: 50px;
+			margin: 0;
+		}
+		select {
+			margin-top: 7px;
+		}
+	}
+	.secondary-bar {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #CCC;
+		margin: 0;
+		.btn {
+			margin: 0;
+		}
+	}
+	.btn.active {
+		background: rgb(230, 230, 230);
+	}
+}

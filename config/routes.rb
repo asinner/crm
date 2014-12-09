@@ -1,9 +1,13 @@
 Rails.application.routes.draw do  
+  get 'sessions/new'
+
   get 'users/new'
   root 'static_pages#home'
   get '/sandbox' => 'static_pages#sandbox'
   get '/sign-up' => 'users#new'
+  get '/sign-in' => 'sessions#new'
   get '/start' => 'dashboard#start'
+  get '/dashboard' => 'dashboard#dashboard'
 
   namespace :api do
     # Version 1
@@ -21,17 +25,11 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
 
-      resources :leads do
-        resources :events, :notes
-      end
+      resources :leads, :notes, :line_items
 
       resources :events do
         resource :estimate
         resources :uploads
-      end
-
-      resources :estimates do
-        resources :items, controller: :line_items
       end
 
       resources :timelines do
@@ -57,17 +55,11 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
       
-      resources :leads do
-        resources :events, :notes
-      end
+      resources :leads, :notes, :line_items
 
       resources :events do
         resource :estimate
         resources :uploads
-      end
-
-      resources :estimates do
-        resources :items, controller: :line_items
       end
 
       resources :timelines do

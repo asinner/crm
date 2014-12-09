@@ -1,0 +1,10 @@
+#sign-in
+	%h1.text-center.small
+		Sign in
+	%form.centered{data: {ng_controller: 'TokensCtrl', ng_submit: 'create()'}}
+		%p.error.text-center
+			{{ error }}
+		%input{placeholder: 'Email', name: 'email', type: 'email', data: {ng_model: 'credentials.email'}}
+		%input{placeholder: 'Password', name: 'password', type: 'password', data: {ng_model: 'credentials.password'}}
+		%button.btn{type: 'Submit'}
+			Sign in

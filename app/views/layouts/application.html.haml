@@ -7,4 +7,5 @@
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
 		= csrf_meta_tags
 	%body{data: {ng_app: 'crmApp', ng_controller: 'ApplicationCtrl'}}
-		= yield
+		%div{data: {ng_view: ''}}
+			= yield

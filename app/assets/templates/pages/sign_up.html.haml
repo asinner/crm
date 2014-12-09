@@ -1,0 +1,33 @@
+#registration
+	%h1.text-center.small
+		Create your free account
+	%p.text-center.small.transparent-txt
+		%strong
+			Free 30-day trial - No credit card required
+
+	%form.centered{name: 'newUserForm', data: {ng_controller: 'UsersCtrl', ng_submit: 'create()'}, autocomplete: false, novalidate: true}
+		%div
+			%input{autocomplete: 'off', name: 'name', required: true, type: 'text', placeholder: 'Name', data: {ng_model: 'currentUser.name', ng_class: "{'error': newUserForm.name.$dirty && newUserForm.name.$invalid && submitted}"}}
+			.error
+				%span{data: {ng_show: 'newUserForm.name.$error.required && submitted'}}
+					This field is required
+	
+		%div
+			%input{unique: true, autocomplete: 'off', name: 'email', required: true, type: 'email', placeholder: 'Email', data: {ng_model: 'currentUser.email', ng_class: "{'error': newUserForm.email.$dirty && newUserForm.email.$invalid && submitted}"}}
+			.error
+				%span{data: {ng_show: '(newUserForm.email.$error.email || newUserForm.email.$error.required) && submitted', ng_blur: 'ngHide()'}}
+					Please enter a valid email
+				%span{data: {ng_show: 'newUserForm.email.$error.unique'}}
+					Email already taken
+		
+		%div
+			%input{autocomplete: 'off', name: 'password', required: true, type: 'password', placeholder: 'Password', data: {ng_model: 'currentUser.password', ng_class: "{'error': newUserForm.password.$dirty && newUserForm.password.$invalid && submitted}", ng_minlength: 6}}
+			.error
+				%span{data: {ng_show: '(newUserForm.password.$error.minlength || newUserForm.password.$error.required) && submitted'}}
+					Must be at least 6 characters
+				-# %span{data: {ng_show: 'newUserForm.password.$error.required && submitted'}}
+				-# 	Please enter a password (minimum of 6 characters)
+
+		
+		%button#new-user-submit{type: 'submit', data: {ng_click: 'submitted = true'}}
+			Create account

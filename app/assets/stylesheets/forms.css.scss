@@ -1,0 +1,9 @@
+.has-error input[type='text'],
+.has-error input[type='email'],
+.has-error input[type='password'],
+.has-error input[type='text']:focus,
+.has-error input[type='email']:focus,
+.has-error input[type='password']:focus {
+	border: 1px solid #e43535;
+	background: rgb(255, 250, 250);
+}

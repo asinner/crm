@@ -76,8 +76,8 @@ class ActiveSupport::TestCase
 
   def create_event(lead)
     event = lead.events.new(
-      estimate_location: 'San Diego',
-      name: 'The Grand Gala'
+      name: 'The Grand Gala',
+      date: 30.days.from_now
     )
     event.save
     event

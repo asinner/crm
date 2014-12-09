@@ -10,14 +10,13 @@ class Api::V1::LineItemsController < ApplicationController
   def create
     estimate = Estimate.find(params[:estimate_id])
     authorize estimate
-    product = Product.find(params[:product_id])
-    authorize product
-    estimate.items << product
+    
+    line_item = LineItem.new(line_item_params)
 
-    if estimate.save
-      render status: 201, nothing: true
+    if line_item.save
+      render status: 201, json: line_item
     else
-      render status: 422, json: estimate.errors
+      render status: 422, json: line_item.errors
     end
   end
 
@@ -27,5 +26,11 @@ class Api::V1::LineItemsController < ApplicationController
     product = Product.find(params[:id])
     estimate.items.delete(product)
     render status: 204, nothing: true
+  end
+  
+  private
+  
+  def line_item_params
+    params.require(:line_item).permit(:name, :description, :amount, :qty, :estimate_id)
   end
 end
