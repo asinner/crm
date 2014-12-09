@@ -16,4 +16,8 @@ class EstimatePolicy < ApplicationPolicy
   def destroy?
     create?
   end
+  
+  def update?
+    create?
+  end
 end

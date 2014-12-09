@@ -108,6 +108,17 @@ class ActiveSupport::TestCase
     upload
   end
 
+  def create_line_item(estimate)
+    line_item = estimate.items.new(
+      name: 'Some Product',
+      description: 'Some Description',
+      qty: 1,
+      amount: 500
+    )
+    line_item.save
+    line_item
+  end
+
   def create(args)
     @user = create_user if args.include?(:user)
     sign_in(@user) if @user
@@ -116,6 +127,7 @@ class ActiveSupport::TestCase
     @event = create_event(@lead) if args.include?(:event)
     @product = create_product(@company) if args.include?(:product)
     @estimate = create_estimate(@event) if args.include?(:estimate)
+    @line_item = create_line_item(@estimate) if args.include?(:line_item)
     @note = create_note(@lead) if args.include?(:note)
     @upload = create_upload(@event) if args.include?(:upload)
   end
