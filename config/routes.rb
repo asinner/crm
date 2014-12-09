@@ -25,15 +25,11 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
 
-      resources :leads, :notes
+      resources :leads, :notes, :line_items
 
       resources :events do
         resource :estimate
         resources :uploads
-      end
-
-      resources :estimates do
-        resources :items, controller: :line_items
       end
 
       resources :timelines do
@@ -59,15 +55,11 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
       
-      resources :leads, :notes
+      resources :leads, :notes, :line_items
 
       resources :events do
         resource :estimate
         resources :uploads
-      end
-
-      resources :estimates do
-        resources :items, controller: :line_items
       end
 
       resources :timelines do
