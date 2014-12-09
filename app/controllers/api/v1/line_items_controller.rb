@@ -29,11 +29,10 @@ class Api::V1::LineItemsController < ApplicationController
   end
   
   def update
-    estimate = Estimate.find(params[:estimate_id])
-    authorize estimate
-    line_item = LineItem.new(line_item_params)
+    line_item = LineItem.find(params[:id])
+    authorize line_item.estimate
     
-    if line_item.save
+    if line_item.update(line_item_params)
       render status: 200, json: line_item
     else
       render status: 422, json: line_item.errors

@@ -20,6 +20,7 @@ class UserCanEditLineItemsTest < ActionDispatch::IntegrationTest
     
     assert_equal 200, response.status
     assert Mime::JSON, response.content_type
+    
     line_item = json(response.body)[:line_item]
     assert_equal 'An updated name', line_item[:name]
     assert_equal 1000, line_item[:amount]
