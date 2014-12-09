@@ -25,9 +25,7 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
 
-      resources :leads do
-        resources :events, :notes
-      end
+      resources :leads, :notes
 
       resources :events do
         resource :estimate
@@ -61,9 +59,7 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
       
-      resources :leads do
-        resources :events, :notes
-      end
+      resources :leads, :notes
 
       resources :events do
         resource :estimate

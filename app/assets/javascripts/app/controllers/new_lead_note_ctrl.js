@@ -15,7 +15,7 @@
 				function(response) {
 					$rootScope.$broadcast(NOTE_EVENTS.created, response.note);
 					$scope.currentNote = {};
-					$scope.newLeadNoteForm.setPristine();
+					$scope.newLeadNoteForm.$setPristine();
 				},
 				function(response) {
 					console.log(response);					

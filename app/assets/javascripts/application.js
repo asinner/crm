@@ -19,15 +19,15 @@
 //= require angular-cookies/angular-cookies
 //= require spin.js/spin.js
 //= require angular-spinner/angular-spinner
+//= require angular-bootstrap/ui-bootstrap
+//= require angular-bootstrap/ui-bootstrap-tpls
 //= require crm
 
 $(document).ready(function() {
 	$('body').on('keypress', 'input.phone-number', function() {
 		var acceptedKeys = [13, 40, 41, 32];
 		var acceptedRange = [48, 57];
-		
 		if (((event.keyCode < 48 && event.keyCode != 13) && event.keyCode > 57)) return false;
-		
 		if ((event.keyCode < 48) || (event.keyCode > 57)) return false;
 		var input = $(this).val().replace(/[^0-9]/g, '');	
 		if (input.length >= 10) return false;

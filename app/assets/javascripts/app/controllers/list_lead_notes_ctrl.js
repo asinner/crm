@@ -11,7 +11,7 @@
 		
 		$scope.$on(NOTE_EVENTS.viewNotes, function(event) {
 			Note.query({
-				leadId: $scope.currentLead.id, 
+				lead_id: $scope.currentLead.id, 
 				token: Session.token
 			}, function(response) {
 				$scope.notes = response.notes;

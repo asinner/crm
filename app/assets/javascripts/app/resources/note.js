@@ -4,7 +4,7 @@
 	
 	app.factory('Note', ['$resource', function($resource) {
 	
-		return $resource('/api/leads/:leadId/notes/:id', { leadId: '@lead_id', id: '@id' }, {
+		return $resource('/api/notes/:id', { id: '@id' }, {
 			
 			'query': { method: 'GET', isArray: false},
 			
