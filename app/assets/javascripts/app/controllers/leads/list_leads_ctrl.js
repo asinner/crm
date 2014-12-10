@@ -24,7 +24,7 @@
 			}
 		);
 		
-		$scope.showNewLead = function() {
+		$scope.showForm = function() {
 			$rootScope.$broadcast(LIGHTBOX_EVENTS.show);
 			$rootScope.$broadcast(LEAD_EVENTS.showNewLead);
 		};

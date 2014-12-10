@@ -1,12 +1,13 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('ShowLeadCtrl', ['$scope', 'LEAD_EVENTS', 'NOTE_EVENTS', 'LINE_ITEM_EVENTS', '$rootScope', '$filter', function($scope, LEAD_EVENTS, NOTE_EVENTS, LINE_ITEM_EVENTS, $rootScope, $filter) {
+	app.controller('ShowLeadCtrl', ['$scope', 'LEAD_EVENTS', 'NOTE_EVENTS', 'LINE_ITEM_EVENTS', '$rootScope', '$filter', 'Current', function($scope, LEAD_EVENTS, NOTE_EVENTS, LINE_ITEM_EVENTS, $rootScope, $filter, Current) {
 		
 		$scope.$on(LEAD_EVENTS.show, function(event, data) {
-			$scope.setCurrentLead(data);
-			$scope.setSelectedEvent($filter('orderBy')(data.events, 'date')[0]);
-			$scope.setActiveTab('information');
+			Current.setEvent($filter('orderBy')(data.events, 'date')[0]);
+			Current.setLead(data);
+			$scope.currentEvent = Current.getEvent();
+			$scope.currentLead = Current.getLead();
 		});
 		
 		$scope.setSelectedEvent = function(event) {

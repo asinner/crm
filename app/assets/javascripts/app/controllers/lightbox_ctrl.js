@@ -5,7 +5,7 @@
 	app.controller('LightboxCtrl', ['$scope', 'LIGHTBOX_EVENTS', function($scope, LIGHTBOX_EVENTS) {
 		
 		$scope.show = false;
-		
+
 		$scope.close = function() {
 			$scope.$broadcast(LIGHTBOX_EVENTS.close);
 			$scope.show = false;

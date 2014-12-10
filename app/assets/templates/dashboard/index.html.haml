@@ -3,7 +3,7 @@
 		.controls
 			.row
 				.col-xs-12
-					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'showNewLead()'}} +
+					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'showForm()'}} +
 		
 		.row.company-lead{data: {ng_repeat: 'lead in leads | orderBy:upcomingEvent '}}
 			.col-xs-12
@@ -13,8 +13,8 @@
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
-	#new-lead.center-block
-		%form{name: 'newLead', novalidate: true, data: {ng_controller: 'NewLeadCtrl', ng_submit: 'create(currentLead)'}}						
+	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'show'}}
+		%form{name: 'newLead', novalidate: true, data: {ng_submit: 'create(currentLead)'}}						
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.first_name.$invalid && (newLead.first_name.$touched || newLead.$submitted) }"}}
@@ -44,6 +44,33 @@
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
 						Create Lead
+						
+	#new-line-item.center-block{data: {ng_controller: 'NewLineItemCtrl', ng_show: 'show'}}
+		%form{data: {ng_submit: 'create(currentLineItem)'}}
+			.row
+				.col-xs-6
+					.form-group
+						%label Name
+						%input.form-control{type: 'text', placeholder: 'Name of line item'}
+				.col-xs-3
+					.form-group
+						%label Amount
+						%input.form-control{type: 'text', placeholder: '0.00'}
+				.col-xs-3
+					.form-group
+						%label Quantity
+						%input.form-control{type: 'number', placeholder: '0'}
+					
+			.row
+				.col-xs-12
+					.form-group
+						%label Description
+						%textarea.form-control{placeholder: 'Description'}
+			.row
+				.col-xs-12
+					%button.btn.btn-default{type: 'submit'}
+						Add line item
+		
 
 #dashboard.container-fluid{data: {ng_controller: 'ShowLeadCtrl', ng_init: 'show'}}
 	.row.primary-bar
@@ -52,7 +79,7 @@
 				%h4.name
 					{{ currentLead.first_name }} {{ currentLead.last_name }}
 			.pull-right
-				%select.form-control{data: {ng_model: 'selectedEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event'	for event in currentLead.events"}}
+				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event'	for event in currentLead.events"}}
 					%option{value: ''} Choose an event
 	.row.secondary-bar
 		.col-xs-12
@@ -91,8 +118,11 @@
 				%span.body				
 					{{ note.body }}
 					
-	#event-estimate{data: {ng_show: 'activeTab == "estimate"'}}
-		.table-responsive{data: {ng_controller: 'ListLineItemsCtrl'}}
+	#estimate{data: {ng_show: 'activeTab == "estimate"'}}
+		.row.controls{data: {ng_controller: 'NewLineItemCtrl'}}
+			.col-xs-12
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'showForm()'}} + Add line item
+		.table-responsive.line-items{data: {ng_controller: 'ListLineItemsCtrl'}}
 			%table.table
 				%thead
 					%tr
