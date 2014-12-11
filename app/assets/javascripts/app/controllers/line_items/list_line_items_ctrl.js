@@ -12,10 +12,9 @@
 			$scope.getLineItems(Current.getEvent().estimate);
 		});
 		
-		$scope.$on(EVENTS.lineItem.created, function(event, data) {			
+		$scope.$on(EVENTS.lineItem.created, function(event, data) {
 			$scope.lineItems = $scope.lineItems.concat(data);
 		});
-		
 		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({

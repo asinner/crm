@@ -14,7 +14,7 @@
 	.close{data: {ng_click: 'close()'}}
 		&times; 
 	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'show'}}
-		%form{name: 'newLead', novalidate: true, data: {ng_submit: 'create(currentLead)'}}						
+		%form{name: 'newLead', novalidate: true, data: {ng_submit: 'create(currentLead)'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.first_name.$invalid && (newLead.first_name.$touched || newLead.$submitted) }"}}
@@ -45,8 +45,8 @@
 					%button.btn.btn-default{type: 'submit'}
 						Create Lead
 						
-	#new-line-item.center-block{data: {ng_controller: 'NewLineItemCtrl', ng_show: 'show'}}
-		%form{name: 'newLineItem', novalidate: true, data: {ng_submit: 'create(currentLineItem)'}}
+	#new-line-item.center-block{data: {ng_controller: 'LineItemCtrl', ng_show: 'show.newForm || show.editForm'}}
+		%form{name: 'newLineItem', novalidate: true, data: {ng_submit: 'save(currentLineItem)'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: '{ "has-error": newLineItem.name.$invalid && (newLineItem.$submitted || newLineItem.name.$touched) }'}}
@@ -69,8 +69,7 @@
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
-						Add line item
-		
+						Add line item				
 
 #dashboard.container-fluid{data: {ng_controller: 'ShowLeadCtrl', ng_init: 'show'}}
 	.row.primary-bar
@@ -119,9 +118,9 @@
 					{{ note.body }}
 					
 	#estimate{data: {ng_show: 'activeTab == "estimate"'}}
-		.row.controls{data: {ng_controller: 'NewLineItemCtrl'}}
+		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'showForm()'}} + Add line item
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}} + Add line item
 		.table-responsive.line-items{data: {ng_controller: 'ListLineItemsCtrl'}}
 			%table.table
 				%thead
@@ -132,7 +131,7 @@
 						%th Qty 
 						%th Total
 				%tbody 
-					%tr{data: {ng_repeat: 'lineItem in lineItems'}}
+					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
 						%td {{ lineItem.name }}
 						%td {{ lineItem.description || '' }}
 						%td {{ lineItem.amount | currency }}

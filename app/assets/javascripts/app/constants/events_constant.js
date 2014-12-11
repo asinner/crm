@@ -26,6 +26,9 @@
 			created: 'lineItemCreated',
 			newForm: {
 				show: 'showNewLineItemForm'
+			},
+			editForm: {
+				show: 'showEditLineItemForm'
 			}
 		},
 		
