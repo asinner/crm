@@ -4,14 +4,15 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('ListLineItemsCtrl', ['$scope', 'LineItem', 'Session', 'Current', function($scope, LineItem, Session, Current) {
+	app.controller('ListLineItemsCtrl', ['$scope', 'LineItem', 'Session', 'Current', 'EVENTS', function($scope, LineItem, Session, Current, EVENTS) {
 		
-		// Listeners
-		$scope.$on(LINE_ITEM_EVENTS.showLineItems, function(event, data) {
+		$scope.lineItems = [];
+		
+		$scope.$on(EVENTS.navigation.viewEstimate, function(event, data) {
 			$scope.getLineItems(Current.getEvent().estimate);
 		});
 		
-		$scope.$on(LINE_ITEM_EVENTS.created, function(event, data) {
+		$scope.$on(EVENTS.lineItem.created, function(event, data) {			
 			$scope.lineItems = $scope.lineItems.concat(data);
 		});
 		

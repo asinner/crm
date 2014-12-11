@@ -6,7 +6,10 @@
 		
 		lead: {
 			show: 'showLead',
-			created: 'leadCreated'
+			created: 'leadCreated',
+			newForm: {
+				show: 'showNewLeadForm'
+			}
 		},
 		
 		event: {
@@ -16,6 +19,22 @@
 		lightbox: {
 			close: 'closeLightbox',
 			show: 'showLightbox'
+		},
+		
+		lineItem: {
+			list: 'listLineItems',
+			created: 'lineItemCreated',
+			newForm: {
+				show: 'showNewLineItemForm'
+			}
+		},
+		
+		note: {
+			created: 'noteCreated'
+		},
+		
+		navigation: {
+			viewNotesTab: 'viewNotesTab'
 		}
 		
 	});

@@ -9,8 +9,8 @@
 		$scope.leads = [];
 		
 		// Listeners
-		$scope.$on(EVENTS.lead.created, function(event, data) {
-			$scope.leads = $scope.leads.concat(data.lead);
+		$scope.$on(EVENTS.lead.created, function(event, lead) {
+			$scope.leads = $scope.leads.concat(lead);
 		});
 		
 		$scope.$on(EVENTS.event.created, function(event, data) {
@@ -33,11 +33,11 @@
 		
 		$scope.showForm = function() {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
-			$rootScope.$broadcast(EVENTS.lead.show);
+			$rootScope.$broadcast(EVENTS.lead.newForm.show);
 		};
 		
 		$scope.showLead = function(lead) {
-			$rootScope.$broadcast(LEAD_EVENTS.show, lead);
+			$rootScope.$broadcast(EVENTS.lead.show, lead);
 		};
 		
 		$scope.upcomingEvent = function(lead) {

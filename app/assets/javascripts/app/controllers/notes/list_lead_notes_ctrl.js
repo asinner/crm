@@ -3,15 +3,15 @@
 (function() {
 	var app = angular.module('crmApp');
 
-	app.controller('ListLeadNotesCtrl', ['$scope', 'Note', 'Session', function($scope, Note, Session) {
+	app.controller('ListLeadNotesCtrl', ['$scope', 'Note', 'Session', 'EVENTS', function($scope, Note, Session, EVENTS) {
 		
 		$scope.notes = [];
 		
-		$scope.$on(NOTE_EVENTS.created, function(event, data) {
+		$scope.$on(EVENTS.note.created, function(event, data) {
 			$scope.notes = $scope.notes.concat(data);
 		});
 		
-		$scope.$on(NOTE_EVENTS.viewNotes, function(event) {
+		$scope.$on(EVENTS.navigation.viewNotesTab, function(event) {
 			Note.query({
 				lead_id: $scope.currentLead.id, 
 				token: Session.token

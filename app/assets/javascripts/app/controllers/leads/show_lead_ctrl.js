@@ -3,9 +3,9 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('ShowLeadCtrl', ['$scope', '$rootScope', '$filter', 'Current', function($scope, $rootScope, $filter, Current) {
+	app.controller('ShowLeadCtrl', ['$scope', '$rootScope', '$filter', 'Current', 'EVENTS', function($scope, $rootScope, $filter, Current, EVENTS) {
 		
-		$scope.$on(LEAD_EVENTS.show, function(event, data) {
+		$scope.$on(EVENTS.lead.show, function(event, data) {
 			Current.setEvent($filter('orderBy')(data.events, 'date')[0]);
 			Current.setLead(data);
 			$scope.currentEvent = Current.getEvent();
@@ -19,11 +19,10 @@
 		
 		$scope.viewTab = function(tab) {
 			$scope.setActiveTab(tab);
-			if (tab == 'info') $rootScope.$broadcast(LEAD_EVENTS.viewInfo);
-			if (tab == 'notes') $rootScope.$broadcast(NOTE_EVENTS.viewNotes);
-			if (tab == 'estimate') $rootScope.$broadcast(LINE_ITEM_EVENTS.showLineItems);
-			if (tab == 'expenseReport') $rootScope.$broadcast(LEAD_EVENTS.viewExpenseReport);
-			if (tab == 'order') $rootScope.$broadcast(LEAD_EVENTS.viewOrder);
+			if (tab == 'info') $rootScope.$broadcast(EVENTS.navigation.viewInfoTab);
+			if (tab == 'notes') $rootScope.$broadcast(EVENTS.navigation.viewNotesTab);
+			if (tab == 'estimate') $rootScope.$broadcast(EVENTS.navigation.viewEstimateTab);
+			if (tab == 'expenseReport') $rootScope.$broadcast(EVENTS.navigation.viewExpenseReportTab);
 		};
 		
 		$scope.setActiveTab = function(tab) {

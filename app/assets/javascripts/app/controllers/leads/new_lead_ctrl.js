@@ -8,13 +8,13 @@
 		$scope.show = false;
 		
 		// Listeners
-		$scope.$on(LIGHTBOX_EVENTS.close, function(event, data) {
+		$scope.$on(EVENTS.lightbox.close, function(event, data) {
 			$scope.newLead.$setPristine();
 			$scope.newLead.$setUntouched();
 			$scope.show = false;
 		});
 		
-		$scope.$on(LEAD_EVENTS.showForm, function(event, data) {
+		$scope.$on(EVENTS.lead.newForm.show, function(event, data) {
 			$scope.show = true;
 		});
 				
@@ -47,8 +47,11 @@
 						email: '',
 						phone_number: ''
 					};
+					$scope.currentEvent = {
+						date: ''
+					}
 					$scope.resetForm();
-					$scope.$broadcast(EVENTS.lead.created, response.lead);
+					$rootScope.$broadcast(EVENTS.lead.created, response.lead);
 				},
 				function(response, status) {
 					console.log([response, status]);
