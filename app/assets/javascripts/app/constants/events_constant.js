@@ -24,6 +24,7 @@
 		lineItem: {
 			list: 'listLineItems',
 			created: 'lineItemCreated',
+			destroyed: 'lineItemDestroyed',
 			newForm: {
 				show: 'showNewLineItemForm'
 			},

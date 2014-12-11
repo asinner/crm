@@ -69,7 +69,13 @@
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
-						Add line item				
+						%span{data: {ng_show: 'show.newForm'}} Add line item
+						%span{data: {ng_show: 'show.editForm'}} Update
+					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.editForm'}}
+						%span{ng_hide: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = true' } Delete line item
+						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLineItem)'} Are you sure?
+					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
+						%span No, nevermind
 
 #dashboard.container-fluid{data: {ng_controller: 'ShowLeadCtrl', ng_init: 'show'}}
 	.row.primary-bar

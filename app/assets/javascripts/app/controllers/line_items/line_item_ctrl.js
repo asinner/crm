@@ -44,12 +44,27 @@
 			}
 		};
 		
+		$scope.destroy = function(lineItem) {	
+			var lineItem = new LineItem(lineItem);
+			lineItem.token = Session.token;
+			lineItem.$delete().then(
+				function(response) {
+					$scope.close();
+					$rootScope.$broadcast(EVENTS.lineItem.destroyed, lineItem);
+				},
+				function(response) {
+					console.log(response);					
+				}
+			);
+		};
+		
 		$scope.resetForm = function() {
 			$scope.newLineItem.$setPristine();
 			$scope.newLineItem.$setUntouched();
 		};
 		
 		$scope.hideForms = function() {
+			$scope.showDeleteConfirm = false;
 			$scope.show.newForm = false;
 			$scope.show.editForm = false;
 		};

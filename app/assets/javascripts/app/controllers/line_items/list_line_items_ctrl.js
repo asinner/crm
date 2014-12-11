@@ -16,6 +16,14 @@
 			$scope.lineItems = $scope.lineItems.concat(data);
 		});
 		
+		$scope.$on(EVENTS.lineItem.destroyed, function(event, data) {
+			angular.forEach($scope.lineItems, function(key, value) {
+				if (key.id == data.id) {
+					$scope.lineItems.splice(value, 1);
+				}
+			});
+		});
+		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({
 				estimate_id: estimate.id,
