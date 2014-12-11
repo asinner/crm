@@ -2,12 +2,14 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('NewLineItemCtrl', ['$scope', 'LIGHTBOX_EVENTS', '$rootScope', 'LINE_ITEM_EVENTS', 'Session', 'LineItem', function($scope, LIGHTBOX_EVENTS, $rootScope, LINE_ITEM_EVENTS, Session, LineItem) {
+	app.controller('NewLineItemCtrl', ['$scope', '$rootScope', 'Session', 'LineItem', 'Current', function($scope, $rootScope, Session, LineItem, Current) {
 		
 		$scope.show = false;
 		
 		// Listeners
 		$scope.$on(LIGHTBOX_EVENTS.close, function(event, data) {
+			$scope.newLineItem.$setPristine();
+			$scope.newLineItem.$setUntouched();
 			$scope.show = false;
 		});
 		
@@ -23,7 +25,22 @@
 		$scope.create = function(lineItem) {
 			var lineItem = new LineItem(lineItem);
 			lineItem.token = Session.token;
-			lineItem.estimate_id = Session.currentEvent.estimate.id;
+			lineItem.estimate_id = Current.getEvent().estimate.id;
+			lineItem.$save().then(
+				function(response) {
+					$scope.currentLineItem = {
+						name: '',
+						amount: '',
+						qty: '',
+						description: ''
+					};
+					
+					$rootScope.$broadcast(LINE_ITEM_EVENTS.created, response.line_item);
+				},
+				function(response) {
+					console.log(response);
+				}
+			)
 		};
 		
 	}]);

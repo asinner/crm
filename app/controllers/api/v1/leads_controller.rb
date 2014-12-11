@@ -1,4 +1,6 @@
 class Api::V1::LeadsController < ApplicationController
+  wrap_parameters :lead, include: Lead.attribute_names + [:events_attributes]
+  
   before_action :authenticate_user!
 
   def index
@@ -7,8 +9,9 @@ class Api::V1::LeadsController < ApplicationController
   end
 
   def create
-    lead = current_user.company.leads.new(lead_params)
-
+    lead = current_user.company.leads.build(lead_params)
+    lead.events.first.build_estimate if lead.events.first
+    
     if lead.save
       render status: 201, json: lead
     else
@@ -19,6 +22,6 @@ class Api::V1::LeadsController < ApplicationController
   private
 
   def lead_params
-    params.require(:lead).permit(:first_name, :last_name, :email, :phone_number)
+    params.require(:lead).permit(:first_name, :last_name, :email, :phone_number, events_attributes: [:name, :date])
   end
 end

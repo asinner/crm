@@ -4,6 +4,8 @@ class Lead < ActiveRecord::Base
   validates :email, presence: true
 
   belongs_to :company
-  has_many :events
-  has_many :notes
+  has_many :events, dependent: :delete_all
+  has_many :notes, dependent: :delete_all
+  
+  accepts_nested_attributes_for :events
 end

@@ -1,7 +1,7 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('NewLeadNoteCtrl', ['$scope', 'Note', 'Session', 'NOTE_EVENTS', '$rootScope', function($scope, Note, Session, NOTE_EVENTS, $rootScope) {
+	app.controller('NewLeadNoteCtrl', ['$scope', 'Note', 'Session', '$rootScope', function($scope, Note, Session, $rootScope) {
 				
 		$scope.currentNote = {
 			body: ''

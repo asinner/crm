@@ -34,7 +34,7 @@
 						%label Phone number
 						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
 			
-			.row{data: {ng_controller: 'NewEventCtrl'}}
+			.row
 				.col-xs-6
 					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
 						%label Date
@@ -46,26 +46,26 @@
 						Create Lead
 						
 	#new-line-item.center-block{data: {ng_controller: 'NewLineItemCtrl', ng_show: 'show'}}
-		%form{data: {ng_submit: 'create(currentLineItem)'}}
+		%form{name: 'newLineItem', novalidate: true, data: {ng_submit: 'create(currentLineItem)'}}
 			.row
 				.col-xs-6
-					.form-group
+					.form-group{data: {ng_class: '{ "has-error": newLineItem.name.$invalid && (newLineItem.$submitted || newLineItem.name.$touched) }'}}
 						%label Name
-						%input.form-control{type: 'text', placeholder: 'Name of line item'}
+						%input.form-control{required: true, name: 'name', type: 'text', placeholder: 'Name of line item', data: {ng_model: 'currentLineItem.name'}}
 				.col-xs-3
-					.form-group
+					.form-group{data: {ng_class: '{ "has-error": newLineItem.amount.$invalid && (newLineItem.$submitted || newLineItem.amount.$touched) }'}}
 						%label Amount
-						%input.form-control{type: 'text', placeholder: '0.00'}
+						%input.form-control{required: true, name: 'amount', type: 'text', placeholder: '0.00', data: {ng_model: 'currentLineItem.amount'}}
 				.col-xs-3
-					.form-group
+					.form-group{data: {ng_class: '{ "has-error": newLineItem.qty.$invalid && (newLineItem.$submitted || newLineItem.qty.$touched) }'}}
 						%label Quantity
-						%input.form-control{type: 'number', placeholder: '0'}
+						%input.form-control{required: true, name: 'qty', type: 'number', placeholder: '0', data: {ng_model: 'currentLineItem.qty'}}
 					
 			.row
 				.col-xs-12
-					.form-group
+					.form-group{data: {ng_class: '{ "has-error": newLineItem.description.$invalid && (newLineItem.$submitted || newLineItem.description.$touched) }'}}
 						%label Description
-						%textarea.form-control{placeholder: 'Description'}
+						%textarea.form-control{name: 'description', placeholder: 'Description', data: {ng_model: 'currentLineItem.description'}}
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
