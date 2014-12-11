@@ -26,6 +26,7 @@
 		$scope.resetForm = function() {
 			$scope.newLineItem.$setPristine();
 			$scope.newLineItem.$setUntouched();
+			$scope.close();
 		};
 		
 		$scope.create = function(lineItem) {
