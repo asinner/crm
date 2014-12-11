@@ -8,7 +8,7 @@
 		
 		$scope.lineItems = [];
 		
-		$scope.$on(EVENTS.navigation.viewEstimate, function(event, data) {
+		$scope.$on(EVENTS.navigation.viewEstimateTab, function(event, data) {
 			$scope.getLineItems(Current.getEvent().estimate);
 		});
 		

@@ -38,7 +38,8 @@
 		},
 		
 		navigation: {
-			viewNotesTab: 'viewNotesTab'
+			viewNotesTab: 'viewNotesTab',
+			viewEstimateTab: 'viewEstimateTab'
 		}
 		
 	});

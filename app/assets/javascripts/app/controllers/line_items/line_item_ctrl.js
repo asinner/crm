@@ -16,7 +16,7 @@
 			$scope.hideForms();
 			$scope.resetCurrentLineItem();
 		});
-		
+
 		$scope.$on(EVENTS.lineItem.newForm.show, function(event, data) {
 			$scope.show.newForm = true;
 		});
@@ -99,8 +99,9 @@
 			lineItem.$update().then(
 				function(response) {
 					$scope.close();
+					$rootScope.$broadcast(EVENTS.lineItem.updated, lineItem);
 					$timeout(function() {
-						$scope.updated = true;
+						$rootScope.$broadcast(EVENTS.lineItem.removeUpdated, lineItem);
 					}, 1000);
 				},
 				function(response) {

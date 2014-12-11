@@ -84,7 +84,7 @@
 				%h4.name
 					{{ currentLead.first_name }} {{ currentLead.last_name }}
 			.pull-right
-				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event'	for event in currentLead.events"}}
+				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events"}}
 					%option{value: ''} Choose an event
 	.row.secondary-bar
 		.col-xs-12
@@ -138,7 +138,9 @@
 						%th Total
 				%tbody 
 					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
-						%td {{ lineItem.name }}
+						%td 
+							%a{:href => ""}
+								{{ lineItem.name }}
 						%td {{ lineItem.description || '' }}
 						%td {{ lineItem.amount | currency }}
 						%td {{ lineItem.qty }}						
@@ -153,7 +155,21 @@
 						%td 
 							%strong
 								{{ total() | currency }}
-						
+		.table-responsive.products{data: {ng_controller: 'ListProductsCtrl'}}
+			%table.table
+				%thead
+					%tr
+						%th Product
+						%th Description
+						%th Price
+						%th Add
+				%tbody
+					%tr{data: {ng_repeat: 'product in products', ng_controller: 'ProductCtrl'}}
+						%td {{ product.name }}
+						%td {{ product.description }}
+						%td {{ product.price | currency }}
+						%td
+							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
 												
 -# #dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
 -#	%input.centered{type: 'search', data: {ng_model: 'query'}, placeholder: 'Search your leads'}
