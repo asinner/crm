@@ -11,7 +11,7 @@
 			lineItem.estimate_id = Current.getEvent().estimate.id;
 			lineItem.$save().then(
 				function(response) {
-					$rootScope.$broadcast(EVENTS.lineItem.created, response.line_item);
+					$rootScope.$broadcast(EVENTS.lineItem.created, response);
 				},
 				function(response) {
 					console.log(response);					

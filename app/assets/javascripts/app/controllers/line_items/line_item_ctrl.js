@@ -96,7 +96,7 @@
 			lineItem.$save().then(
 				function(response) {
 					$scope.close();
-					$rootScope.$broadcast(EVENTS.lineItem.created, response.line_item);
+					$rootScope.$broadcast(EVENTS.lineItem.created, response);
 				},
 				function(response) {
 					console.log(response);

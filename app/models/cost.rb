@@ -4,7 +4,7 @@ class Cost < ActiveRecord::Base
   belongs_to :product
   
   def amount=(value)
-    self[:amount] = value.abs.to_f * 100
+    self[:amount] = value.to_f.abs * 100
   end
   
   def amount

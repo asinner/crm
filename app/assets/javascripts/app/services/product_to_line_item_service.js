@@ -12,6 +12,7 @@
 		
 		this.create = function(product) {
 			return {
+				product_id: product.id,
 				name: product.name,
 				description: product.description,
 				amount: product.price,

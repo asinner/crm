@@ -4,7 +4,7 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('ListLineItemsCtrl', ['$scope', '$filter', 'LineItem', 'Session', 'Current', 'EVENTS', function($scope, $filter, LineItem, Session, Current, EVENTS) {
+	app.controller('ListLineItemsCtrl', ['$scope', '$filter', 'LineItem', 'Session', 'Current', 'EVENTS', 'Deduplicate', function($scope, $filter, LineItem, Session, Current, EVENTS, Deduplicate) {
 		
 		$scope.role = 'revenue';
 		
@@ -21,7 +21,9 @@
 		});
 		
 		$scope.$on(EVENTS.lineItem.created, function(event, data) {
-			$scope.lineItems = $scope.lineItems.concat(data);
+			
+			$scope.line_items = Deduplicate.updateOrAdd($scope.lineItems, data.line_items);
+			
 		});
 		
 		$scope.$on(EVENTS.lineItem.destroyed, function(event, data) {

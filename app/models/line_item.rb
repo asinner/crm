@@ -4,7 +4,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :estimate
   
   def amount=(value)
-    self[:amount] = value.abs.to_f * 100
+    self[:amount] = value.to_f.abs * 100
   end
   
   def amount
