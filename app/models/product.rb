@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   belongs_to :company
 
   def price=(value)
-    self[:price] = value.to_f * 100
+    self[:price] = value.abs.to_f * 100
   end
   
   def price

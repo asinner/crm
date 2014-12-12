@@ -1,7 +1,7 @@
-class LineItem < ActiveRecord::Base
+class Cost < ActiveRecord::Base
   validates :name, presence: true
   
-  belongs_to :estimate
+  belongs_to :product
   
   def amount=(value)
     self[:amount] = value.abs.to_f * 100
