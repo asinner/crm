@@ -1,13 +1,20 @@
+'use strict';
+
 (function() {
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('ListLeadsCtrl', ['$scope', 'Lead', 'Session', 'LEAD_EVENTS', 'LIGHTBOX_EVENTS', '$rootScope', '$filter', function($scope, Lead, Session, LEAD_EVENTS, LIGHTBOX_EVENTS, $rootScope, $filter) {
+	app.controller('ListLeadsCtrl', ['$scope', 'Lead', 'Session', '$rootScope', '$filter', 'EVENTS', function($scope, Lead, Session, $rootScope, $filter, EVENTS) {
 				
 		$scope.leads = [];
 		
-		$scope.$on(LEAD_EVENTS.created, function(event, data) {
-			$scope.leads = $scope.leads.concat(data.lead);
+		// Listeners
+		$scope.$on(EVENTS.lead.created, function(event, lead) {
+			$scope.leads = $scope.leads.concat(lead);
+		});
+		
+		$scope.$on(EVENTS.event.created, function(event, data) {
+			$scope.leads[$scope.leads.indexOf(data.lead)].events.push(data.event);
 		});
 		
 		$scope.search = function(lead) {
@@ -24,13 +31,13 @@
 			}
 		);
 		
-		$scope.showNewLead = function() {
-			$rootScope.$broadcast(LIGHTBOX_EVENTS.show);
-			$rootScope.$broadcast(LEAD_EVENTS.showNewLead);
+		$scope.showForm = function() {
+			$rootScope.$broadcast(EVENTS.lightbox.show);
+			$rootScope.$broadcast(EVENTS.lead.newForm.show);
 		};
 		
 		$scope.showLead = function(lead) {
-			$rootScope.$broadcast(LEAD_EVENTS.show, lead);
+			$rootScope.$broadcast(EVENTS.lead.show, lead);
 		};
 		
 		$scope.upcomingEvent = function(lead) {

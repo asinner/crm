@@ -1,7 +1,9 @@
+'use strict';
+
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('NewLeadNoteCtrl', ['$scope', 'Note', 'Session', 'NOTE_EVENTS', '$rootScope', function($scope, Note, Session, NOTE_EVENTS, $rootScope) {
+	app.controller('NewLeadNoteCtrl', ['$scope', 'Note', 'Session', '$rootScope', 'EVENTS', function($scope, Note, Session, $rootScope, EVENTS) {
 				
 		$scope.currentNote = {
 			body: ''
@@ -13,7 +15,7 @@
 			note.token = Session.token;
 			note.$save().then(
 				function(response) {
-					$rootScope.$broadcast(NOTE_EVENTS.created, response.note);
+					$rootScope.$broadcast(EVENTS.note.created, response.note);
 					$scope.currentNote = {};
 					$scope.newLeadNoteForm.$setPristine();
 				},

@@ -1,0 +1,10 @@
+.line-item {
+	&.updated {
+		background: yellow;
+	}
+	&:hover {
+		background: #FEFFE8;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+}
