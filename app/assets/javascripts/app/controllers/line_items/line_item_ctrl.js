@@ -13,6 +13,14 @@
 		
 		$scope.activeTab = 'revenue';
 		
+		$scope.currentLineItem = {
+			name: '',
+			description: '',
+			role: '',
+			amount: '',
+			qty: ''
+		}
+		
 		$scope.$on(EVENTS.lightbox.close, function(event, data) {
 			$scope.resetForm();
 			$scope.hideForms();
@@ -20,6 +28,7 @@
 		});
 
 		$scope.$on(EVENTS.lineItem.newForm.show, function(event, data) {
+			$scope.currentLineItem.role = data;
 			$scope.show.newForm = true;
 		});
 		
@@ -28,9 +37,9 @@
 			$scope.currentLineItem = data;
 		});
 				
-		$scope.new = function() {
+		$scope.new = function(role) {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
-			$rootScope.$broadcast(EVENTS.lineItem.newForm.show);
+			$rootScope.$broadcast(EVENTS.lineItem.newForm.show, role);
 		};
 		
 		$scope.edit = function(lineItem) {
@@ -101,10 +110,6 @@
 			lineItem.$update().then(
 				function(response) {
 					$scope.close();
-					$rootScope.$broadcast(EVENTS.lineItem.updated, lineItem);
-					$timeout(function() {
-						$rootScope.$broadcast(EVENTS.lineItem.removeUpdated, lineItem);
-					}, 1000);
 				},
 				function(response) {
 					console.log(response);					

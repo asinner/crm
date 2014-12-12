@@ -4,7 +4,7 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('ListLineItemsCtrl', ['$scope', 'LineItem', 'Session', 'Current', 'EVENTS', function($scope, LineItem, Session, Current, EVENTS) {
+	app.controller('ListLineItemsCtrl', ['$scope', '$filter', 'LineItem', 'Session', 'Current', 'EVENTS', function($scope, $filter, LineItem, Session, Current, EVENTS) {
 		
 		$scope.role = 'revenue';
 		
@@ -32,11 +32,11 @@
 			});
 		});
 		
-		$scope.filterRole = function(lineItem) {
-			if (($scope.role == 'report') || (lineItem.role == $scope.role)) {
-				return true;
-			}
-		};
+		//$scope.filterRole = function(lineItem) {
+		//	if (($scope.role == 'report') || (lineItem.role == $scope.role)) {
+		//		return true;
+		//	}
+		//};
 		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({

@@ -6,14 +6,17 @@
 	
 	app.service('ProductToLineItem', function() {
 		
-		this.defaultQty = 1;
+		this.role = 'revenue';
+		
+		this.qty = 1;
 		
 		this.create = function(product) {
 			return {
 				name: product.name,
 				description: product.description,
 				amount: product.price,
-				qty: this.defaultQty
+				qty: this.qty,
+				role: this.role
 			}
 		};
 		

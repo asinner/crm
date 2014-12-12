@@ -50,7 +50,7 @@
 					$scope.currentEvent = {
 						date: ''
 					}
-					$scope.resetForm();
+					$scope.close();
 					$rootScope.$broadcast(EVENTS.lead.created, response.lead);
 				},
 				function(response, status) {

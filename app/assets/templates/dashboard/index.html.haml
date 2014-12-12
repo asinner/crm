@@ -143,7 +143,7 @@
 						%th Qty 
 						%th Total
 				%tbody 
-					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems | filter:filterRole | orderBy:"-role" ', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
+					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems | roleFilter:role | orderBy:"-role" ', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
 						%td 
 							%a{:href => ""}
 								{{ lineItem.name }}
