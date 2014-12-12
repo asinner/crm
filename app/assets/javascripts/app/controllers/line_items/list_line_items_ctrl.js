@@ -21,9 +21,7 @@
 		});
 		
 		$scope.$on(EVENTS.lineItem.created, function(event, data) {
-			
 			$scope.line_items = Deduplicate.updateOrAdd($scope.lineItems, data.line_items);
-			
 		});
 		
 		$scope.$on(EVENTS.lineItem.destroyed, function(event, data) {
