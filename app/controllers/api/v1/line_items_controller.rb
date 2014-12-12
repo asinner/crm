@@ -3,6 +3,7 @@ class Api::V1::LineItemsController < ApplicationController
 
   def index
     estimate = Estimate.find(params[:estimate_id])
+    
     authorize estimate
     render status: 200, json: estimate.items
   end

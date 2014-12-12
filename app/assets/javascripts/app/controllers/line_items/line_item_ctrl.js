@@ -5,11 +5,13 @@
 	var app = angular.module('crmApp');
 	
 	app.controller('LineItemCtrl', ['$scope', '$rootScope', '$timeout', 'Session', 'LineItem', 'Current', 'EVENTS', function($scope, $rootScope, $timeout, Session, LineItem, Current, EVENTS) {
-				
+		
 		$scope.show = {
 			newForm: false,
 			editForm: false
 		};
+		
+		$scope.activeTab = 'revenue';
 		
 		$scope.$on(EVENTS.lightbox.close, function(event, data) {
 			$scope.resetForm();
@@ -25,7 +27,7 @@
 			$scope.show.editForm = true;
 			$scope.currentLineItem = data;
 		});
-		
+				
 		$scope.new = function() {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
 			$rootScope.$broadcast(EVENTS.lineItem.newForm.show);
@@ -109,6 +111,12 @@
 				}
 			)
 		};
+		
+		$scope.setActiveTab = function(tab) {
+			$scope.activeTab = tab;
+			$rootScope.$broadcast(EVENTS.estimate.filterLineItems, tab);
+		};
+		
 		
 	}]);
 	

@@ -92,7 +92,6 @@
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : activeTab == 'information' }"}} Information
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("notes")',					ng_class: " { 'active' : activeTab == 'notes' }"}} Notes
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("estimate")',				ng_class: " { 'active' : activeTab == 'estimate' }"}} Estimate
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("expenseReport")',	ng_class: " { 'active' : activeTab == 'expenseReport' }"}} Expense report
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("timeline")',				ng_class: " { 'active' : activeTab == 'timeline' }"}} Timeline
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("files")',					ng_class: " { 'active' : activeTab == 'files' }"}} Files
 				
@@ -110,7 +109,7 @@
 				.col-xs-12
 					{{ currentLead.phone_number }}
 					
-	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}	
+	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
 		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
 			.row
 				.col-xs-12
@@ -126,7 +125,14 @@
 	#estimate{data: {ng_show: 'activeTab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}} + Add line item
+				.btn-group
+					%button.btn.btn-default{type: 'button', data: {ng_click: 'new("revenue")'}} + Add line item
+					%button.btn.btn-default{type: 'button', data: {ng_click: 'new("expense")'}} + Add expense
+				.btn-group
+					%button.btn.btn-default{type: 'button', data: {ng_click: 'setActiveTab("revenue")', ng_class: "{ 'active': activeTab == 'revenue' }"}} Revenues
+					%button.btn.btn-default{type: 'button', data: {ng_click: 'setActiveTab("expense")', ng_class: "{ 'active': activeTab == 'expense' }"}} Expenses
+					%button.btn.btn-default{type: 'button', data: {ng_click: 'setActiveTab("report")', ng_class: "{ 'active': activeTab == 'report' }"}} Report
+				
 		.table-responsive.line-items{data: {ng_controller: 'ListLineItemsCtrl'}}
 			%table.table
 				%thead
@@ -137,7 +143,7 @@
 						%th Qty 
 						%th Total
 				%tbody 
-					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
+					%tr.line-item{data: {ng_repeat: 'lineItem in lineItems | filter:filterRole | orderBy:"-role" ', ng_controller: 'LineItemCtrl', ng_click: 'edit(lineItem)', ng_class: " { 'updated': updated } "}}
 						%td 
 							%a{:href => ""}
 								{{ lineItem.name }}
@@ -170,53 +176,3 @@
 						%td {{ product.price | currency }}
 						%td
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
-												
--# #dashboard-menu{data: {ng_controller: 'LeadListCtrl'}}
--#	%input.centered{type: 'search', data: {ng_model: 'query'}, placeholder: 'Search your leads'}
--#	.lead{data: {ng_repeat: 'lead in leads | filter:search'}}
--#		%a{data: {ng_class: "{ 'active': activeLead == lead.id }", ng_click: 'viewLead(lead)'}}
--#			{{lead.first_name}} {{lead.last_name}}
-
--# #dashboard-view
--#	%div{data: {ng_controller: 'ViewLeadCtrl'}}
--#		#lead-view-menu
--#			%ul
--#				%li{data: {ng_class: "{'active': activeTab == 'info'}", ng_click: 'viewTab("info")'}} Info
--#				%li{data: {ng_class: "{'active': activeTab == 'notes'}", ng_click: 'viewTab("notes")'}} Notes
--#				%li{data: {ng_class: "{'active': activeTab == 'estimate'}", ng_click: 'viewTab("estimate")'}} Estimate
--#				%li{data: {ng_class: "{'active': activeTab == 'expense-report'}", ng_click: 'viewTab("expense-report")'}} Expense Report
--#				%li{data: {ng_class: "{'active': activeTab == 'order'}", ng_click: 'viewTab("order")'}} Order
--#		.tab-view
--#			%div{data: {ng_show: 'activeTab == "info"'}}
--#				.heading
--#					Personal Info
--#				.name
--#					{{ currentLead.first_name }} {{currentLead.last_name}}
--#				.email
--#					{{ currentLead.email }}
--#				.phone_number
--#					{{ currentLead.phone_number }}
--#			%div{data: {ng_show: 'activeTab == "notes"'}}
--#				.heading
--#					Notes
--#				%form#new_note{name: 'new-lead-note', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
--#					%input{placeholder: 'Leave a note about this lead', name: 'body', type: 'text', data: {ng_model: 'currentNote.body'}}
--#				.notes{data: {ng_controller: 'ListLeadNotesCtrl'}}
--#					.note{data: {ng_repeat: "note in notes | orderBy:'-created_at'"}}
--#						%span.date {{ note.created_at | date: 'MMM dd, yy' }}
--#						%span.body {{ note.body }}
--#			%div{data: {ng_show: 'activeTab == "estimate"'}}
--#				.heading
--#					Estimate
--#				.products{data: {ng_controller: 'ConnectProductsToEstimateCtrl'}}
--#					%p
--#						Add your products & services to this estimate
--#					.product{data: {ng_repeat: 'product in products'}}
--#						{{ product.name }} {{ product.price | currency }}
--#			%div{data: {ng_show: 'activeTab == "expense-report"'}}
--#				.heading
--#					Expense Report
--#			%div{data: {ng_show: 'activeTab == "order"'}}
--#				.heading
--#					Order
-		

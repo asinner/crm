@@ -6,7 +6,15 @@
 	
 	app.controller('ListLineItemsCtrl', ['$scope', 'LineItem', 'Session', 'Current', 'EVENTS', function($scope, LineItem, Session, Current, EVENTS) {
 		
+		$scope.role = 'revenue';
+		
+		$scope.anything = 'Andrew';
+		
 		$scope.lineItems = [];
+		
+		$scope.$on(EVENTS.estimate.filterLineItems, function(event, data) {
+			$scope.role = data;
+		});
 		
 		$scope.$on(EVENTS.navigation.viewEstimateTab, function(event, data) {
 			$scope.getLineItems(Current.getEvent().estimate);
@@ -23,6 +31,12 @@
 				}
 			});
 		});
+		
+		$scope.filterRole = function(lineItem) {
+			if (($scope.role == 'report') || (lineItem.role == $scope.role)) {
+				return true;
+			}
+		};
 		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({

@@ -40,6 +40,10 @@
 		navigation: {
 			viewNotesTab: 'viewNotesTab',
 			viewEstimateTab: 'viewEstimateTab'
+		},
+		
+		estimate: {
+			viewTab: 'viewEstimateTab'
 		}
 		
 	});

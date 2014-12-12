@@ -44,7 +44,18 @@ Estimate.all.each do |e|
       name: Faker::App.name,
       description: Faker::Lorem.sentence,
       amount: rand(3...1000),
-      qty: rand(1..2)
+      qty: rand(1..2),
+      role: 'revenue'
+    )
+  end
+  
+  10.times do
+    e.items.create(
+      name: Faker::App.name,
+      description: Faker::Lorem.sentence,
+      amount: rand(3...200),
+      qty: rand(1..2),
+      role: 'expense'
     )
   end
 end
