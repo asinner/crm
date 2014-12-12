@@ -149,8 +149,9 @@
 								{{ lineItem.name }}
 						%td {{ lineItem.description || '' }}
 						%td {{ lineItem.amount | currency }}
-						%td {{ lineItem.qty }}						
-						%td {{ lineItem.qty * lineItem.amount | currency }}
+						%td {{ lineItem.qty }}
+						%td{data: {ng_show: "lineItem.role == 'revenue'"}} {{ (lineItem.qty * lineItem.amount) | currency }}
+						%td{data: {ng_show: "lineItem.role == 'expense'"}} {{ -(lineItem.qty * lineItem.amount) | currency }}
 					%tr
 						%td
 							%strong

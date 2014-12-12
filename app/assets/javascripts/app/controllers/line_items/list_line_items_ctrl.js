@@ -30,13 +30,7 @@
 					$scope.lineItems.splice(value, 1);
 				}
 			});
-		});
-		
-		//$scope.filterRole = function(lineItem) {
-		//	if (($scope.role == 'report') || (lineItem.role == $scope.role)) {
-		//		return true;
-		//	}
-		//};
+		});		
 		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({
@@ -47,10 +41,12 @@
 			});
 		};
 		
-		$scope.total = function() {
+		$scope.total = function(lineItems) {
+			var lineItems = $filter('roleFilter')($scope.lineItems, $scope.role);
 			var total = 0;
-			angular.forEach($scope.lineItems, function(item) {
-				total = total + (item.amount * item.qty);
+			angular.forEach(lineItems, function(item) {
+				if (item.role == 'expense') total = total - (item.amount * item.qty);
+				if (item.role == 'revenue') total = total + (item.amount * item.qty);
 			});
 			return total;
 		};
