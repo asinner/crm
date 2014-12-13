@@ -37,7 +37,7 @@
 		
 		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
 			if ($scope.activeTab == 'estimate') {
-				$scope.getLineItems(data.estimate);
+				$scope.list(data.estimate);
 			}
 		});
 		

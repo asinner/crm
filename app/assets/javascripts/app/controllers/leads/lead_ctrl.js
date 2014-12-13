@@ -29,6 +29,7 @@
 		
 		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
 			$scope.currentEvent = data;
+			Current.setEvent(data);
 		});
 		
 		$scope.new = function() {
@@ -78,8 +79,8 @@
 		};
 				
 		$scope.changeCurrentEvent = function() {
-			$rootScope.$broadcast(EVENTS.event.currentEventChanged);
-			Current.setEvent($scope.currentEvent);
+			$rootScope.$broadcast(EVENTS.event.currentEventChanged, $scope.currentEvent);
+			//Current.setEvent($scope.currentEvent);
 		};
 		
 	}]);
