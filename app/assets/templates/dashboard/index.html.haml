@@ -1,9 +1,9 @@
 .container-fluid
 	.company-leads-list{data: {ng_controller: 'ListLeadsCtrl'}}
 		.controls
-			.row
+			.row{data: {ng_controller: 'LeadCtrl'}}
 				.col-xs-12
-					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'showForm()'}} +
+					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'new()'}} +
 		
 		.row.company-lead{data: {ng_repeat: 'lead in leads | orderBy:upcomingEvent '}}
 			.col-xs-12

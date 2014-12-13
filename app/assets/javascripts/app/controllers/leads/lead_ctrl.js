@@ -30,7 +30,12 @@
 		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
 			$scope.currentEvent = data;
 		});
-				
+		
+		$scope.new = function() {
+			$rootScope.$broadcast(EVENTS.lightbox.show);
+			$rootScope.$broadcast(EVENTS.lead.newForm.show);
+		};	
+		
 		$scope.edit = function(lead) {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
 			$rootScope.$broadcast(EVENTS.lead.editForm.show, lead);
@@ -73,6 +78,7 @@
 		};
 				
 		$scope.changeCurrentEvent = function() {
+			$rootScope.$broadcast(EVENTS.event.currentEventChanged);
 			Current.setEvent($scope.currentEvent);
 		};
 		
