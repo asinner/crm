@@ -9,11 +9,15 @@
 			created: 'leadCreated',
 			newForm: {
 				show: 'showNewLeadForm'
+			},
+			editForm: {
+				show: 'showEditLeadForm'
 			}
 		},
 		
 		event: {
-			created: 'eventCreated'
+			created: 'eventCreated',
+			currentEventChanged: 'currentEventChanged'
 		},
 		
 		lightbox: {
@@ -38,8 +42,13 @@
 		},
 		
 		navigation: {
-			viewNotesTab: 'viewNotesTab',
-			viewEstimateTab: 'viewEstimateTab'
+			view: {
+				information: "viewLeadInformationTab",
+				notes: "viewLeadNotesTab",
+				estimate: "viewLeadEstimateTab",
+				timeline: "viewLeadTimelineTab",
+				files: "viewLeadFilesTab"
+			}
 		},
 		
 		estimate: {

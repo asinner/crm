@@ -7,7 +7,7 @@
 		
 		.row.company-lead{data: {ng_repeat: 'lead in leads | orderBy:upcomingEvent '}}
 			.col-xs-12
-				%a{href: '', data: {ng_click: 'showLead(lead)'}}
+				%a{href: '', data: {ng_click: 'show(lead)'}}
 					{{ (lead.events | orderBy:'date')[0].date | date:'MMM dd' }} {{ lead.first_name }} {{ lead.last_name }}
 
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
@@ -77,16 +77,49 @@
 					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
 						%span No, nevermind
 
-#dashboard.container-fluid{data: {ng_controller: 'ShowLeadCtrl', ng_init: 'show'}}
+	#edit-lead.center-block{data: {ng_controller: 'LeadCtrl', ng_show: 'show.editForm'}}
+		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'update(currentLead)'}}
+			.row
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.first_name.$invalid && (leadForm.first_name.$touched || leadForm.$submitted) }"}}
+						%label First Name
+						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'currentLead.first_name'}}
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.last_name.$invalid && (leadForm.last_name.$touched || leadForm.$submitted) }"}}
+						%label Last Name
+						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'currentLead.last_name'}}
+			.row
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.email.$invalid && (leadForm.email.$touched || leadForm.$submitted) }"}}
+						%label Email
+						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'currentLead.email'}}
+				.col-xs-6
+					.form-group
+						%label Phone number
+						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
+			.row
+				.col-xs-12
+					%button.btn.btn-default{type: 'submit'}
+						%span{data: {ng_show: 'show.editForm'}} Update
+					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.editForm'}}
+						%span{ng_hide: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = true' } Delete lead
+						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLead)'} Are you sure?
+					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
+						%span No, nevermind
+
+
+
+#dashboard.container-fluid{data: {ng_controller: 'LeadCtrl'}}
 	.row.primary-bar
 		.col-xs-12
 			.pull-left
 				%h4.name
 					{{ currentLead.first_name }} {{ currentLead.last_name }}
 			.pull-right
-				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events"}}
+				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events", ng_change: 'changeCurrentEvent(event)'}}
 					%option{value: ''} Choose an event
-	.row.secondary-bar
+				
+	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
 			.btn-group
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : activeTab == 'information' }"}} Information
@@ -108,6 +141,9 @@
 			%p
 				.col-xs-12
 					{{ currentLead.phone_number }}
+		%button.btn.btn-default{type: 'button', data: {ng_click: 'edit(currentLead)'}}
+			Edit Information
+			
 					
 	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
 		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}

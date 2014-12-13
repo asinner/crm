@@ -18,6 +18,17 @@ class Api::V1::LeadsController < ApplicationController
       render status: 422, json: lead.errors
     end
   end
+  
+  def update
+    lead = Lead.find(params[:id])
+    authorize lead
+    
+    if lead.update(lead_params)
+      render status: 200, json: lead
+    else
+      render status: 422, json: lead.errors
+    end
+  end
 
   private
 

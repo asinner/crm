@@ -30,21 +30,15 @@
 				$scope.leads = response.leads;
 			}
 		);
-		
-		$scope.showForm = function() {
-			$rootScope.$broadcast(EVENTS.lightbox.show);
-			$rootScope.$broadcast(EVENTS.lead.newForm.show);
-		};
-		
-		$scope.showLead = function(lead) {
-			$rootScope.$broadcast(EVENTS.lead.show, lead);
-		};
-		
+						
 		$scope.upcomingEvent = function(lead) {
 			var events = $filter('orderBy')(lead.events, 'date');
 			return events[0].date;
 		};
 		
+		$scope.show = function(lead) {
+			$rootScope.$broadcast(EVENTS.lead.show, lead);
+		};
 		
 	}]);
 	

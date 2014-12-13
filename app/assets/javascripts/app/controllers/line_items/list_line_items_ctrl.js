@@ -1,6 +1,5 @@
-'use strict';
-
 (function() {
+	'use strict';
 	
 	var app = angular.module('crmApp');
 	
@@ -23,7 +22,7 @@
 		$scope.$on(EVENTS.lineItem.created, function(event, data) {
 			$scope.line_items = Deduplicate.updateOrAdd($scope.lineItems, data.line_items);
 		});
-		
+				
 		$scope.$on(EVENTS.lineItem.destroyed, function(event, data) {
 			angular.forEach($scope.lineItems, function(key, value) {
 				if (key.id == data.id) {
@@ -31,6 +30,12 @@
 				}
 			});
 		});		
+		
+		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
+			if ($scope.activeTab == 'estimate') {
+				$scope.getLineItems(data.estimate);
+			}
+		});
 		
 		$scope.getLineItems = function(estimate) {
 			LineItem.query({
