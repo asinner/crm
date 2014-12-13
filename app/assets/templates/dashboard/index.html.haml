@@ -125,7 +125,8 @@
 							%input.form-control{name: 'name', type: 'text', placeholder: 'Ex. Appleton Wedding', data: {ng_model: 'currentEvent.name'}}
 			%footer
 				%button.btn.btn-default{type: 'submit'}
-					Create event
+					%span{data: {ng_show: 'show.newForm'}} Create event
+					%span{data: {ng_show: 'show.editForm'}} Update
 			
 #dashboard.container-fluid{data: {ng_controller: 'LeadCtrl'}}
 	.row.primary-bar
@@ -134,7 +135,7 @@
 				%h4.name
 					{{ currentLead.first_name }} {{ currentLead.last_name }}
 			.pull-right
-				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events", ng_change: 'changeCurrentEvent(event)'}}
+				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events", ng_change: 'changeCurrentEvent()'}}
 					%option{value: ''} Choose an event
 			.pull-right{data: {ng_controller: 'EventCtrl'}}
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'new(currentLead)'}}
@@ -164,24 +165,35 @@
 			.col-xs-12
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'edit(currentLead)'}}
 					Edit Information
-		.row
-			.col-xs-12
-				%strong
-					Event date
-				{{ currentEvent.date | date:'MMM dd, yyyy' }}
-		.row
-			.col-xs-12
-				%strong
-					Event location
-				%div
-				422 Yale Ave N. #308
-				%br
-				Seattle, WA
-				%br
-				91809
-				%br
-				%a{target: '_blank', data: {:ng_href => "https://maps.google.com?q={{ currentEvent.address.line1 }} {{ currentEvent.address.city }} {{ currentEvent.address.state }}"}}
-					Open in Google Maps
+		%div
+			.row
+				.col-xs-12
+					%div
+						%strong
+							Event name
+						%br
+						{{ currentEvent.name }}
+					%div
+						%strong
+							Event date
+						%br
+						{{ currentEvent.date | date:'MMM dd, yyyy' }}
+					%div
+						%strong
+							Event location
+						%div
+						{{ currentEvent.address.line1 || 'Address not set' }}
+						%br
+						{{ currentEvent.address.city || 'City not set' }}, {{ currentEvent.address.state || 'State not set' }}
+						%br
+						{{ currentEvent.address.zip || 'Zip not set' }}
+						%br
+						%a{target: '_blank', data: {:ng_href => "https://maps.google.com?q={{ currentEvent.address.line1 }} {{ currentEvent.address.city }} {{ currentEvent.address.state }}"}}
+							Open in Google Maps
+			.row{data: {ng_controller: 'EventCtrl'}}
+				.col-xs-12
+					%button.btn.btn-default{data: {ng_click: 'edit()'}}
+						Edit event
 					
 	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
 		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}

@@ -27,10 +27,10 @@
 			$scope.show.editForm = true;
 		});
 		
-		$scope.setActiveTab = function(tab) {
-			$scope.activeTab = tab;
-		};
-		
+		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
+			$scope.currentEvent = data;
+		});
+				
 		$scope.edit = function(lead) {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
 			$rootScope.$broadcast(EVENTS.lead.editForm.show, lead);
@@ -48,6 +48,10 @@
 			)
 		};
 		
+		$scope.setActiveTab = function(tab) {
+			$scope.activeTab = tab;
+		};
+		
 		$scope.resetForm = function() {
 			$scope.leadForm.$setPristine();
 			$scope.leadForm.$setUntouched();
@@ -58,6 +62,19 @@
 			$scope.show.newForm = false;
 			$scope.show.editForm = false;
 		};		
+		
+		$scope.resetCurrentLead = function() {
+			$scope.currentLead = {
+				first_name: '',
+				last_name: '',
+				email: '',
+				phone_number: ''
+			}
+		};
 				
+		$scope.changeCurrentEvent = function() {
+			Current.setEvent($scope.currentEvent);
+		};
+		
 	}]);
 })();

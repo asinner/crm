@@ -20,6 +20,9 @@
 			currentEventChanged: 'currentEventChanged',
 			newForm: {
 				show: 'showNewEventForm'
+			},
+			editForm: {
+				show: 'showEditEventForm'
 			}
 		},
 		
