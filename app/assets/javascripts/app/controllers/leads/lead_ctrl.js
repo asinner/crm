@@ -40,10 +40,10 @@
 			var lead = new Lead(lead);
 			lead.$update().then(
 				function(response) {
-					
+					$scope.close();
 				},
 				function(response) {
-					
+					console.log(response);
 				}
 			)
 		};

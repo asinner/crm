@@ -106,9 +106,27 @@
 						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLead)'} Are you sure?
 					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
 						%span No, nevermind
-
-
-
+	
+	#event-form.form-container.center-block{data: {ng_controller: 'EventCtrl', ng_show: 'show.editForm || show.newForm' }}
+		%form{name: 'eventForm', novalidate: true, data: {ng_submit: 'save(currentEvent)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.newForm'} New Event
+					%span{ng_show: 'show.editForm'} Edit Event
+			%section
+				.row
+					.col-xs-6{data: {ng_controller: 'DatepickerCtrl'}}
+						.form-group{data: {ng_class: "{ 'has-error': eventForm.date.$invalid && (eventForm.date.$touched || eventForm.$submitted) }"}}
+							%label Event date
+							%input.form-control{name: 'date', type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'currentEvent.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': eventForm.name.$invalid && (eventForm.name.$touched || eventForm.$submitted) }"}}
+							%label Event name
+							%input.form-control{name: 'name', type: 'text', placeholder: 'Ex. Appleton Wedding', data: {ng_model: 'currentEvent.name'}}
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					Create event
+			
 #dashboard.container-fluid{data: {ng_controller: 'LeadCtrl'}}
 	.row.primary-bar
 		.col-xs-12
@@ -118,6 +136,9 @@
 			.pull-right
 				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events", ng_change: 'changeCurrentEvent(event)'}}
 					%option{value: ''} Choose an event
+			.pull-right{data: {ng_controller: 'EventCtrl'}}
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'new(currentLead)'}}
+					Add an event for {{ currentLead.first_name }}
 				
 	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
@@ -131,19 +152,36 @@
 	#lead-information{data: {ng_show: 'activeTab == "information"'}}
 		.row
 			.col-xs-12
-				%h4
-					{{ currentLead.first_name }} {{ currentLead.last_name }}
+				%strong
+					Client information
+				%br
+				{{ currentLead.first_name }} {{ currentLead.last_name }}
+				%br
+				{{ currentLead.email }}
+				%br
+				{{ currentLead.phone_number }}
 		.row
-			%p
-				.col-xs-12
-					{{ currentLead.email }}
+			.col-xs-12
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'edit(currentLead)'}}
+					Edit Information
 		.row
-			%p
-				.col-xs-12
-					{{ currentLead.phone_number }}
-		%button.btn.btn-default{type: 'button', data: {ng_click: 'edit(currentLead)'}}
-			Edit Information
-			
+			.col-xs-12
+				%strong
+					Event date
+				{{ currentEvent.date | date:'MMM dd, yyyy' }}
+		.row
+			.col-xs-12
+				%strong
+					Event location
+				%div
+				422 Yale Ave N. #308
+				%br
+				Seattle, WA
+				%br
+				91809
+				%br
+				%a{target: '_blank', data: {:ng_href => "https://maps.google.com?q={{ currentEvent.address.line1 }} {{ currentEvent.address.city }} {{ currentEvent.address.state }}"}}
+					Open in Google Maps
 					
 	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
 		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}

@@ -17,7 +17,10 @@
 		
 		event: {
 			created: 'eventCreated',
-			currentEventChanged: 'currentEventChanged'
+			currentEventChanged: 'currentEventChanged',
+			newForm: {
+				show: 'showNewEventForm'
+			}
 		},
 		
 		lightbox: {

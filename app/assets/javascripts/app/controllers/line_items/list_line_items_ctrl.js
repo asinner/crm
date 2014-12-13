@@ -15,8 +15,12 @@
 			$scope.role = data;
 		});
 		
-		$scope.$on(EVENTS.navigation.viewEstimateTab, function(event, data) {
-			$scope.getLineItems(Current.getEvent().estimate);
+		$scope.$on(EVENTS.navigation.view.estimate, function(event, data) {
+			$scope.list(Current.getEvent().estimate);
+		});
+		
+		$scope.$on(EVENTS.lead.show, function(event) {
+			$scope.list(Current.getEvent().estimate);
 		});
 		
 		$scope.$on(EVENTS.lineItem.created, function(event, data) {
@@ -37,7 +41,7 @@
 			}
 		});
 		
-		$scope.getLineItems = function(estimate) {
+		$scope.list = function(estimate) {
 			LineItem.query({
 				estimate_id: estimate.id,
 				token: Session.token
