@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   has_one :estimate, dependent: :destroy
   has_one :address, dependent: :destroy
   has_many :uploads, dependent: :destroy
+  has_many :notes, dependent: :destroy
   
   accepts_nested_attributes_for :address
 end

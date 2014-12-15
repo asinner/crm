@@ -16,6 +16,7 @@
 		
 		$scope.show = function(eventt) {
 			Current.event = eventt;
+			$rootScope.$broadcast(EVENTS.current.event.changed);
 		};
 		
 		$scope.list();

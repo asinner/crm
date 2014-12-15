@@ -152,6 +152,40 @@
 					%span{data: {ng_show: 'show.new'}} Create event
 					%span{data: {ng_show: 'show.edit'}} Update
 			
+	#address-form.form-container.center-block{data: {ng_controller: 'AddressCtrl', ng_show: 'show.edit || show.new'}}
+		%form{name: 'addressForm', novalidate: true, data: {ng_submit: 'save(model)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.new'} New Event
+					%span{ng_show: 'show.edit'} Edit Event
+			%section
+				.row
+					.col-xs-12
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.line1.$invalid && (addressForm.line1.$touched || addressForm.$submitted) }"}}
+							%label Street Address
+							%input.form-control{name: 'line1', type: 'text', placeholder: '1235 Main St.', data: {ng_model: 'model.line1'}}
+
+				.row
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.city.$invalid && (addressForm.name.$touched || addressForm.$submitted) }"}}
+							%label City
+							%input.form-control{name: 'city', type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'model.city'}}
+
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.state.$invalid && (addressForm.state.$touched || addressForm.$submitted) }"}}
+							%label State
+							%input.form-control{name: 'state', type: 'text', placeholder: 'California', data: {ng_model: 'model.state'}}
+
+				.row
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.city.$invalid && (addressForm.name.$touched || addressForm.$submitted) }"}}
+							%label City
+							%input.form-control{name: 'zip', type: 'text', placeholder: '90001', data: {ng_model: 'model.zip'}}
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					%span{data: {ng_show: 'show.new'}} Create event
+					%span{data: {ng_show: 'show.edit'}} Update
+	
 #dashboard.container-fluid
 	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
@@ -182,21 +216,20 @@
 					%a{:href => "", data: {ng_click: 'edit(current.event.address)'}}
 						Edit event location
 				
-				
-	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
-		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
+	#lead-notes{data: {ng_show: 'current.tab == "notes"'}}
+		%form#new-lead-note{name: 'noteForm', data: {ng_controller: 'NoteCtrl', ng_submit: 'create(model)'}}
 			.row
 				.col-xs-12
 					.form-group
-						%input.form-control{type: 'text', placeholder: 'Add a note...', data: {ng_model: 'currentNote.body'}}
-		%ul.notes{data: {ng_controller: 'ListLeadNotesCtrl'}}
+						%input.form-control{type: 'text', placeholder: 'Add a note...', data: {ng_model: 'model.body'}}
+		%ul.notes{data: {ng_controller: 'ListNotesCtrl'}}
 			%li.note{data: {ng_repeat: 'note in notes | orderBy:"-created_at"'}}
 				%span.time
 					{{ note.created_at | date:'MMM dd, yyyy' }}
 				%span.body				
 					{{ note.body }}
 					
-	#estimate{data: {ng_show: 'activeTab == "estimate"'}}
+	#estimate{data: {ng_show: 'current.tab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
 				.btn-group
@@ -252,4 +285,4 @@
 						%td
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
 
-	#timeline{data: {ng_show: 'activeTab == "timeline"'}}
+	#timeline{data: {ng_show: 'current.tab == "timeline"'}}

@@ -2,18 +2,18 @@ class Api::V1::NotesController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    lead = Lead.find(params[:lead_id])
-    authorize lead
-    notes = lead.notes
+    event = Event.find(params[:event_id])
+    authorize event
+    notes = event.notes
     render status: 200, json: notes
   end
   
   def create
-    lead = Lead.find(params[:lead_id])
-    authorize lead
+    event = Event.find(params[:event_id])
+    authorize event
     note = Note.new(note_params)
-
-    if note.save
+    
+    if note.save(note_params)
       render status: 201, json: note
     else
       render status: 422, json: note.errors
@@ -41,6 +41,6 @@ class Api::V1::NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:body, :lead_id)
+    params.require(:note).permit(:body, :event_id)
   end
 end

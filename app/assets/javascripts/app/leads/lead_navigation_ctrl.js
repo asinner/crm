@@ -10,6 +10,7 @@
 		
 		$scope.viewTab = function(tab) {
 			Current.tab = tab;
+			$rootScope.$broadcast(EVENTS.navigation.view[tab]);
 		};
 		
 	}]);

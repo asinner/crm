@@ -15,9 +15,15 @@
 			}
 		},
 		
+		current: {
+			event: {
+				changed: 'currentEventChanged'
+			}
+		},
+		
 		event: {
 			created: 'eventCreated',
-			edit: 'editEvent'
+			edit: 'editEvent',
 		},
 		
 		lightbox: {
@@ -53,6 +59,10 @@
 		
 		estimate: {
 			viewTab: 'viewEstimateTab'
+		},
+		
+		address: {
+			edit: 'editAddress'
 		}
 		
 	});
