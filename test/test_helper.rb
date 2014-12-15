@@ -118,6 +118,17 @@ class ActiveSupport::TestCase
     line_item.save
     line_item
   end
+  
+  def create_address(event)
+    address = event.build_address(
+      line1: '555 Main St',
+      city: 'Anywhere',
+      state: 'CA',
+      zip: '12345'
+    )
+    address.save
+    address
+  end
 
   def create(args)
     @user = create_user if args.include?(:user)
@@ -130,6 +141,7 @@ class ActiveSupport::TestCase
     @line_item = create_line_item(@estimate) if args.include?(:line_item)
     @note = create_note(@lead) if args.include?(:note)
     @upload = create_upload(@event) if args.include?(:upload)
+    @address = create_address(@event) if args.include?(:address)
   end
 
   def sign_in(user)

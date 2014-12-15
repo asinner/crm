@@ -173,13 +173,13 @@
 					%a{:href => "", ng_click: 'edit(current.event)'}
 						Edit event date
 		.row
-			.col-xs-12
+			.col-xs-12{data: {ng_controller: 'AddressCtrl'}}
 				%h5 Location
 				{{ current.event.address.line1 }}
 				%br {{ current.event.address.city }}, {{ current.event.address.state }}
 				{{ current.event.address.zip }}
 				%br
-					%a{:href => ""}
+					%a{:href => "", data: {ng_click: 'edit(current.event.address)'}}
 						Edit event location
 				
 				
