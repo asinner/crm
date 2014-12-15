@@ -17,13 +17,7 @@
 		
 		event: {
 			created: 'eventCreated',
-			currentEventChanged: 'currentEventChanged',
-			newForm: {
-				show: 'showNewEventForm'
-			},
-			editForm: {
-				show: 'showEditEventForm'
-			}
+			edit: 'editEvent'
 		},
 		
 		lightbox: {

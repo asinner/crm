@@ -3,6 +3,11 @@
 	
 	angular.module('crmApp').controller('LeadCtrl', ['$scope', '$rootScope', '$filter', 'EVENTS', 'Current', 'Lead', function($scope, $rootScope, $filter, EVENTS, Current, Lead) {
 		
+		$scope.currentEvent = {
+			name: '',
+			date: ''
+		};
+		
 		$scope.show = {
 			newForm: false,
 			editForm: false
@@ -23,6 +28,10 @@
 			$scope.currentLead = Current.getLead();
 		});
 		
+		$scope.$on(EVENTS.lead.newForm.show, function(event, data) {
+			$scope.show.newForm = true;
+		});
+		
 		$scope.$on(EVENTS.lead.editForm.show, function(event, data) {
 			$scope.show.editForm = true;
 		});
@@ -40,6 +49,21 @@
 		$scope.edit = function(lead) {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
 			$rootScope.$broadcast(EVENTS.lead.editForm.show, lead);
+		};
+		
+		$scope.create = function(lead, eventt, address) {
+			var lead = new Lead(lead);
+			eventt.address_attributes = address;
+			lead.events_attributes = [ eventt ];
+			lead.$save(
+				function(response) {
+					$rootScope.$broadcast(EVENTS.lead.created, response.lead);
+					$scope.close();
+				},
+				function(response) {
+					console.log(response);
+				}
+			)
 		};
 		
 		$scope.update = function(lead) {
@@ -80,7 +104,6 @@
 				
 		$scope.changeCurrentEvent = function() {
 			$rootScope.$broadcast(EVENTS.event.currentEventChanged, $scope.currentEvent);
-			//Current.setEvent($scope.currentEvent);
 		};
 		
 	}]);

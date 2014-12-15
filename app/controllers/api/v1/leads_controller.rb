@@ -11,7 +11,7 @@ class Api::V1::LeadsController < ApplicationController
   def create
     lead = current_user.company.leads.build(lead_params)
     lead.events.first.build_estimate if lead.events.first
-    
+        
     if lead.save
       render status: 201, json: lead
     else
@@ -33,6 +33,6 @@ class Api::V1::LeadsController < ApplicationController
   private
 
   def lead_params
-    params.require(:lead).permit(:first_name, :last_name, :email, :phone_number, events_attributes: [:name, :date])
+    params.require(:lead).permit(:first_name, :last_name, :email, :phone_number, events_attributes: [:name, :date, address_attributes: [ :line1, :line2, :city, :state, :zip ]])
   end
 end

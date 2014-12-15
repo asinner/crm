@@ -1,20 +1,18 @@
 .container-fluid
-	.company-leads-list{data: {ng_controller: 'ListLeadsCtrl'}}
-		.controls
-			.row{data: {ng_controller: 'LeadCtrl'}}
-				.col-xs-12
-					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'new()'}} +
-		
-		.row.company-lead{data: {ng_repeat: 'lead in leads | orderBy:upcomingEvent '}}
-			.col-xs-12
-				%a{href: '', data: {ng_click: 'show(lead)'}}
-					{{ (lead.events | orderBy:'date')[0].date | date:'MMM dd' }} {{ lead.first_name }} {{ lead.last_name }}
-
+	#events
+		%ul{data: {ng_controller: 'ListEventsCtrl'}}
+			%li{data: {ng_repeat: 'event in events', ng_click: 'show(event)'}}
+				%a{:href => ""}
+					{{ event.date | date:'MMM dd, yyyy'}}
+					%br
+					{{ event.lead.first_name }} {{ event.lead.last_name }}
+				
+					
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
-	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'show'}}
-		%form{name: 'newLead', novalidate: true, data: {ng_submit: 'create(currentLead)'}}
+	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'false'}}
+		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'create(currentLead, currentEvent, currentAddress)'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.first_name.$invalid && (newLead.first_name.$touched || newLead.$submitted) }"}}
@@ -34,11 +32,37 @@
 						%label Phone number
 						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
 			
+			%h4.text-center
+				Event information
+				
 			.row
+				.col-xs-6
+					.form-group
+						%label Street address
+						%input.form-control{type: 'text', placeholder: '555 Main St', data: {ng_model: 'currentAddress.line1'}}
+				
 				.col-xs-6
 					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
 						%label Date
 						%input.form-control{type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'currentEvent.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+			
+			.row
+				.col-xs-6
+					.form-group
+						%label City
+						%input.form-control{type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'currentAddress.city'}}
+						
+			.row
+				.col-xs-6
+					.form-group
+						%label State
+						%input.form-control{type: 'text', placeholder: 'CA', data: {ng_model: 'currentAddress.state'}}
+
+			.row
+				.col-xs-6
+					.form-group
+						%label Zip
+						%input.form-control{type: 'text', placeholder: '90001', data: {ng_model: 'currentAddress.zip'}}			
 			
 			.row
 				.col-xs-12
@@ -107,94 +131,58 @@
 					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
 						%span No, nevermind
 	
-	#event-form.form-container.center-block{data: {ng_controller: 'EventCtrl', ng_show: 'show.editForm || show.newForm' }}
-		%form{name: 'eventForm', novalidate: true, data: {ng_submit: 'save(currentEvent)'}}
+	#event-form.form-container.center-block{data: {ng_controller: 'EventCtrl', ng_show: 'show.edit || show.new' }}
+		%form{name: 'eventForm', novalidate: true, data: {ng_submit: 'save(current.event)'}}
 			%header
 				%h5
-					%span{ng_show: 'show.newForm'} New Event
-					%span{ng_show: 'show.editForm'} Edit Event
+					%span{ng_show: 'show.new'} New Event
+					%span{ng_show: 'show.edit'} Edit Event
 			%section
 				.row
 					.col-xs-6{data: {ng_controller: 'DatepickerCtrl'}}
 						.form-group{data: {ng_class: "{ 'has-error': eventForm.date.$invalid && (eventForm.date.$touched || eventForm.$submitted) }"}}
 							%label Event date
-							%input.form-control{name: 'date', type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'currentEvent.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+							%input.form-control{required: true, name: 'date', type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'model.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
 					.col-xs-6
 						.form-group{data: {ng_class: "{ 'has-error': eventForm.name.$invalid && (eventForm.name.$touched || eventForm.$submitted) }"}}
 							%label Event name
-							%input.form-control{name: 'name', type: 'text', placeholder: 'Ex. Appleton Wedding', data: {ng_model: 'currentEvent.name'}}
+							%input.form-control{name: 'name', type: 'text', placeholder: 'Ex. Appleton Wedding', data: {ng_model: 'model.name'}}
 			%footer
 				%button.btn.btn-default{type: 'submit'}
-					%span{data: {ng_show: 'show.newForm'}} Create event
-					%span{data: {ng_show: 'show.editForm'}} Update
+					%span{data: {ng_show: 'show.new'}} Create event
+					%span{data: {ng_show: 'show.edit'}} Update
 			
-#dashboard.container-fluid{data: {ng_controller: 'LeadCtrl'}}
-	.row.primary-bar
-		.col-xs-12
-			.pull-left
-				%h4.name
-					{{ currentLead.first_name }} {{ currentLead.last_name }}
-			.pull-right
-				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events", ng_change: 'changeCurrentEvent()'}}
-					%option{value: ''} Choose an event
-			.pull-right{data: {ng_controller: 'EventCtrl'}}
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'new(currentLead)'}}
-					Add an event for {{ currentLead.first_name }}
-				
+#dashboard.container-fluid
 	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
 			.btn-group
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : activeTab == 'information' }"}} Information
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("notes")',					ng_class: " { 'active' : activeTab == 'notes' }"}} Notes
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("estimate")',				ng_class: " { 'active' : activeTab == 'estimate' }"}} Estimate
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("timeline")',				ng_class: " { 'active' : activeTab == 'timeline' }"}} Timeline
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("files")',					ng_class: " { 'active' : activeTab == 'files' }"}} Files
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : current.tab == 'information' }"}} Information
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("notes")',					ng_class: " { 'active' : current.tab == 'notes' }"}} Notes
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("estimate")',				ng_class: " { 'active' : current.tab == 'estimate' }"}} Estimate
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("timeline")',				ng_class: " { 'active' : current.tab == 'timeline' }"}} Timeline
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("files")',					ng_class: " { 'active' : current.tab == 'files' }"}} Files
 				
-	#lead-information{data: {ng_show: 'activeTab == "information"'}}
+	#event-information{data: {ng_controller: 'EventCtrl', ng_show: 'current.tab == "information"'}}
 		.row
 			.col-xs-12
-				%strong
-					Client information
+				%h4 Event information
+				{{current.event.name }}
 				%br
-				{{ currentLead.first_name }} {{ currentLead.last_name }}
+				{{ current.event.date | date: 'MMM dd, yyyy' }}
 				%br
-				{{ currentLead.email }}
-				%br
-				{{ currentLead.phone_number }}
+					%a{:href => "", ng_click: 'edit(current.event)'}
+						Edit event date
 		.row
 			.col-xs-12
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'edit(currentLead)'}}
-					Edit Information
-		%div
-			.row
-				.col-xs-12
-					%div
-						%strong
-							Event name
-						%br
-						{{ currentEvent.name }}
-					%div
-						%strong
-							Event date
-						%br
-						{{ currentEvent.date | date:'MMM dd, yyyy' }}
-					%div
-						%strong
-							Event location
-						%div
-						{{ currentEvent.address.line1 || 'Address not set' }}
-						%br
-						{{ currentEvent.address.city || 'City not set' }}, {{ currentEvent.address.state || 'State not set' }}
-						%br
-						{{ currentEvent.address.zip || 'Zip not set' }}
-						%br
-						%a{target: '_blank', data: {:ng_href => "https://maps.google.com?q={{ currentEvent.address.line1 }} {{ currentEvent.address.city }} {{ currentEvent.address.state }}"}}
-							Open in Google Maps
-			.row{data: {ng_controller: 'EventCtrl'}}
-				.col-xs-12
-					%button.btn.btn-default{data: {ng_click: 'edit()'}}
-						Edit event
-					
+				%h5 Location
+				{{ current.event.address.line1 }}
+				%br {{ current.event.address.city }}, {{ current.event.address.state }}
+				{{ current.event.address.zip }}
+				%br
+					%a{:href => ""}
+						Edit event location
+				
+				
 	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
 		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
 			.row
@@ -263,3 +251,5 @@
 						%td {{ product.price | currency }}
 						%td
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
+
+	#timeline{data: {ng_show: 'activeTab == "timeline"'}}
