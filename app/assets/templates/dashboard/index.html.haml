@@ -69,35 +69,35 @@
 					%button.btn.btn-default{type: 'submit'}
 						Create Lead
 						
-	#new-line-item.center-block{data: {ng_controller: 'LineItemCtrl', ng_show: 'show.newForm || show.editForm'}}
-		%form{name: 'newLineItem', novalidate: true, data: {ng_submit: 'save(currentLineItem)'}}
+	#new-line-item.center-block{data: {ng_controller: 'LineItemCtrl', ng_show: 'show.new || show.edit'}}
+		%form{name: 'lineItemForm', novalidate: true, data: {ng_submit: 'save(model)'}}
 			.row
 				.col-xs-6
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.name.$invalid && (newLineItem.$submitted || newLineItem.name.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.name.$invalid && (lineItemForm.$submitted || lineItemForm.name.$touched) }'}}
 						%label Name
-						%input.form-control{required: true, name: 'name', type: 'text', placeholder: 'Name of line item', data: {ng_model: 'currentLineItem.name'}}
+						%input.form-control{required: true, name: 'name', type: 'text', placeholder: 'Name of line item', data: {ng_model: 'model.name'}}
 				.col-xs-3
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.amount.$invalid && (newLineItem.$submitted || newLineItem.amount.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.amount.$invalid && (lineItemForm.$submitted || lineItemForm.amount.$touched) }'}}
 						%label Amount
-						%input.form-control{required: true, name: 'amount', type: 'text', placeholder: '0.00', data: {ng_model: 'currentLineItem.amount'}}
+						%input.form-control{required: true, name: 'amount', type: 'text', placeholder: '0.00', data: {ng_model: 'model.amount'}}
 				.col-xs-3
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.qty.$invalid && (newLineItem.$submitted || newLineItem.qty.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.qty.$invalid && (lineItemForm.$submitted || lineItemForm.qty.$touched) }'}}
 						%label Quantity
-						%input.form-control{required: true, name: 'qty', type: 'number', placeholder: '0', data: {ng_model: 'currentLineItem.qty'}}
+						%input.form-control{required: true, name: 'qty', type: 'number', placeholder: '0', data: {ng_model: 'model.qty'}}
 					
 			.row
 				.col-xs-12
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.description.$invalid && (newLineItem.$submitted || newLineItem.description.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.description.$invalid && (lineItemForm.$submitted || lineItemForm.description.$touched) }'}}
 						%label Description
-						%textarea.form-control{name: 'description', placeholder: 'Description', data: {ng_model: 'currentLineItem.description'}}
+						%textarea.form-control{name: 'description', placeholder: 'Description', data: {ng_model: 'model.description'}}
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
-						%span{data: {ng_show: 'show.newForm'}} Add line item
-						%span{data: {ng_show: 'show.editForm'}} Update
-					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.editForm'}}
+						%span{data: {ng_show: 'show.new'}} Add line item
+						%span{data: {ng_show: 'show.edit'}} Update
+					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.edit'}}
 						%span{ng_hide: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = true' } Delete line item
-						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLineItem)'} Are you sure?
+						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(model)'} Are you sure?
 					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
 						%span No, nevermind
 

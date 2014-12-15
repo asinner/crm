@@ -8,7 +8,7 @@
 		
 		$scope.addToEstimate = function(product) {
 			var lineItem = new LineItem(ProductToLineItem.create(product));
-			lineItem.estimate_id = Current.getEvent().estimate.id;
+			lineItem.estimate_id = Current.event.estimate.id;
 			lineItem.$save().then(
 				function(response) {
 					$rootScope.$broadcast(EVENTS.lineItem.created, response);

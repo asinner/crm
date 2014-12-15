@@ -4,12 +4,11 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('LineItemCtrl', ['$scope', '$rootScope', '$timeout', 'Session', 'LineItem', 'Current', 'EVENTS', function($scope, $rootScope, $timeout, Session, LineItem, Current, EVENTS) {
+	app.controller('LineItemCtrl', ['$scope', '$rootScope', '$timeout', 'Session', 'LineItem', 'Current', 'EVENTS', 'FormCleaner', function($scope, $rootScope, $timeout, Session, LineItem, Current, EVENTS, FormCleaner) {
 		
-		$scope.show = {
-			newForm: false,
-			editForm: false
-		};
+		$scope.model = {};
+		
+		$scope.show = { edit: false, new: false };
 		
 		$scope.activeTab = 'revenue';
 		
@@ -22,19 +21,19 @@
 		}
 		
 		$scope.$on(EVENTS.lightbox.close, function(event, data) {
-			$scope.resetForm();
-			$scope.hideForms();
-			$scope.resetCurrentLineItem();
+			$scope.model = {};
+			$scope.show = { edit: false, new: false };
+			FormCleaner.clean($scope.lineItemForm);
 		});
 
 		$scope.$on(EVENTS.lineItem.newForm.show, function(event, data) {
-			$scope.currentLineItem.role = data;
-			$scope.show.newForm = true;
+			$scope.model.role = data;
+			$scope.show.new = true;
 		});
 		
 		$scope.$on(EVENTS.lineItem.editForm.show, function(event, data) {
-			$scope.show.editForm = true;
-			$scope.currentLineItem = data;
+			$scope.show.edit = true;
+			$scope.model = data;
 		});
 				
 		$scope.new = function(role) {
@@ -48,7 +47,7 @@
 		};
 		
 		$scope.save = function(lineItem) {
-			if ($scope.show.newForm) {
+			if ($scope.show.new) {
 				$scope.create(lineItem);
 			} else {
 				$scope.update(lineItem);
@@ -91,9 +90,8 @@
 		
 		$scope.create = function(lineItem) {
 			var lineItem = new LineItem(lineItem);
-			lineItem.token = Session.token;
-			lineItem.estimate_id = Current.getEvent().estimate.id;
-			lineItem.$save().then(
+			lineItem.estimate_id = Current.event.estimate.id;
+			lineItem.$save(
 				function(response) {
 					$scope.close();
 					$rootScope.$broadcast(EVENTS.lineItem.created, response);

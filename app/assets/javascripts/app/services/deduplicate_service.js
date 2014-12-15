@@ -6,8 +6,10 @@
 	app.service('Deduplicate', function() {
 		
 		this.updateOrAdd = function(input, list) {
+
 			var results = input;
 			angular.forEach(list, function(k, v) {
+				
 				var doesNotExist = true;
 				angular.forEach(input, function(kk, vv) {
 					if (kk.id == k.id) {

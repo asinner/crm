@@ -5,9 +5,7 @@
 	
 	app.controller('ListLineItemsCtrl', ['$scope', '$filter', 'LineItem', 'Session', 'Current', 'EVENTS', 'Deduplicate', function($scope, $filter, LineItem, Session, Current, EVENTS, Deduplicate) {
 		
-		$scope.role = 'revenue';
-		
-		$scope.anything = 'Andrew';
+		$scope.role = 'revenue';		
 		
 		$scope.lineItems = [];
 		
@@ -16,7 +14,7 @@
 		});
 		
 		$scope.$on(EVENTS.navigation.view.estimate, function(event, data) {
-			$scope.list(Current.getEvent().estimate);
+			$scope.list(Current.event.estimate);
 		});
 		
 		$scope.$on(EVENTS.lead.show, function(event) {
