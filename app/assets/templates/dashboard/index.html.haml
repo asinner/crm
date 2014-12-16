@@ -190,6 +190,28 @@
 					%span{data: {ng_show: 'show.new'}} Create event
 					%span{data: {ng_show: 'show.edit'}} Update
 	
+	#upload-form.form-container.center-block{data: {ng_controller: 'UploadCtrl', ng_show: 'show.new'}}
+		%form{name: 'uploadForm', novalidate: true, data: {ng_submit: 'create(model)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.new'} New Upload
+			%section
+				.row
+					.col-xs-12
+						.form-group
+							%label Select files to upload
+							%input.form-control{name: 'files', type: 'file', multiple: true}
+				.row.success{data: {ng_repeat: 'upload in uploads'}}
+					.col-xs-12
+						{{ upload.name }} has been succesfully uploaded
+				.row.failuer{data: {ng_repeat: 'failed in fails'}}
+					.col-xs-12
+						{{ upload.name }} {{ upload.message }}
+
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					%span{data: {ng_show: 'show.new'}} Upload files
+
 #dashboard.container-fluid
 
 	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
@@ -299,3 +321,10 @@
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
 
 	#timeline{data: {ng_show: 'current.tab == "timeline"'}}
+		%h4 Timeline
+
+	#files{data: {ng_show: 'current.tab == "files"'}}
+		.row.controls{data: {ng_controller: 'UploadCtrl'}}
+			.col-xs-12
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}}
+					Upload files

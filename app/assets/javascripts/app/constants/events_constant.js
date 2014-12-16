@@ -59,6 +59,11 @@
 		
 		address: {
 			edit: 'editAddress'
+		},
+		
+		upload: {
+			new: 'newUpload',
+			edit: 'editUpload'
 		}
 		
 	});

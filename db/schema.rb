@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215222119) do
+ActiveRecord::Schema.define(version: 20141216204650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,13 +143,14 @@ ActiveRecord::Schema.define(version: 20141215222119) do
   add_index "timelines", ["event_id"], name: "index_timelines_on_event_id", using: :btree
 
   create_table "uploads", force: true do |t|
-    t.string   "path"
     t.integer  "size",       limit: 8
     t.string   "name"
     t.string   "mime_type"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
+    t.boolean  "uploaded"
   end
 
   add_index "uploads", ["event_id"], name: "index_uploads_on_event_id", using: :btree
