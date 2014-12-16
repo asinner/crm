@@ -25,12 +25,7 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
 
-      resources :leads, :notes, :line_items, :costs
-
-      resources :events do
-        resource :estimate
-        resources :uploads
-      end
+      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads
 
       resources :timelines do
         resources :categories, controller: :timeline_categories
@@ -55,12 +50,7 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
       
-      resources :leads, :notes, :line_items, :costs
-
-      resources :events do
-        resource :estimate
-        resources :uploads
-      end
+      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads
 
       resources :timelines do
         resources :categories, controller: :timeline_categories

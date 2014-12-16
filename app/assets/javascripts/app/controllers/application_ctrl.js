@@ -3,7 +3,9 @@
 (function() {
 	var app = angular.module('crmApp');
 	
-	app.controller('ApplicationCtrl', ['$scope', '$location', '$cookieStore', 'AuthService', function($scope, $location, $cookieStore, AuthService) {
+	app.controller('ApplicationCtrl', ['$scope', '$location', '$cookieStore', 'AuthService', 'Current', function($scope, $location, $cookieStore, AuthService, Current) {
+		
+		$scope.current = Current;
 		
 		$scope.currentUser = null;
 		

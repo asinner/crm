@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212031159) do
+ActiveRecord::Schema.define(version: 20141216204650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.integer  "event_id"
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["event_id"], name: "index_addresses_on_event_id", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -74,7 +87,7 @@ ActiveRecord::Schema.define(version: 20141212031159) do
     t.string   "name"
     t.string   "description"
     t.integer  "amount"
-    t.integer  "qty"
+    t.integer  "qty",         default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "estimate_id"
@@ -85,12 +98,12 @@ ActiveRecord::Schema.define(version: 20141212031159) do
 
   create_table "notes", force: true do |t|
     t.string   "body"
-    t.integer  "lead_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
-  add_index "notes", ["lead_id"], name: "index_notes_on_lead_id", using: :btree
+  add_index "notes", ["event_id"], name: "index_notes_on_event_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "name"
@@ -130,13 +143,14 @@ ActiveRecord::Schema.define(version: 20141212031159) do
   add_index "timelines", ["event_id"], name: "index_timelines_on_event_id", using: :btree
 
   create_table "uploads", force: true do |t|
-    t.string   "path"
     t.integer  "size",       limit: 8
     t.string   "name"
     t.string   "mime_type"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
+    t.boolean  "uploaded"
   end
 
   add_index "uploads", ["event_id"], name: "index_uploads_on_event_id", using: :btree

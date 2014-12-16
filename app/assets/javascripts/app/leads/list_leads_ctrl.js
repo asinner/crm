@@ -5,10 +5,9 @@
 	var app = angular.module('crmApp');
 	
 	app.controller('ListLeadsCtrl', ['$scope', 'Lead', 'Session', '$rootScope', '$filter', 'EVENTS', function($scope, Lead, Session, $rootScope, $filter, EVENTS) {
-				
+						
 		$scope.leads = [];
 		
-		// Listeners
 		$scope.$on(EVENTS.lead.created, function(event, lead) {
 			$scope.leads = $scope.leads.concat(lead);
 		});
@@ -25,27 +24,25 @@
 			return false;
 		}
 		
-		Lead.query({token: Session.token},
-			function(response) {
-				$scope.leads = response.leads;
-			}
-		);
-		
-		$scope.showForm = function() {
-			$rootScope.$broadcast(EVENTS.lightbox.show);
-			$rootScope.$broadcast(EVENTS.lead.newForm.show);
+		$scope.list = function() {
+			Lead.query({token: Session.token},
+				function(response) {
+					$scope.leads = response.leads;
+				}
+			);
 		};
-		
-		$scope.showLead = function(lead) {
-			$rootScope.$broadcast(EVENTS.lead.show, lead);
-		};
-		
+						
 		$scope.upcomingEvent = function(lead) {
 			var events = $filter('orderBy')(lead.events, 'date');
 			return events[0].date;
 		};
 		
+		$scope.show = function(lead) {
+			$rootScope.$broadcast(EVENTS.lead.show, lead);
+		};
 		
+		$scope.list();
+				
 	}]);
 	
 })()

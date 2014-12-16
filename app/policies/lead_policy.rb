@@ -12,4 +12,8 @@ class LeadPolicy < ApplicationPolicy
   def create?
     index?
   end
+  
+  def update?
+    index?
+  end
 end

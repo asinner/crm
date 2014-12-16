@@ -7,13 +7,19 @@
 		lead: {
 			show: 'showLead',
 			created: 'leadCreated',
-			newForm: {
-				show: 'showNewLeadForm'
+			new: 'newLead'
+		},
+		
+		current: {
+			event: {
+				changed: 'currentEventChanged'
 			}
 		},
 		
 		event: {
-			created: 'eventCreated'
+			created: 'eventCreated',
+			edit: 'editEvent',
+			new: 'newEvent'
 		},
 		
 		lightbox: {
@@ -38,12 +44,26 @@
 		},
 		
 		navigation: {
-			viewNotesTab: 'viewNotesTab',
-			viewEstimateTab: 'viewEstimateTab'
+			view: {
+				information: "viewLeadInformationTab",
+				notes: "viewLeadNotesTab",
+				estimate: "viewLeadEstimateTab",
+				timeline: "viewLeadTimelineTab",
+				files: "viewLeadFilesTab"
+			}
 		},
 		
 		estimate: {
 			viewTab: 'viewEstimateTab'
+		},
+		
+		address: {
+			edit: 'editAddress'
+		},
+		
+		upload: {
+			new: 'newUpload',
+			edit: 'editUpload'
 		}
 		
 	});

@@ -6,7 +6,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def update?
-    @user.company.leads.include?(@record.lead)
+    @user.company.leads.include?(@record.event.lead)
   end
 
   def destroy?

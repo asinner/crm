@@ -1,0 +1,32 @@
+#events {
+	.row {
+		margin: 0;
+		padding: 10px 0px;
+	}
+	.controls {
+		border-bottom: 1px solid rgb(230, 230, 230);
+	}
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	overflow: scroll;
+	border-right: 1px solid #CCC;
+	width: 200px;
+	background: #FFF;
+	ul {
+		padding: 0;
+		list-style: none;	
+	}
+	li {
+		text-align: center;
+		border-bottom: 1px solid rgb(200, 200, 200);
+	}
+	a {
+		padding: 5px;
+		display: block;
+		&:hover {
+			background: rgb(230, 230, 230);
+		}
+	}
+}

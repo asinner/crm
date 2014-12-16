@@ -1,14 +1,11 @@
-'use strict';
-
 (function() {
+	'use strict';
 	
 	var app = angular.module('crmApp');
 	
 	app.controller('ListLineItemsCtrl', ['$scope', '$filter', 'LineItem', 'Session', 'Current', 'EVENTS', 'Deduplicate', function($scope, $filter, LineItem, Session, Current, EVENTS, Deduplicate) {
 		
-		$scope.role = 'revenue';
-		
-		$scope.anything = 'Andrew';
+		$scope.role = 'revenue';		
 		
 		$scope.lineItems = [];
 		
@@ -16,16 +13,18 @@
 			$scope.role = data;
 		});
 		
-		$scope.$on(EVENTS.navigation.viewEstimateTab, function(event, data) {
-			$scope.getLineItems(Current.getEvent().estimate);
+		$scope.$on(EVENTS.navigation.view.estimate, function(event, data) {
+			$scope.list(Current.event.estimate);
+		});
+		
+		$scope.$on(EVENTS.lead.show, function(event) {
+			$scope.list(Current.getEvent().estimate);
 		});
 		
 		$scope.$on(EVENTS.lineItem.created, function(event, data) {
-			
 			$scope.line_items = Deduplicate.updateOrAdd($scope.lineItems, data.line_items);
-			
 		});
-		
+				
 		$scope.$on(EVENTS.lineItem.destroyed, function(event, data) {
 			angular.forEach($scope.lineItems, function(key, value) {
 				if (key.id == data.id) {
@@ -34,7 +33,13 @@
 			});
 		});		
 		
-		$scope.getLineItems = function(estimate) {
+		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
+			if ($scope.activeTab == 'estimate') {
+				$scope.list(data.estimate);
+			}
+		});
+		
+		$scope.list = function(estimate) {
 			LineItem.query({
 				estimate_id: estimate.id,
 				token: Session.token

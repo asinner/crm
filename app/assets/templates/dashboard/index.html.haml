@@ -1,128 +1,270 @@
 .container-fluid
-	.company-leads-list{data: {ng_controller: 'ListLeadsCtrl'}}
-		.controls
-			.row
-				.col-xs-12
-					%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'showForm()'}} +
-		
-		.row.company-lead{data: {ng_repeat: 'lead in leads | orderBy:upcomingEvent '}}
-			.col-xs-12
-				%a{href: '', data: {ng_click: 'showLead(lead)'}}
-					{{ (lead.events | orderBy:'date')[0].date | date:'MMM dd' }} {{ lead.first_name }} {{ lead.last_name }}
-
+	#events
+		.row.controls{data: {ng_controller: 'LeadCtrl'}}
+			.col-xs-12.text-center
+				%button.btn.btn-default.btn-sm{data: {ng_click: 'new()'}}
+					+ Add new event
+		%ul{data: {ng_controller: 'ListEventsCtrl'}}
+			%li{data: {ng_repeat: 'event in events | orderBy:"date" ', ng_click: 'show(event)'}}
+				%a{:href => ""}
+					{{ event.date | date:'MMM dd, yyyy'}}
+					%br
+					{{ event.lead.first_name }} {{ event.lead.last_name }}
+				
+					
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
-	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'show'}}
-		%form{name: 'newLead', novalidate: true, data: {ng_submit: 'create(currentLead)'}}
+	#lead-form.center-block{data: {ng_controller: 'LeadCtrl', ng_show: 'show.new'}}
+		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'create(model, eventModel, addressModel)'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.first_name.$invalid && (newLead.first_name.$touched || newLead.$submitted) }"}}
 						%label First Name
-						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'currentLead.first_name'}}
+						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'model.first_name'}}
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.last_name.$invalid && (newLead.last_name.$touched || newLead.$submitted) }"}}
 						%label Last Name
-						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'currentLead.last_name'}}
+						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'model.last_name'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.email.$invalid && (newLead.email.$touched || newLead.$submitted) }"}}
 						%label Email
-						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'currentLead.email'}}
+						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'model.email'}}
 				.col-xs-6
 					.form-group
 						%label Phone number
-						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
+						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'model.phone_number'}}
 			
+			%h4.text-center
+				Event information
+				
 			.row
+				.col-xs-6
+					.form-group
+						%label Street address
+						%input.form-control{type: 'text', placeholder: '555 Main St', data: {ng_model: 'addressModel.line1'}}
+				
 				.col-xs-6
 					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
 						%label Date
-						%input.form-control{type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'currentEvent.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+						%input.form-control{type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'eventModel.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+			
+			.row
+				.col-xs-6
+					.form-group
+						%label City
+						%input.form-control{type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'addressModel.city'}}
+						
+			.row
+				.col-xs-6
+					.form-group
+						%label State
+						%input.form-control{type: 'text', placeholder: 'CA', data: {ng_model: 'addressModel.state'}}
+
+			.row
+				.col-xs-6
+					.form-group
+						%label Zip
+						%input.form-control{type: 'text', placeholder: '90001', data: {ng_model: 'addressModel.zip'}}			
 			
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
 						Create Lead
 						
-	#new-line-item.center-block{data: {ng_controller: 'LineItemCtrl', ng_show: 'show.newForm || show.editForm'}}
-		%form{name: 'newLineItem', novalidate: true, data: {ng_submit: 'save(currentLineItem)'}}
+	#new-line-item.center-block{data: {ng_controller: 'LineItemCtrl', ng_show: 'show.new || show.edit'}}
+		%form{name: 'lineItemForm', novalidate: true, data: {ng_submit: 'save(model)'}}
 			.row
 				.col-xs-6
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.name.$invalid && (newLineItem.$submitted || newLineItem.name.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.name.$invalid && (lineItemForm.$submitted || lineItemForm.name.$touched) }'}}
 						%label Name
-						%input.form-control{required: true, name: 'name', type: 'text', placeholder: 'Name of line item', data: {ng_model: 'currentLineItem.name'}}
+						%input.form-control{required: true, name: 'name', type: 'text', placeholder: 'Name of line item', data: {ng_model: 'model.name'}}
 				.col-xs-3
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.amount.$invalid && (newLineItem.$submitted || newLineItem.amount.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.amount.$invalid && (lineItemForm.$submitted || lineItemForm.amount.$touched) }'}}
 						%label Amount
-						%input.form-control{required: true, name: 'amount', type: 'text', placeholder: '0.00', data: {ng_model: 'currentLineItem.amount'}}
+						%input.form-control{required: true, name: 'amount', type: 'text', placeholder: '0.00', data: {ng_model: 'model.amount'}}
 				.col-xs-3
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.qty.$invalid && (newLineItem.$submitted || newLineItem.qty.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.qty.$invalid && (lineItemForm.$submitted || lineItemForm.qty.$touched) }'}}
 						%label Quantity
-						%input.form-control{required: true, name: 'qty', type: 'number', placeholder: '0', data: {ng_model: 'currentLineItem.qty'}}
+						%input.form-control{required: true, name: 'qty', type: 'number', placeholder: '0', data: {ng_model: 'model.qty'}}
 					
 			.row
 				.col-xs-12
-					.form-group{data: {ng_class: '{ "has-error": newLineItem.description.$invalid && (newLineItem.$submitted || newLineItem.description.$touched) }'}}
+					.form-group{data: {ng_class: '{ "has-error": lineItemForm.description.$invalid && (lineItemForm.$submitted || lineItemForm.description.$touched) }'}}
 						%label Description
-						%textarea.form-control{name: 'description', placeholder: 'Description', data: {ng_model: 'currentLineItem.description'}}
+						%textarea.form-control{name: 'description', placeholder: 'Description', data: {ng_model: 'model.description'}}
 			.row
 				.col-xs-12
 					%button.btn.btn-default{type: 'submit'}
-						%span{data: {ng_show: 'show.newForm'}} Add line item
-						%span{data: {ng_show: 'show.editForm'}} Update
-					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.editForm'}}
+						%span{data: {ng_show: 'show.new'}} Add line item
+						%span{data: {ng_show: 'show.edit'}} Update
+					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.edit'}}
 						%span{ng_hide: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = true' } Delete line item
-						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLineItem)'} Are you sure?
+						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(model)'} Are you sure?
 					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
 						%span No, nevermind
 
-#dashboard.container-fluid{data: {ng_controller: 'ShowLeadCtrl', ng_init: 'show'}}
-	.row.primary-bar
-		.col-xs-12
-			.pull-left
-				%h4.name
-					{{ currentLead.first_name }} {{ currentLead.last_name }}
-			.pull-right
-				%select.form-control{data: {ng_model: 'currentEvent', ng_options: "event.name || (event.date | date:'MMMM dd, yyyy') || 'Event' for event in currentLead.events"}}
-					%option{value: ''} Choose an event
-	.row.secondary-bar
+	#edit-lead.center-block{data: {ng_controller: 'LeadCtrl', ng_show: 'show.editForm'}}
+		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'update(currentLead)'}}
+			.row
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.first_name.$invalid && (leadForm.first_name.$touched || leadForm.$submitted) }"}}
+						%label First Name
+						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'currentLead.first_name'}}
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.last_name.$invalid && (leadForm.last_name.$touched || leadForm.$submitted) }"}}
+						%label Last Name
+						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'currentLead.last_name'}}
+			.row
+				.col-xs-6
+					.form-group{data: {ng_class: "{ 'has-error': leadForm.email.$invalid && (leadForm.email.$touched || leadForm.$submitted) }"}}
+						%label Email
+						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'currentLead.email'}}
+				.col-xs-6
+					.form-group
+						%label Phone number
+						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
+			.row
+				.col-xs-12
+					%button.btn.btn-default{type: 'submit'}
+						%span{data: {ng_show: 'show.editForm'}} Update
+					%button.btn.btn-danger{type: 'button', data: {ng_show: 'show.editForm'}}
+						%span{ng_hide: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = true' } Delete lead
+						%span{ng_show: 'showDeleteConfirm', ng_click: 'destroy(currentLead)'} Are you sure?
+					%button.btn.btn-default{type: 'button', data: {ng_show: 'showDeleteConfirm', ng_click: 'showDeleteConfirm = false'}}
+						%span No, nevermind
+	
+	#event-form.form-container.center-block{data: {ng_controller: 'EventCtrl', ng_show: 'show.edit || show.new' }}
+		%form{name: 'eventForm', novalidate: true, data: {ng_submit: 'save(current.event)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.new'} New Event
+					%span{ng_show: 'show.edit'} Edit Event
+			%section
+				.row
+					.col-xs-6{data: {ng_controller: 'DatepickerCtrl'}}
+						.form-group{data: {ng_class: "{ 'has-error': eventForm.date.$invalid && (eventForm.date.$touched || eventForm.$submitted) }"}}
+							%label Event date
+							%input.form-control{required: true, name: 'date', type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'model.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': eventForm.name.$invalid && (eventForm.name.$touched || eventForm.$submitted) }"}}
+							%label Event name
+							%input.form-control{name: 'name', type: 'text', placeholder: 'Ex. Appleton Wedding', data: {ng_model: 'model.name'}}
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					%span{data: {ng_show: 'show.new'}} Create event
+					%span{data: {ng_show: 'show.edit'}} Update
+			
+	#address-form.form-container.center-block{data: {ng_controller: 'AddressCtrl', ng_show: 'show.edit || show.new'}}
+		%form{name: 'addressForm', novalidate: true, data: {ng_submit: 'save(model)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.new'} New Event
+					%span{ng_show: 'show.edit'} Edit Event
+			%section
+				.row
+					.col-xs-12
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.line1.$invalid && (addressForm.line1.$touched || addressForm.$submitted) }"}}
+							%label Street Address
+							%input.form-control{name: 'line1', type: 'text', placeholder: '1235 Main St.', data: {ng_model: 'model.line1'}}
+
+				.row
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.city.$invalid && (addressForm.name.$touched || addressForm.$submitted) }"}}
+							%label City
+							%input.form-control{name: 'city', type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'model.city'}}
+
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.state.$invalid && (addressForm.state.$touched || addressForm.$submitted) }"}}
+							%label State
+							%input.form-control{name: 'state', type: 'text', placeholder: 'California', data: {ng_model: 'model.state'}}
+
+				.row
+					.col-xs-6
+						.form-group{data: {ng_class: "{ 'has-error': addressForm.city.$invalid && (addressForm.name.$touched || addressForm.$submitted) }"}}
+							%label City
+							%input.form-control{name: 'zip', type: 'text', placeholder: '90001', data: {ng_model: 'model.zip'}}
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					%span{data: {ng_show: 'show.new'}} Create event
+					%span{data: {ng_show: 'show.edit'}} Update
+	
+	#upload-form.form-container.center-block{data: {ng_controller: 'UploadCtrl', ng_show: 'show.new'}}
+		%form{name: 'uploadForm', novalidate: true, data: {ng_submit: 'create(model)'}}
+			%header
+				%h5
+					%span{ng_show: 'show.new'} New Upload
+			%section
+				.row
+					.col-xs-12
+						.form-group
+							%label Select files to upload
+							%input.form-control{name: 'files', type: 'file', multiple: true}
+				.row.success{data: {ng_repeat: 'upload in uploads'}}
+					.col-xs-12
+						{{ upload.name }} has been succesfully uploaded
+				.row.failuer{data: {ng_repeat: 'failed in fails'}}
+					.col-xs-12
+						{{ upload.name }} {{ upload.message }}
+
+			%footer
+				%button.btn.btn-default{type: 'submit'}
+					%span{data: {ng_show: 'show.new'}} Upload files
+
+#dashboard.container-fluid
+
+	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
 			.btn-group
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : activeTab == 'information' }"}} Information
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("notes")',					ng_class: " { 'active' : activeTab == 'notes' }"}} Notes
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("estimate")',				ng_class: " { 'active' : activeTab == 'estimate' }"}} Estimate
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("timeline")',				ng_class: " { 'active' : activeTab == 'timeline' }"}} Timeline
-				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("files")',					ng_class: " { 'active' : activeTab == 'files' }"}} Files
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("information")',		ng_class: " { 'active' : current.tab == 'information' }"}} Information
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("notes")',					ng_class: " { 'active' : current.tab == 'notes' }"}} Notes
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("estimate")',				ng_class: " { 'active' : current.tab == 'estimate' }"}} Estimate
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("timeline")',				ng_class: " { 'active' : current.tab == 'timeline' }"}} Timeline
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'viewTab("files")',					ng_class: " { 'active' : current.tab == 'files' }"}} Files
 				
-	#lead-information{data: {ng_show: 'activeTab == "information"'}}
+	#event-information{data: {ng_controller: 'EventCtrl', ng_show: 'current.tab == "information"'}}
 		.row
 			.col-xs-12
-				%h4
-					{{ currentLead.first_name }} {{ currentLead.last_name }}
+				%h4 Event information
+				{{current.event.name }}
+				%br
+				{{ current.event.date | date: 'MMM dd, yyyy' }}
+				%br
+					%a{:href => "", ng_click: 'edit(current.event)'}
+						Edit event date
 		.row
-			%p
-				.col-xs-12
-					{{ currentLead.email }}
-		.row
-			%p
-				.col-xs-12
-					{{ currentLead.phone_number }}
-					
-	#lead-notes{data: {ng_show: 'activeTab == "notes"'}}
-		%form#new-lead-note{name: 'newLeadNoteForm', data: {ng_controller: 'NewLeadNoteCtrl', ng_submit: 'create(currentNote)'}}
+			.col-xs-12{data: {ng_controller: 'AddressCtrl'}}
+				%h5 Location
+				{{ current.event.address.line1 }}
+				%br {{ current.event.address.city }}, {{ current.event.address.state }}
+				{{ current.event.address.zip }}
+				%br
+					%a{:href => "", data: {ng_click: 'edit(current.event.address)'}}
+						Edit event location
+				
+	#notes{data: {ng_show: 'current.tab == "notes"'}}
+		%form#new-lead-note{name: 'noteForm', data: {ng_controller: 'NoteCtrl', ng_submit: 'create(model)'}}
 			.row
 				.col-xs-12
 					.form-group
-						%input.form-control{type: 'text', placeholder: 'Add a note...', data: {ng_model: 'currentNote.body'}}
-		%ul.notes{data: {ng_controller: 'ListLeadNotesCtrl'}}
-			%li.note{data: {ng_repeat: 'note in notes | orderBy:"-created_at"'}}
-				%span.time
-					{{ note.created_at | date:'MMM dd, yyyy' }}
-				%span.body				
-					{{ note.body }}
+						%input.form-control{type: 'text', placeholder: 'Add a note...', data: {ng_model: 'model.body'}}
+		%ul{data: {ng_controller: 'ListNotesCtrl'}}
+			%li{data: {ng_repeat: 'note in notes | orderBy:"-created_at"'}}
+				{{ note.body }}
+				%div
+					%span.time
+						{{ note.created_at | date:'MMM dd, yyyy' }}
+					%span.delete
+						%a{href: '', data: {ng_click: 'showDeleteConfirm = true', ng_hide: 'showDeleteConfirm'}}
+							Delete
+						%a{href: '', data: {ng_click: 'destroy(note)', ng_show: 'showDeleteConfirm'}}
+							Are you sure?
+						%a.cancel{href: '', data: {ng_click: 'showDeleteConfirm = false', ng_show: 'showDeleteConfirm'}}
+							Cancel
 					
-	#estimate{data: {ng_show: 'activeTab == "estimate"'}}
+	
+	#estimate{data: {ng_show: 'current.tab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
 				.btn-group
@@ -177,3 +319,12 @@
 						%td {{ product.price | currency }}
 						%td
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
+
+	#timeline{data: {ng_show: 'current.tab == "timeline"'}}
+		%h4 Timeline
+
+	#files{data: {ng_show: 'current.tab == "files"'}}
+		.row.controls{data: {ng_controller: 'UploadCtrl'}}
+			.col-xs-12
+				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}}
+					Upload files

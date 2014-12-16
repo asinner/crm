@@ -21,7 +21,12 @@
 //= require angular-spinner/angular-spinner
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-bootstrap/ui-bootstrap-tpls
+
 //= require crm
+
+
+// require all the dependencies then require modules
+
 
 $(document).ready(function() {
 	$('body').on('keypress', 'input.phone-number', function() {

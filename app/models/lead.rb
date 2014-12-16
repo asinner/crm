@@ -5,7 +5,6 @@ class Lead < ActiveRecord::Base
 
   belongs_to :company
   has_many :events, dependent: :destroy
-  has_many :notes, dependent: :destroy
   
   accepts_nested_attributes_for :events
 end
