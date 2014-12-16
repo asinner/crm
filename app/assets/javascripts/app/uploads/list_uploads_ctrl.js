@@ -10,6 +10,10 @@
 			$scope.list(Current.event);
 		});
 		
+		$scope.$on(EVENTS.current.event.changed, function(event, data) {
+			$scope.list(Current.event);
+		});
+		
 		$scope.list = function(event) {
 			Upload.query({event_id: event.id},
 				function(response) {
