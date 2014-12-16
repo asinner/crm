@@ -15,7 +15,7 @@
 					$rootScope.$broadcast(EVENTS.note.created, response.note);
 				},
 				function(response) {
-					
+					console.log(response);
 				}
 			)
 		};

@@ -7,12 +7,7 @@
 		lead: {
 			show: 'showLead',
 			created: 'leadCreated',
-			newForm: {
-				show: 'showNewLeadForm'
-			},
-			editForm: {
-				show: 'showEditLeadForm'
-			}
+			new: 'newLead'
 		},
 		
 		current: {
@@ -24,6 +19,7 @@
 		event: {
 			created: 'eventCreated',
 			edit: 'editEvent',
+			new: 'newEvent'
 		},
 		
 		lightbox: {

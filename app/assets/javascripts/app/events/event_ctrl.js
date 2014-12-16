@@ -18,6 +18,10 @@
 			FormCleaner.clean($scope.eventForm);
 		});
 		
+		$scope.$on(EVENTS.event.new, function(event, data) {
+			$scope.show.new = true;
+		});
+		
 		$scope.edit = function(eventt) {
 			$rootScope.$broadcast(EVENTS.lightbox.show);
 			$rootScope.$broadcast(EVENTS.event.edit, eventt);

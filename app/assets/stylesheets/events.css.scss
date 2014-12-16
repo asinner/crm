@@ -1,4 +1,11 @@
 #events {
+	.row {
+		margin: 0;
+		padding: 10px 0px;
+	}
+	.controls {
+		border-bottom: 1px solid rgb(230, 230, 230);
+	}
 	position: fixed;
 	top: 0;
 	left: 0;

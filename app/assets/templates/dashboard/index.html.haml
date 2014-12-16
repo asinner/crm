@@ -1,7 +1,11 @@
 .container-fluid
 	#events
+		.row.controls{data: {ng_controller: 'LeadCtrl'}}
+			.col-xs-12.text-center
+				%button.btn.btn-default.btn-sm{data: {ng_click: 'new()'}}
+					+ Add new event
 		%ul{data: {ng_controller: 'ListEventsCtrl'}}
-			%li{data: {ng_repeat: 'event in events', ng_click: 'show(event)'}}
+			%li{data: {ng_repeat: 'event in events | orderBy:"date" ', ng_click: 'show(event)'}}
 				%a{:href => ""}
 					{{ event.date | date:'MMM dd, yyyy'}}
 					%br
@@ -11,26 +15,26 @@
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
-	#new-lead.center-block{data: {ng_controller: 'NewLeadCtrl', ng_show: 'false'}}
-		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'create(currentLead, currentEvent, currentAddress)'}}
+	#lead-form.center-block{data: {ng_controller: 'LeadCtrl', ng_show: 'show.new'}}
+		%form{name: 'leadForm', novalidate: true, data: {ng_submit: 'create(model, eventModel, addressModel)'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.first_name.$invalid && (newLead.first_name.$touched || newLead.$submitted) }"}}
 						%label First Name
-						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'currentLead.first_name'}}
+						%input.form-control{required: true, name: 'first_name', type: 'text', placeholder: 'First name', data: {ng_model: 'model.first_name'}}
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.last_name.$invalid && (newLead.last_name.$touched || newLead.$submitted) }"}}
 						%label Last Name
-						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'currentLead.last_name'}}
+						%input.form-control{required: true, name: 'last_name', type: 'text', placeholder: 'Last name', data: {ng_model: 'model.last_name'}}
 			.row
 				.col-xs-6
 					.form-group{data: {ng_class: "{ 'has-error': newLead.email.$invalid && (newLead.email.$touched || newLead.$submitted) }"}}
 						%label Email
-						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'currentLead.email'}}
+						%input.form-control{type: 'email', name: 'email', placeholder: 'Email', data: {ng_model: 'model.email'}}
 				.col-xs-6
 					.form-group
 						%label Phone number
-						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'currentLead.phone_number'}}
+						%input.form-control.phone-number{type: 'text', placeholder: 'Phone Number', data: {ng_model: 'model.phone_number'}}
 			
 			%h4.text-center
 				Event information
@@ -39,30 +43,30 @@
 				.col-xs-6
 					.form-group
 						%label Street address
-						%input.form-control{type: 'text', placeholder: '555 Main St', data: {ng_model: 'currentAddress.line1'}}
+						%input.form-control{type: 'text', placeholder: '555 Main St', data: {ng_model: 'addressModel.line1'}}
 				
 				.col-xs-6
 					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
 						%label Date
-						%input.form-control{type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'currentEvent.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
+						%input.form-control{type: 'text', placeholder: 'yyyy-mm-dd', data: {ng_model: 'eventModel.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy-MM-dd' }}", 'is-open' => 'opened'}
 			
 			.row
 				.col-xs-6
 					.form-group
 						%label City
-						%input.form-control{type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'currentAddress.city'}}
+						%input.form-control{type: 'text', placeholder: 'Los Angeles', data: {ng_model: 'addressModel.city'}}
 						
 			.row
 				.col-xs-6
 					.form-group
 						%label State
-						%input.form-control{type: 'text', placeholder: 'CA', data: {ng_model: 'currentAddress.state'}}
+						%input.form-control{type: 'text', placeholder: 'CA', data: {ng_model: 'addressModel.state'}}
 
 			.row
 				.col-xs-6
 					.form-group
 						%label Zip
-						%input.form-control{type: 'text', placeholder: '90001', data: {ng_model: 'currentAddress.zip'}}			
+						%input.form-control{type: 'text', placeholder: '90001', data: {ng_model: 'addressModel.zip'}}			
 			
 			.row
 				.col-xs-12
@@ -187,6 +191,7 @@
 					%span{data: {ng_show: 'show.edit'}} Update
 	
 #dashboard.container-fluid
+
 	.row.secondary-bar{data: {ng_controller: 'LeadNavigationCtrl'}}
 		.col-xs-12
 			.btn-group
@@ -216,19 +221,27 @@
 					%a{:href => "", data: {ng_click: 'edit(current.event.address)'}}
 						Edit event location
 				
-	#lead-notes{data: {ng_show: 'current.tab == "notes"'}}
+	#notes{data: {ng_show: 'current.tab == "notes"'}}
 		%form#new-lead-note{name: 'noteForm', data: {ng_controller: 'NoteCtrl', ng_submit: 'create(model)'}}
 			.row
 				.col-xs-12
 					.form-group
 						%input.form-control{type: 'text', placeholder: 'Add a note...', data: {ng_model: 'model.body'}}
-		%ul.notes{data: {ng_controller: 'ListNotesCtrl'}}
-			%li.note{data: {ng_repeat: 'note in notes | orderBy:"-created_at"'}}
-				%span.time
-					{{ note.created_at | date:'MMM dd, yyyy' }}
-				%span.body				
-					{{ note.body }}
+		%ul{data: {ng_controller: 'ListNotesCtrl'}}
+			%li{data: {ng_repeat: 'note in notes | orderBy:"-created_at"'}}
+				{{ note.body }}
+				%div
+					%span.time
+						{{ note.created_at | date:'MMM dd, yyyy' }}
+					%span.delete
+						%a{href: '', data: {ng_click: 'showDeleteConfirm = true', ng_hide: 'showDeleteConfirm'}}
+							Delete
+						%a{href: '', data: {ng_click: 'destroy(note)', ng_show: 'showDeleteConfirm'}}
+							Are you sure?
+						%a.cancel{href: '', data: {ng_click: 'showDeleteConfirm = false', ng_show: 'showDeleteConfirm'}}
+							Cancel
 					
+	
 	#estimate{data: {ng_show: 'current.tab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12

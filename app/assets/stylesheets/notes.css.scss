@@ -1,0 +1,30 @@
+#notes {
+	ul {
+		list-style: none;
+		padding-left: 15px;
+	}
+	.delete {
+		display: none;
+		a {
+			color: red;
+			opacity: 0.70;
+		}
+		.cancel {
+			color: rgb(150, 150, 150);
+		}
+	}
+	li {
+		border-bottom: 1px dotted rgb(240, 240, 240);
+		padding: 10px;
+		border-radius: 4px;
+		&:hover {
+			.delete {
+				display: inline;
+			}
+		}
+	}
+	.time {
+		font-size: 12px;
+		color: rgb(200, 200, 200);
+	}
+}

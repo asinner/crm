@@ -13,7 +13,7 @@ class Api::V1::LeadsController < ApplicationController
     lead.events.first.build_estimate if lead.events.first
         
     if lead.save
-      render status: 201, json: lead
+      render status: 201, json: lead.events.first
     else
       render status: 422, json: lead.errors
     end

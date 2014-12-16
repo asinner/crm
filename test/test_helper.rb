@@ -89,8 +89,8 @@ class ActiveSupport::TestCase
     estimate
   end
 
-  def create_note(lead)
-    note = lead.notes.build(
+  def create_note(event)
+    note = event.notes.build(
       body: 'An awesome note'
     )
     note.save
@@ -139,7 +139,7 @@ class ActiveSupport::TestCase
     @product = create_product(@company) if args.include?(:product)
     @estimate = create_estimate(@event) if args.include?(:estimate)
     @line_item = create_line_item(@estimate) if args.include?(:line_item)
-    @note = create_note(@lead) if args.include?(:note)
+    @note = create_note(@event) if args.include?(:note)
     @upload = create_upload(@event) if args.include?(:upload)
     @address = create_address(@event) if args.include?(:address)
   end

@@ -29,6 +29,22 @@
 			)
 		};
 		
+		$scope.destroy = function(note) {
+			var note = new Note(note);
+			note.$delete().then(
+				function(response) {
+					angular.forEach($scope.notes, function(k, v) {
+						if (k.id == note.id) {
+							$scope.notes.splice(v, 1);
+						};
+					});
+				},
+				function(response) {
+					
+				}
+			);
+		};
+		
 	}]);
 	
 })();
