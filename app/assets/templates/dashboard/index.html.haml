@@ -198,15 +198,20 @@
 			%section
 				.row
 					.col-xs-12
+						%label
+							Upload guidelines
+						%ul
+							%li 100 MB max per file
+				.row
+					.col-xs-12
 						.form-group
 							%label Select files to upload
 							%input.form-control{name: 'files', type: 'file', multiple: true}
-				.row.success{data: {ng_repeat: 'upload in uploads'}}
+				.row.alert.alert-success{data: {ng_repeat: 'upload in uploads'}}
 					.col-xs-12
-						{{ upload.name }} has been succesfully uploaded
-				.row.failuer{data: {ng_repeat: 'failed in fails'}}
-					.col-xs-12
-						{{ upload.name }} {{ upload.message }}
+						%strong
+							{{ upload.name }}
+						has been succesfully uploaded
 
 			%footer
 				%button.btn.btn-default{type: 'submit'}
@@ -328,3 +333,15 @@
 			.col-xs-12
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}}
 					Upload files
+		.table-responsive{data: {ng_controller: 'ListUploadsCtrl'}}
+			%table.table
+				%thead
+					%tr
+						%th Name
+						%th Size
+				%tbody
+					%tr{data: {ng_repeat: 'upload in uploads'}}
+						%td 
+							%a{:ng_href => "{{ upload.link }}"}
+								{{ upload.name }}
+						%td {{ upload.size | bytes }}

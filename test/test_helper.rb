@@ -97,12 +97,13 @@ class ActiveSupport::TestCase
     note
   end
 
-  def create_upload(event)
+  def create_upload(event, name = 'My Awesome File', url = '/uploads/my-awesome-file', uploaded = true)
     upload = event.uploads.new(
-      name: 'Some Document.docx',
-      size: 1_234_567,
-      mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      path: '/uploads/my-awesome-file'
+      name: name,
+      size: 50.megabytes,
+      mime_type: 'application/pdf',
+      url: url,
+      uploaded: uploaded
     )
     upload.save
     upload

@@ -42,24 +42,25 @@
 						S3Service.upload(response, k).then(
 
 							function(response) {
-								
-					 	 		upload.$update({ uploaded: true });
-					
-								$scope.uploads.push(upload);
+																
+					 	 		upload.$update({ uploaded: true }).then(
+									function(response) {
+										$scope.uploads.push(response.upload)
+									},
+									function(response) {
+										// Uploaded but not updated
+									}
+								)
 					
 							},
 							function(response) {
 								
-								// Bad upload from S3
 							}
 							
 						);
 					},
 					function(response) {
-						
-						// Bad upload on validation
-						console.log(response);
-						
+												
 					}
 				)
 				
