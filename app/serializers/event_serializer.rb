@@ -4,4 +4,5 @@ class EventSerializer < ActiveModel::Serializer
   has_one :estimate
   has_one :address
   has_one :lead
+  has_one :timeline
 end

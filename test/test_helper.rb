@@ -46,9 +46,11 @@ class ActiveSupport::TestCase
     category
   end
 
-  def create_timeline_event(category, description = 'My awesome timeline event')
+  def create_timeline_event(category, body = 'My awesome timeline event')
     event = category.events.build(
-      description: description
+      body: body,
+      start_time: 10.days.from_now,
+      end_time: 10.days.from_now
     )
     event.save!
     event
@@ -97,12 +99,13 @@ class ActiveSupport::TestCase
     note
   end
 
-  def create_upload(event)
+  def create_upload(event, name = 'My Awesome File', url = '/uploads/my-awesome-file', uploaded = true)
     upload = event.uploads.new(
-      name: 'Some Document.docx',
-      size: 1_234_567,
-      mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      path: '/uploads/my-awesome-file'
+      name: name,
+      size: 50.megabytes,
+      mime_type: 'application/pdf',
+      url: url,
+      uploaded: uploaded
     )
     upload.save
     upload
@@ -142,6 +145,7 @@ class ActiveSupport::TestCase
     @note = create_note(@event) if args.include?(:note)
     @upload = create_upload(@event) if args.include?(:upload)
     @address = create_address(@event) if args.include?(:address)
+    @timeline = create_timeline(@event) if args.include?(:timeline)
   end
 
   def sign_in(user)

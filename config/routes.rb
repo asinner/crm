@@ -25,15 +25,8 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
 
-      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads
+      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads, :timeline_events
 
-      resources :timelines do
-        resources :categories, controller: :timeline_categories
-      end
-
-      resources :timeline_categories do
-        resources :events, controller: :timeline_events
-      end
     end
 
     # Catch all API requests
@@ -50,15 +43,8 @@ Rails.application.routes.draw do
         get 'emails', on: :collection
       end
       
-      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads
+      resources :events, :leads, :notes, :line_items, :costs, :addresses, :uploads, :timeline_events
 
-      resources :timelines do
-        resources :categories, controller: :timeline_categories
-      end
-
-      resources :timeline_categories do
-        resources :events, controller: :timeline_events
-      end
     end
   end
 

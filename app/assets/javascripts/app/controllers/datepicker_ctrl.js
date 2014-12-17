@@ -4,7 +4,7 @@
 	
 	var app = angular.module('crmApp');
 	
-	app.controller('DatepickerCtrl', ['$scope', function($scope) {
+	app.controller('DatepickerCtrl', ['$scope', 'Current', function($scope, Current) {
 		
 	  $scope.today = function() {
 	    $scope.dt = new Date();

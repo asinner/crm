@@ -11,7 +11,6 @@
 					%br
 					{{ event.lead.first_name }} {{ event.lead.last_name }}
 				
-					
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
@@ -198,15 +197,20 @@
 			%section
 				.row
 					.col-xs-12
+						%label
+							Upload guidelines
+						%ul
+							%li 100 MB max per file
+				.row
+					.col-xs-12
 						.form-group
 							%label Select files to upload
 							%input.form-control{name: 'files', type: 'file', multiple: true}
-				.row.success{data: {ng_repeat: 'upload in uploads'}}
+				.row.alert.alert-success{data: {ng_repeat: 'upload in uploads'}}
 					.col-xs-12
-						{{ upload.name }} has been succesfully uploaded
-				.row.failuer{data: {ng_repeat: 'failed in fails'}}
-					.col-xs-12
-						{{ upload.name }} {{ upload.message }}
+						%strong
+							{{ upload.name }}
+						has been succesfully uploaded
 
 			%footer
 				%button.btn.btn-default{type: 'submit'}
@@ -263,7 +267,6 @@
 						%a.cancel{href: '', data: {ng_click: 'showDeleteConfirm = false', ng_show: 'showDeleteConfirm'}}
 							Cancel
 					
-	
 	#estimate{data: {ng_show: 'current.tab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
@@ -321,10 +324,59 @@
 							%button.btn.btn-default.btn-sm{type: 'button', data: {ng_click: 'addToEstimate(product)'}} Add
 
 	#timeline{data: {ng_show: 'current.tab == "timeline"'}}
-		%h4 Timeline
+		%form{name: 'timelineEventForm', data: {ng_controller: 'TimelineEventCtrl', ng_submit: 'create(model)'}}
+			.row
+				.col-xs-12
+					.form-group
+						%label Event
+						%input.form-control{type: 'text', data: {ng_model: 'model.body'}}
+						
+			.row
+				.col-xs-12
+					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
+						%label Date
+						%input.form-control{type: 'text', data: {ng_model: 'model.start.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy/MM/dd' }}", 'is-open' => 'opened'}
+			
+			.row
+				.col-xs-12
+					.form-group
+						%label Start time
+						%input.form-control{type: 'text', data: {ng_model: 'model.start.time'}, 'ui-timepicker' => ''}
 
+			.row
+				.col-xs-12
+					.form-group{data: {ng_controller: 'DatepickerCtrl'}}
+						%label Date
+						%input.form-control{type: 'text', data: {ng_model: 'model.end.date', ng_click: 'open($event)'}, 'datepicker-popup' => "{{ 'yyyy/MM/dd' }}", 'is-open' => 'opened'}
+
+			.row
+				.col-xs-12
+					.form-group
+						%label End time
+						%input.form-control{type: 'text', data: {ng_model: 'model.end.time'}, 'ui-timepicker' => ''}
+						
+			.row
+				.col-xs-12
+					%button.btn.btn-default{type: 'submit'}
+						Add timeline event
+		%ul{data: {ng_controller: 'ListTimelineEventsCtrl'}}
+			%li{data: {ng_repeat: 'event in events | orderBy:"start_time"'}}
+				{{ event.start_time | date: 'h:mm a'}} - {{ event.end_time | date: 'h:mm a' }} {{ event.body }}
+			
 	#files{data: {ng_show: 'current.tab == "files"'}}
 		.row.controls{data: {ng_controller: 'UploadCtrl'}}
 			.col-xs-12
 				%button.btn.btn-default{type: 'button', data: {ng_click: 'new()'}}
 					Upload files
+		.table-responsive{data: {ng_controller: 'ListUploadsCtrl'}}
+			%table.table
+				%thead
+					%tr
+						%th Name
+						%th Size
+				%tbody
+					%tr{data: {ng_repeat: 'upload in uploads'}}
+						%td 
+							%a{:ng_href => "{{ upload.link }}"}
+								{{ upload.name }}
+						%td {{ upload.size | bytes }}

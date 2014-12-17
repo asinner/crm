@@ -33,9 +33,9 @@
 			});
 		});		
 		
-		$scope.$on(EVENTS.event.currentEventChanged, function(event, data) {
-			if ($scope.activeTab == 'estimate') {
-				$scope.list(data.estimate);
+		$scope.$on(EVENTS.current.event.changed, function(event, data) {
+			if (Current.tab == 'estimate') {
+				$scope.list(Current.event.estimate);
 			}
 		});
 		

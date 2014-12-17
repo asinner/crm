@@ -1,9 +1,14 @@
 class Api::V1::UploadsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    event = Event.find(params[:event_id])
+    authorize event
+    uploads = event.uploads    
+    render status: 200, json: event.uploads
+  end
+
   def create
-    sleep(1)
-    
     event = Event.find(params[:event_id])
     authorize event
     upload = event.uploads.build(upload_params)

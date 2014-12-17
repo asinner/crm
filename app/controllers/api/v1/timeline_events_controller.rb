@@ -3,18 +3,15 @@ class Api::V1::TimelineEventsController < ApplicationController
   before_action :authenticate_company!
 
   def index
-    category = TimelineCategory.find(params[:timeline_category_id])
-    authorize category.timeline
-
-    render status: 200, json: category.events
+    timeline = Timeline.find(params[:timeline_id])
+    authorize timeline
+    render status: 200, json: timeline.events
   end
 
   def create
-    category = TimelineCategory.find(params[:timeline_category_id])
-    authorize category.timeline
-
-    timeline_event = category.events.new(timeline_event_params)
-
+    timeline = Timeline.find(params[:timeline_id])
+    authorize timeline    
+    timeline_event = timeline.events.build(timeline_event_params)
     if timeline_event.save
       render status: 201, json: timeline_event
     else
@@ -43,6 +40,6 @@ class Api::V1::TimelineEventsController < ApplicationController
   private
 
   def timeline_event_params
-    params.require(:timeline_event).permit(:description)
+    params.require(:timeline_event).permit(:body, :start_time, :end_time)
   end
 end

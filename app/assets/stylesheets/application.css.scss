@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap 
+ *= require bootstrap/less/mixins/gradients
+ *= require jquery-timepicker-jt/jquery.timepicker.css
  *= require_tree .
  */
 
