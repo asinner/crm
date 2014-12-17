@@ -143,6 +143,7 @@ class ActiveSupport::TestCase
     @note = create_note(@event) if args.include?(:note)
     @upload = create_upload(@event) if args.include?(:upload)
     @address = create_address(@event) if args.include?(:address)
+    @timeline = create_timeline(@event) if args.include?(:timeline)
   end
 
   def sign_in(user)
