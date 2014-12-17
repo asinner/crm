@@ -64,6 +64,10 @@
 		upload: {
 			new: 'newUpload',
 			edit: 'editUpload'
+		},
+		
+		timelineCategory: {
+			new: 'newTimelineCategory'
 		}
 		
 	});

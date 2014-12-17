@@ -10,7 +10,9 @@ class Api::V1::LeadsController < ApplicationController
 
   def create
     lead = current_user.company.leads.build(lead_params)
-    lead.events.first.build_estimate if lead.events.first
+    event = lead.events.first
+    event.build_estimate if event
+    event.build_timeline if event
         
     if lead.save
       render status: 201, json: lead.events.first

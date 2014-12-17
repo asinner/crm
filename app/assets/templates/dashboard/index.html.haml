@@ -11,7 +11,6 @@
 					%br
 					{{ event.lead.first_name }} {{ event.lead.last_name }}
 				
-					
 #lightbox{data: {ng_controller: 'LightboxCtrl', ng_show: 'show'}}
 	.close{data: {ng_click: 'close()'}}
 		&times; 
@@ -268,7 +267,6 @@
 						%a.cancel{href: '', data: {ng_click: 'showDeleteConfirm = false', ng_show: 'showDeleteConfirm'}}
 							Cancel
 					
-	
 	#estimate{data: {ng_show: 'current.tab == "estimate"'}}
 		.row.controls{data: {ng_controller: 'LineItemCtrl'}}
 			.col-xs-12
@@ -327,7 +325,6 @@
 
 	#timeline{data: {ng_show: 'current.tab == "timeline"'}}
 		
-
 	#files{data: {ng_show: 'current.tab == "files"'}}
 		.row.controls{data: {ng_controller: 'UploadCtrl'}}
 			.col-xs-12
