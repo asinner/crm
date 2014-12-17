@@ -66,8 +66,8 @@
 			edit: 'editUpload'
 		},
 		
-		timelineCategory: {
-			new: 'newTimelineCategory'
+		timelineEvent: {
+			created: 'timelineEventCreated'
 		}
 		
 	});

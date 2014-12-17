@@ -46,9 +46,11 @@ class ActiveSupport::TestCase
     category
   end
 
-  def create_timeline_event(category, description = 'My awesome timeline event')
+  def create_timeline_event(category, body = 'My awesome timeline event')
     event = category.events.build(
-      description: description
+      body: body,
+      start_time: 10.days.from_now,
+      end_time: 10.days.from_now
     )
     event.save!
     event

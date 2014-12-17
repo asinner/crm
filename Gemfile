@@ -23,6 +23,8 @@ gem 'bcrypt'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml'
 gem 'jquery-rails'
+gem 'less-rails'
+gem 'therubyracer'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 

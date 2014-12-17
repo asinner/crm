@@ -21,11 +21,9 @@
 //= require angular-spinner/angular-spinner
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-bootstrap/ui-bootstrap-tpls
-
+//= require jquery-timepicker-jt/jquery.timepicker.js
+//= require angular-jquery-timepicker/src/timepickerdirective.js
 //= require crm
-
-
-// require all the dependencies then require modules
 
 
 $(document).ready(function() {

@@ -1,0 +1,29 @@
+$dark-blue: #253c62;
+$orange: #ea691c;
+.hero {
+	font-family: 'Lato';
+	font-size: 24px;
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	&.main {
+		padding-top: 100px;
+		padding-bottom: 200px;
+		color: #FFF;
+		background: #253c62;
+		.title,
+		.subtitle {
+			font-weight: 300;
+		}
+		.title {
+			font-weight: 100;
+		}
+		.btn {
+			-webkit-font-smoothing: aliased;
+			background: $orange;
+			border: none;
+			color: #FFF;
+		}
+	}
+}

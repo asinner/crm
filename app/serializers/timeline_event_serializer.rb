@@ -1,3 +1,3 @@
 class TimelineEventSerializer < ActiveModel::Serializer
-  attributes :id, :body
+  attributes :id, :body, :start_time, :end_time
 end

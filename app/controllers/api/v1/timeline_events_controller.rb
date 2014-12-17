@@ -3,10 +3,9 @@ class Api::V1::TimelineEventsController < ApplicationController
   before_action :authenticate_company!
 
   def index
-    category = TimelineCategory.find(params[:timeline_category_id])
-    authorize category.timeline
-
-    render status: 200, json: category.events
+    timeline = Timeline.find(params[:timeline_id])
+    authorize timeline
+    render status: 200, json: timeline.events
   end
 
   def create
@@ -41,6 +40,6 @@ class Api::V1::TimelineEventsController < ApplicationController
   private
 
   def timeline_event_params
-    params.require(:timeline_event).permit(:body)
+    params.require(:timeline_event).permit(:body, :start_time, :end_time)
   end
 end
